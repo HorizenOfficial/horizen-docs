@@ -4,8 +4,11 @@ language: node_js
 node_js:
   - "18"
 
+cache:
+  yarn: true
+
 install:
-  - npm install
+  - yarn install --frozen-lockfile
 
 script:
-  - npm run build
+  - yarn run build
