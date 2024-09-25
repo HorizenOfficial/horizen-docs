@@ -5,10 +5,10 @@ node_js:
   - "18"
 
 cache:
-  yarn: true
+  npm: true
 
 install:
-  - yarn install
+  - npm install
 
 script:
-  - yarn run build
+  - npm run build
