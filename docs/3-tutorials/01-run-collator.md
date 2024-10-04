@@ -1,5 +1,5 @@
-# Ho to run a collator
+# How to run a collator
 
 [ coming soon... ]
 
-instructions to run a collator
+instructions on how to run a collator
