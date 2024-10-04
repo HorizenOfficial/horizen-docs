@@ -21,13 +21,13 @@ Please note that once a collator will reach the target to be included in this li
 
 ## Collators rewards
 
-The session switch will also mark the time when collators' rewards are calculated.<br/>
-Rewards will be composed by the transaction fees collected in the block and the coinbase (new ZEN minted) of each block authored (see [tokenomics](./04-tokenomics.md) section for more info on the coinbase rules). <br/>
-There is a fixed collator commision of 15%. The remaining 85% of the rewards will be delivered to delegators, proportionally to the amount of delegated stake.<br/>
+The end of each session also marks the time when collators' rewards are calculated.<br/>
+Rewards are composed by the transaction fees collected in the block and the coinbase (new ZEN minted) of each block authored (see [tokenomics](./04-tokenomics.md) section for more info on the coinbase rules). <br/>
+There is a fixed collator commission of 15%. The remaining 85% of the rewards are delivered to delegators, proportionally to the amount of delegated stake.<br/>
 Payments are made once-per-block until all payments have been made. In each such block, one collator is chosen for a rewards payment and is paid along
 with each of its delegators.
 
-Additional rules and contraints on how to join/leave the set of candidates and stake/unstake funds are detailed in the [Stake and delegation](../../3-tutorials/02-stake-and-delegation.md) tutorial.
+Additional rules and constraints on how to join/leave the set of candidates and stake/unstake funds are detailed in the [Stake and delegation](../../3-tutorials/02-stake-and-delegation.md) tutorial.
 
 
 
