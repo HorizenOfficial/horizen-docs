@@ -3,9 +3,9 @@ import type { Config } from "@docusaurus/types";
 import type * as Preset from "@docusaurus/preset-classic";
 
 const config: Config = {
-  title: "Horizen 2.0 Documentation",
+  title: "Horizen Documentation",
   tagline: "An Advanced and Efficient EVM for Zero-Knowledge Applications",
-  favicon: "img/favicon.ico",
+  favicon: "img/favicon-32x32.png",
 
   // Set the production url of your site here
   url: "https://your-docusaurus-site.example.com",
@@ -27,10 +27,8 @@ const config: Config = {
       {
         docs: {
           sidebarPath: "./sidebars.ts",
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/",
+          editUrl: 'https://github.com/HorizenLabs/horizen-2-docs/tree/main',
+          routeBasePath: '/'
         },
         theme: {
           customCss: "./src/css/custom.css",
@@ -48,17 +46,35 @@ const config: Config = {
     // Replace with your project's social card
     image: "img/docusaurus-social-card.jpg",
     navbar: {
-      title: "Horizen 2.0",
       logo: {
-        alt: "Horizen 2.0",
-        src: "img/logo.svg",
+        alt: "Horizen",
+        src: "img/horizenlogo.png",
       },
       items: [
         {
           type: "docSidebar",
-          sidebarId: "tutorialSidebar",
+          sidebarId: "overviewSidebar",
           position: "left",
-          label: "Tutorial",
+          label: "Overview",
+        },
+        {
+          type: "docSidebar",
+          sidebarId: "apiSidebar",
+          position: "left",
+          label: "Api",
+        },    
+        {
+          type: "docSidebar",
+          sidebarId: "tutorialsSidebar",
+          position: "left",
+          label: "Tutorials",
+        },  
+        {
+          type: 'doc',
+          docId: 'horizen_hub',
+          to: 'docs/horizen_hub.md',
+          position: 'left',
+          label: 'Horizen Hub',
         },
         {
           href: "https://github.com/HorizenLabs/horizen-2-docs",
@@ -68,18 +84,8 @@ const config: Config = {
       ],
     },
     footer: {
-      style: "dark",
-      links: [
-        {
-          title: "Docs",
-          items: [
-            {
-              label: "Tutorial",
-              to: "/docs/intro",
-            },
-          ],
-        },
-      ],
+      style: 'dark',
+      copyright: `Copyright © ${new Date().getFullYear()} Horizen`,
     },
     prism: {
       theme: prismThemes.github,
