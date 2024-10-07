@@ -2,15 +2,15 @@
 
 ## Overview
 
-The tokenomics follow what described and approved in the [ZenIP 42407](https://horizen.discourse.group/t/zenip-42407-proposed-tokenomics-for-horizen-2-0/718).<br/>
+The tokenomic follows what  described and approved in the [ZenIP 42407](https://horizen.discourse.group/t/zenip-42407-proposed-tokenomics-for-horizen-2-0/718).<br/>
 ZEN is the default currency of the chain.<br/>
 A maximum total supply of 21 millions of ZEN is enforced by consensus.<br/>
 
 ## Coinbase
 
 40% of the remaining supply of the old Horizen  mainchain  at the moment of the initial bootstrap of the parachain is reserved to the coinbase.<br/>
-Every new block authored contains a coinbase (new ZEN minted). The coinbase increases the collator reward coming from the transaction fees, and is redistributed to the collator's delegators with the same rules (fixed collator commission of 15%  and remaining 85% to delegators).<br/>
-The coinbase algorithm is designed to mimic the same emission rate of the old mainchain, but with a smooth curve instead of fixed halving steps. This means that at the beginning of the parachain the coinbase will be tuned to be similar to the 40% of  mainchain emission rate after the 3rd halviing (approximately 40% of 3.125 ZEN  => <b>1.25 ZEN  every 2.5 minutes</b>),  then slowly reducing on every new block with an approximate rate of  <b>-50% every 4 years</b>.
+Every new block authored contains a coinbase (new ZEN minted). The coinbase rewards the collator authoring the block: it  increases the rewards coming from the transaction fees and is redistributed to the collator's delegators (if any) with the same rules (fixed collator commission of 15%  and remaining 85% to delegators).<br/>
+The coinbase algorithm is designed to mimic the same emission rate of the old mainchain, but with a smooth curve instead of fixed halving steps. This means that at the beginning of the parachain the coinbase is tuned to be similar to the 40% of  mainchain emission rate after the 3rd halviing (approximately 40% of 3.125 ZEN  => <b>1.25 ZEN  every 2.5 minutes</b>),  then slowly reducing on every new block with an approximate rate of  <b>-50% every 4 years</b>.
 
 <img  src="/img/halvingcurve.png"/>
 
@@ -35,8 +35,8 @@ For all of the above: 25% of the allocation is immediately onlocked, the remaini
 
 ## Transaction fee handling
 
-Any transaction fee is burnt.<br/>
-Both transaction tip and base (weight) fees are redistributed to the collator authoring the block containing the transaction.<br/>
+All the transaction's fees collected are redistributed, without any burning.<br/>
+Both transaction tip and base (weight) fees goes to the collator authoring the block containing the transaction.<br/>
 Collected rewards are redistributed to collator's delegators with a fixed collator commission of 15% and remaining 85% to delegators.
 
 
