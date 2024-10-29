@@ -12,51 +12,25 @@ These accounts, recorded in the genesis state of the Horizen2 parachain, resembl
 
 ZEN balances will be part of the initial state but will not be immediately accessible. A claim procedure has been established requiring users to “unlock” these balances; a successful claim transfers the balance to a new address controlled by the claimer.
 
-ZEN mainchain transparent addresses may be associated with either a P2PKH (in the vast majority of cases) or a multisig P2SH. To facilitate the transfer of these balances to regular Horizen2 addresses, two precompiles have been developed, one for each supported locking type.
+ZEN mainchain transparent addresses may be associated with either a P2PKH (in the vast majority of cases) or a multisig P2SH.
 
-The Solidity interface for the precompiles is as follows:
+To facilitate the transfer of these balances to regular Horizen2 addresses, the `ZenClaim` precompile has been devised exposing two methods, one for each supported locking type.
 
-     interface ZenClaim {
+The precompile's address is:
 
-        /**
-         * zend_address: is a base58 encoded zend address (35 bytes)
-         *    
-         * destination_address: is an address encoded in checksum format (EIP-55)
-         *
-         * signature: is the base64 encoded zend signature obtained signing the concatenation of ("ZENCLAIM"+destination_address) string
-         *    with the private key corresponding to the public keys contained in the redeem_script. The signing must take place in the same way Zend does, that is adding a magic string to the
-         *    original message to be signed.
-         *
-         * return: the claimed amount moved to destination_address
-         */
-        function claimP2pkh(string memory zend_address, string memory destination_address, string memory signature) external returns (uint256);
-    
-    
-        /**
-         * zend_multisig_address: is a base58 encoded zend p2sh address (35 bytes)
-         *    
-         * destination_address: is an address encoded in checksum format (EIP-55)
-         *
-         * redeem_script: is the redeem script corresponding to the multisig address
-         *
-         * signatures: is an array of base64 encoded zend signatures obtained signing the concatenation of ("ZENCLAIM"+zend_multisig_address+destination_address) string
-         *    with the private key corresponding to the public keys contained in the redeem_script. The signing must take place in the same way Zend does, that is adding a magic string to the
-         *    original message to be signed.
-         *
-         * return: the claimed amount moved to destination_address
-         */
-        function claimP2shMultisig(string memory zend_multisig_address, string memory destination_address, string memory redeem_script, string[] memory signatures) external returns (uint256);
-    
-        /**
-         * The claim methods above emit two different but similar events where the indexed fields allow to match a zend address
-         * after recomposing its 35 ascii char bytes representation. The data part includes both claimed amount and destination address.
-         */
-        event P2PKHClaimed(bytes32 indexed zend_addr_part1, bytes3 indexed zend_addr_part2, uint256 amount, address destination_address);
-        event P2SHMultisigClaimed(bytes32 indexed zend_addr_part1, bytes3 indexed zend_addr_part2, uint256 amount, address destination_address);
-    
-    }
+      0x0000000000000000000000000000000000000409
+
+The precompile's solidity description can be found at:
+
+      https://github.com/HorizenOfficial/horizen/blob/main/precompiles/zenclaim/ZenClaim.sol
+
 
 ### Claim P2PKH
+The Solidity interface is as follows:
+
+`function claimP2pkh(string memory zend_address, string memory destination_address, string memory signature) external returns (uint256);
+`
+
 A user owning a P2PKH transparent address `<zend_address>` wants to claim their funds by transferring them to a specified `<destination_address>`. To initiate this process, they must generate a `<signature>` (off-chain) using the private key associated with their transparent address. The message to be signed is created by concatenating:
 
     “ZENCLAIM” + <destination_address>
@@ -76,8 +50,18 @@ These are the steps covered in the precompile implementation:
 - Get the source address from the specified transparent address `<zend_address>`
 - Transfer the funds from the source address to the `<destination_address>`
 
+The `claimP2pkh` method emits an event where the indexed fields allow to match a zend_address after recomposing its 35 ascii char bytes representation.
+The data part includes both claimed amount and destination address. The solidity description is as follows:
+
+`event P2PKHClaimed(bytes32 indexed zend_addr_part1, bytes3 indexed zend_addr_part2, uint256 amount, address destination_address);
+`
+
 
 ### Claim P2SH
+The Solidity interface is as follows:
+
+`function claimP2shMultisig(string memory zend_multisig_address, string memory destination_address, string memory redeem_script, string[] memory signatures) external returns (uint256);
+`
 
 **M** users are co-owners of a multisig P2SH transparent address `<zend_multisig_address>`, derived from a `<redeem_script>` with a signature threshold of **N** (where **N ≤ M**) required to unlock the P2SH. These users agree to claim the funds, transferring them to a `<destination_address>`.
 
@@ -99,3 +83,8 @@ These are the steps covered in the precompile implementation:
 - Reconstruct the signed message and verify that at least **N** provided `<signature>` have their extracted public key included in the specified `<redeem_script>`
 - Get the source address from the specified transparent address `<zend_multisig_address>`
 - Transfer the funds from the source address to the `<destination_address>`
+
+The `claimP2shMultisig` method emits an event where the indexed fields allow to match a `zend_multisig_address` after recomposing its 35 ascii char bytes representation.
+The data part includes both claimed amount and destination address. The solidity description is as follows:
+
+`event P2SHMultisigClaimed(bytes32 indexed zend_multisig_addr_part1, bytes3 indexed zend_multisig_addr_part2, uint256 amount, address destination_address);`
