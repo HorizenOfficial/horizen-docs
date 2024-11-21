@@ -105,7 +105,7 @@ The steps for executing a bond-less request are:
 
 The collator balance will be immediately changed but the decreased bond will have effect on collator selection only starting from the next round.
 
-## How to Cancel a Scheduled Bond Less Request 
+### How to Cancel a Scheduled Bond Less Request 
 It is possible to cancel a scheduled bond-less request until it is not actually executed.
 The steps are:
 - On Polkadot.js Apps, select _Developer>Extrinsics_.
