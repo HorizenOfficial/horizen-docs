@@ -34,7 +34,7 @@ For checking that the collator has actually joined the candidate pool, see [How 
 If the collator is in the top candidates by stake set, it will create blocks starting from the next round. The rewards will be payed after a fixed number of rounds called _rewardPaymentDelay_, whose value can be found using Polkadot.js Apps, under _Developer>Chain State>Constants_ tab, selecting _parachainStaking_, _rewardPaymentDelay_ and pressing the "+" button.
 
 ## How to Leave the Collator Pool
-Stopping being a collator is an operation that requires two steps. First it is necessary to schedule a request to leave the collator pool. Then it is necessary to wait a fixed number of rounds, called _leaveCandidateDelay_, after that the execution of the leave request can be invoked.
+Stopping being a collator is an operation that requires two steps. First it is necessary to schedule a request to leave the collator pool. Then it is necessary to wait for a fixed number of rounds, called _leaveCandidateDelay_, after that the execution of the leave request can be invoked.
 Scheduling a leave request automatically removes the collator from the active set, so it will be no longer eligible to produce blocks or earn rewards. The collator bond and the delegator stakes, instead, are returned only after the leave request is executed.
 
 The steps for scheduling a leave request are:
