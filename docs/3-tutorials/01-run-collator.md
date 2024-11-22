@@ -98,6 +98,7 @@ The steps for scheduling a bond-less request are:
 
 The steps for executing a bond-less request are:
 - After having scheduled a bond-less request, wait until _candidateBondLessDelay_ rounds have passed. The value for _candidateBondLessDelay_ can be found using Polkadot.js Apps, under _Developer>Chain State>Constants_ tab, selecting _parachainStaking_, _candidateBondLessDelay_ and pressing the "+" button.
+- Select _Developer>Extrinsics_.
 - In _using the selected account_ field, select the account that will request the extrinsic. It is not needed to be the collator account, it can be any account.
 - Select _parachainStaking_ and then _executeCandidateBondLess_.
 - Set the candidate account in the _candidate_ field.
