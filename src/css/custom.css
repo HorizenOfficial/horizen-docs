@@ -15,6 +15,7 @@
   --ifm-color-primary-lightest: #e1dad0;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --deep-blue: #030E24;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -27,6 +28,20 @@
   --ifm-color-primary-lighter: #32d8b4;
   --ifm-color-primary-lightest: #4fddbf;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  .navbar, 
+  .footer {
+    background-color: var(--deep-blue);
+  }
+  .navbar {
+    border-bottom-color: var(--ifm-toc-border-color);
+  }
+  .footer {
+    border-top: 1px solid var(--ifm-toc-border-color);
+  }
+}
+/* need to be more specific to override this variable */
+html[data-theme='dark'] {
+  --ifm-background-color: var(--deep-blue);
 }
 .navbar {
   background-color: #fff4d6;
