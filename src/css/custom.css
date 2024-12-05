@@ -29,17 +29,21 @@
   --ifm-color-primary-lighter: #fdd943;
   --ifm-color-primary-lightest: #fde26c;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
-  .navbar, 
-  .footer {
-    background-color: var(--deep-blue);
-  }
-  .navbar {
-    border-bottom-color: var(--ifm-toc-border-color);
-  }
-  .footer {
-    border-top: 1px solid var(--ifm-toc-border-color);
-  }
 }
+
+[data-theme='dark'] .navbar, 
+[data-theme='dark'] .footer {
+  background-color: var(--deep-blue);
+}
+
+[data-theme='dark'] .navbar {
+  border-bottom-color: var(--ifm-toc-border-color);
+}
+
+[data-theme='dark'] .footer {
+  border-top: 1px solid var(--ifm-toc-border-color);
+}
+
 /* need to be more specific to override this variable */
 html[data-theme='dark'] {
   --ifm-background-color: var(--deep-blue);
