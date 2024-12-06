@@ -49,6 +49,7 @@ const config: Config = {
       logo: {
         alt: "Horizen",
         src: "img/horizenlogo.png",
+        srcDark: "img/horizenlogo_darkmode.png"
       },
       items: [
         {

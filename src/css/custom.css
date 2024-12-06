@@ -15,18 +15,38 @@
   --ifm-color-primary-lightest: #e1dad0;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --deep-blue: #030E24;
+  --sunrise-yellow: #FCD11A;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
+  --ifm-color-primary: var(--sunrise-yellow);
+  --ifm-color-primary-dark: #f7c903;
+  --ifm-color-primary-darker: #e9bd03;
+  --ifm-color-primary-darkest: #c09c03;
+  --ifm-color-primary-light: #fcd735;
+  --ifm-color-primary-lighter: #fdd943;
+  --ifm-color-primary-lightest: #fde26c;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+[data-theme='dark'] .navbar, 
+[data-theme='dark'] .footer {
+  background-color: var(--deep-blue);
+}
+
+[data-theme='dark'] .navbar {
+  border-bottom-color: var(--ifm-toc-border-color);
+}
+
+[data-theme='dark'] .footer {
+  border-top: 1px solid var(--ifm-toc-border-color);
+}
+
+/* need to be more specific to override this variable */
+html[data-theme='dark'] {
+  --ifm-background-color: var(--deep-blue);
 }
 .navbar {
   background-color: #fff4d6;
