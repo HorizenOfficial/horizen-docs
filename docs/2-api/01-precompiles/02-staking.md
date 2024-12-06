@@ -1,6 +1,6 @@
 # Staking
 
-Horizen2 parachain uses Parachain Staking pallet, that allows users to stake their ZEN tokens to support the parachain. 
+Horizen parachain uses Parachain Staking pallet, that allows users to stake their ZEN tokens to support the parachain. 
 The staking pallet is responsible for managing the staking process, including staking, delegation, and rewards distribution.
 For general information see tutorials for [Collator Management](../../3-tutorials/01-run-collator.md) and [Stake and Delegation](../../3-tutorials/02-stake-and-delegation.md).
 
@@ -15,11 +15,11 @@ Some of the extrinsics in the Parachain Staking pallet have an exit delay. This 
 The exit delays for different extrinsics are as follows:
 
 | Extrinsic            | Exit Delay |
-|----------------------|----------|
-| Leave Candidates     | 20 round |
-| Revoke Delegation    | 20 round |
-| Candidate Bond Less  | 20 round |
-| Delegation Bond Less | 20 round |
+|----------------------|------------|
+| Leave Candidates     | 20 rounds  |
+| Revoke Delegation    | 20 rounds  |
+| Candidate Bond Less  | 20 rounds  |
+| Delegation Bond Less | 20 rounds  |
 
 
 ## Available Methods
