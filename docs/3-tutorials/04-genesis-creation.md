@@ -124,6 +124,6 @@ The ZEND Mainchain height that marks the migration will be an input parameter of
          ```
 
 
-The output of step 8.3 will be a hash of the entire genesis data. By verifying that it matches the one published by HorizenLabs, you can ensure that no data has been tampered with.
+The output of step 8.3 will be a hash of the entire genesis data. By verifying that it matches the one published by Horizen Labs, you can ensure that no data has been tampered with.
 
 
