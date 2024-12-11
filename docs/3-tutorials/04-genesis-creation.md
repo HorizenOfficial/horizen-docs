@@ -12,7 +12,7 @@ The following software is needed:
 
 1. Fully synched ZEND Mainchain node with dump support enabled:
 
-    - Donwload latest ZEND release from here: https://github.com/HorizenOfficial/zen/releases
+    - Download latest ZEND release from here: https://github.com/HorizenOfficial/zen/releases
     - Follow the instructions here https://github.com/HorizenLabs/migration-tools/tree/main/snapshot to patch the ZEND node in order to have dump support enabled
     - Compile the node, start and have it fully synched with the old mainchain 
     
