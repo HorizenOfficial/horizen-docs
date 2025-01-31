@@ -1,7 +1,4 @@
-
-# Use ZKInterface ZKP Verification
-
-  
+# ZKInterface ZKP Verification
 
 **ZKInterface** is a precompile inside the Horizen chain that allows zero-knowledge proof verification using different proof types.
 
@@ -42,11 +39,10 @@ The method returns a tuple `(bool, uint8)`, composed by the following values:
 | 3        | `vk` (verification key) argument is invalid            |
 | 4        | `proof` argument is invalid                            |
 
-Please note: due to inconsistencies in ZkVerify verification responses, the error result code (1-4) could differ from the real problem of the given input.
 
 ## Encoding parameters
 
-All the parameters should be provided as a *bytes* object, that represent the encoding of the corresponding object in Rust according to the `sp_core::Decode` trait. For more information, check [official sp_core Rust documentation](https://docs.rs/sp-core/latest/sp_core/). 
+All the parameters should be provided as a *bytes* object, that represent the encoding of the corresponding object in Rust according to the SCALE enconding. For more information, check [official SCALE codec documentation](https://docs.polkadot.com/polkadot-protocol/basics/data-encoding/#scale-codec-libraries) and [parity_scale_codec Rust pallet documentation](https://docs.rs/parity-scale-codec/latest/parity_scale_codec/s)
 
 An exception is provided for the Groth16 proof type, since it's the only one (between the supported ones) which *publicInput* value has the `Vec<Vec<u8>>` type (array of an array). In this case, the encoding is the following:
 
@@ -54,11 +50,11 @@ An exception is provided for the Groth16 proof type, since it's the only one (be
 
 - Outer array is obtained chaining the inner arrays' encoded values.
 
-You can find some examples of valid encoded inputs for each algorithm inside the `test` subfolder in the `precompile` source code folder.
+You can find some examples of valid encoded inputs for each algorithm [inside the `test` subfolder](https://github.com/HorizenOfficial/horizen/tree/dev/precompiles/zkinterface/test) in the `precompile` source code folder.
 
 ## Proof verifications
 
-The precompiles executes the proof verification with a *pure* (stateless read-only) method on the Solidity interface. This verification is executed in the following way:
+The precompiles executes the proof verification in a synchronous way with a *pure* (stateless read-only) method on the Solidity interface. This verification is executed in the following way:
 
 - The input arguments are decoded from the *bytes* format to the Rust object
 - The decoded inputs are passed to the `zkverify` verifier for the given proof type, invoking the corresponding method imported as a Rust library
@@ -74,7 +70,7 @@ For more information about the verification code, consult the zkVerify sources:
 | Fflonk | [Link](https://docs.zkverify.io/overview/verification_pallets/fflonk/) | [Link](https://github.com/zkVerify/zkVerify/tree/main/verifiers/fflonk) |
 
 ## Source Code
-The `precompile` source code folder contains the following files:
+[The `precompile` source code folder](https://github.com/HorizenOfficial/horizen/tree/dev/precompiles/zkinterface) contains the following files:
 
 - `lib.rs`: access point for the precompile, it receives the arguments and pass to the `handlers.rs`  verification method, that convert the response into the Solidity's interface requested one.
 - `handlers.rs`: contains the implementation for all the verification proof types
