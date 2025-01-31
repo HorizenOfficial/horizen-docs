@@ -46,7 +46,7 @@ All the parameters should be provided as a *bytes* object, that represent the en
 
 An exception is provided for the Groth16 proof type, since it's the only one (between the supported ones) which *publicInput* value has the `Vec<Vec<u8>>` type (array of an array). In this case, the encoding is the following:
 
-- Inner arrays are encoded according to the `sp_core::Decode` standard
+- Inner arrays are encoded according to the SCALE encoding standard.
 
 - Outer array is obtained chaining the inner arrays' encoded values.
 
@@ -54,7 +54,7 @@ You can find some examples of valid encoded inputs for each algorithm [inside th
 
 ## Proof verifications
 
-The precompiles executes the proof verification in a synchronous way with a *pure* (stateless read-only) method on the Solidity interface. This verification is executed in the following way:
+The precompile executes the proof verification in a synchronous way with a *pure* (stateless read-only) method on the Solidity interface. This verification is executed in the following way:
 
 - The input arguments are decoded from the *bytes* format to the Rust object
 - The decoded inputs are passed to the `zkverify` verifier for the given proof type, invoking the corresponding method imported as a Rust library
@@ -72,7 +72,7 @@ For more information about the verification code, consult the zkVerify sources:
 ## Source Code
 [The `precompile` source code folder](https://github.com/HorizenOfficial/horizen/tree/dev/precompiles/zkinterface) contains the following files:
 
-- `lib.rs`: access point for the precompile, it receives the arguments and pass to the `handlers.rs`  verification method, that convert the response into the Solidity's interface requested one.
+- `lib.rs`: access point for the precompile, it receives the arguments and passes them to the `handlers.rs` verification method, that converts the response into the Solidity's interface requested one.
 - `handlers.rs`: contains the implementation for all the verification proof types
 - `utils.rs`: contains the utility as the `ResultCode` enum and the error conversion methods.
 - `tests.rs`: contains the positive and negative unit tests
