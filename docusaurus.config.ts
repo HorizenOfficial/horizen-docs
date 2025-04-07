@@ -60,23 +60,10 @@ const config: Config = {
         },
         {
           type: "docSidebar",
-          sidebarId: "apiSidebar",
+          sidebarId: "migrationSidebar",
           position: "left",
-          label: "Api",
+          label: "Migration",
         },    
-        {
-          type: "docSidebar",
-          sidebarId: "tutorialsSidebar",
-          position: "left",
-          label: "Tutorials",
-        },  
-        {
-          type: 'doc',
-          docId: 'horizen_hub',
-          to: 'docs/horizen_hub.md',
-          position: 'left',
-          label: 'Horizen Hub',
-        },
         {
           href: "https://github.com/HorizenLabs/horizen-2-docs",
           label: "GitHub",
