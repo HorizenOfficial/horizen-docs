@@ -6,17 +6,9 @@ Assuming the data loading process has been succesfully completed by Horizen, any
 
 ## How it works:
 
-In the previous sections a dump of all the balances to be migrated has been obtained from fully-synched chain nodes.<br/>
-Then the balances have been loaded into two smart contracts. During the load, a cumulative hash has been calculated with the data, using the following forumla:<br/>
+We have already described in previous sections the concept of dumps, migration data and cumulative hash.
 
-    ```
-    overall_hash = "0x00000000"
-    for each tuple:
-        overall_hash = hash(overall_hash, key, value)
-    ```
-
-In this section, a new dump will be obtainen, then a scrpt will be executed to reculcate the hash locally with the same algorithm used in the solidity code.
-Finally, the calculated hash will be compared with the one stored in the smart contract. <bt/>
+The verification process will require to take a new dump, reculcate the hash locally with the same algorithm and compare it with the one stored in the vault smart contracts. <bt/>
 
 
 ## Instructions:
@@ -46,8 +38,6 @@ The following software is needed:
 
 ### Instructions: 
 
-The ZEND Mainchain height that marks the migration will be an input parameter of the process: we will call it MC_MIGRATION_HEIGHT.
+1. Execute the dumps with the procedure already [described here](./04-dump-execution.md)** 
 
-1. Execute the dumps with procedure [described here](./04-dump-execution.md)** 
-
-2. Download the git repo [https://github.com/HorizenOfficial/horizen-migration-check] and follow the README instructions to check the on-chain hash corresponds to the one calculated locally.
+2. Download the git repo [https://github.com/HorizenOfficial/horizen-migration-check] and follow the README instructions to recalculate the hash from the dumps and compare it with the on-chain one.

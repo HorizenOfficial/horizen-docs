@@ -67,6 +67,20 @@ We will need to interact with a node of each chain:
     - First parameter of the method is the path of the file generated at step 1
     - Second parameter is the local-path of the output json file.
 
+    The output format will be a key-value json data structure like this:
+
+    ```
+    {
+        "0xabf1FF91cECD9990B3f29363B62B87FD76f55F4A": 10001500000000000000000,
+        "0x448ae34180D03AD7da48975d6Fd7B297bb871E26": 2082100000000000000,
+        "0x144e0FE5e69893577107a15a7c76bABd59f0A279": 100000000000000000
+    }
+     ```
+
+     The *keys* represent the ZEND address in an Base58check decoded format, without the first 2bytes chain prefix (so 20 bytes in total), prepended with 0x.<br/>
+     The *values* represent the ZEND balance, in "wei format" (1 ZEN = 1 with 18 zeros).
+   
+
 5. Convert EON  dump in json format, with the script [setup_eon2_json.py](https://github.com/HorizenOfficial/horizen-migration/blob/dev/dump-scripts/python/setup_eon2_json.py):
 
     ```
@@ -76,6 +90,20 @@ We will need to interact with a node of each chain:
     - First parameter of the method is the path of the file generated at step 2
     - Second parameter of the method is the path of the file generated at step 3
     - Third parameter is the local-path of the output json file.
+
+    The output format will be a key-value json data structure like this:
+
+    ```
+    {
+        "0xBa2290AEaAE3e1ea336431911C97a67Ebff46528": 1500000000000000000,
+        "0xFEB3DE3D4A6F49bbF643c44E64dfd3e46D3E0F04": 821003000000000000,
+        "0x2a085Ca4E931938Aa383C88026b0566cFce1A34b": 45500000000000000
+    }
+     ```
+
+     The *keys* represent the EON address in the hex form (EIP-55 format), with “0x” prefix.<br/>
+     The *values* represent the EON balance, in "wei format" (1 ZEN = 1 with 18 zeros).
+
 
 The output files of steps 4 and 5 will be the ones used for the data loading and migration check steps.
 

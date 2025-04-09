@@ -14,12 +14,16 @@ A simple manual claim of the funds will be required because the address format o
 
 ## Overview of the process
 
+<img  src="/img/migration1.png"/>
+
 1. A migration point will be fixed on both old chains. When reached, Horizen Labs will perform dumps of all the relevant data on both chains.
 2. A set of smart contracts will be deployed on BASE to handle the restore:
     - the offical ERC-20 smart contract
     - An EONBackupVault, that will store the EON balances and automatically mint them to BASE
-    - A ZENDBackupVault, that will store the ZEND balances and expose methods to claim them
-  HorizenLabs will be responsible to deploy the contracts and load the dump data. 
+    - A ZENDBackupVault, that will store the ZEND balances and expose methods to claim them 
+
+      HorizenLabs will be responsible to deploy the contracts and load the dump data. 
+
 3. A migration check procedure will allow third parties to challenge the fairness of the loaded data
 4. ZEND owners will be able to claim funds via on-chain calls to the ZENDBackupVault contract
 
