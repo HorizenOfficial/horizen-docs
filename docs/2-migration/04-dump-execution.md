@@ -1,17 +1,17 @@
 # Dump execution
 
-> :warning: **This step will be executed by Horizen admins and does not require actions for ZEN holders, unless they want to perform a [migration check](./06-migration-check.md)** 
+> :warning: **This step will be executed by Horizen admins and does not require action from ZEN holders, unless they want to perform a [migration check](./06-migration-check.md)** 
 
-In the previous step network has reached  the  migration heights, and the final block hashes/heights of both chains are now revealed.<br/>
+In the previous step, the network has reached  the  migration heights, and the final block hashes/heights of both chains are now revealed.<br/>
 This section will describe how to generate the data with all the balances to be migrated.<br/>
 
 We will need to interact with a node of each chain:
 
-- Fully synched ZEND Mainchain node 
+- Fully synced ZEND Mainchain node 
 
-- Fully synched EON Chain node with dump support enabled:
+- Fully synced EON Chain node with dump support enabled:
 
-    - To enable dump support,  the following fragment must be present in the config file  (*important*: to generate a valid state dump the fragment must be added *BEFORE* starting to synch the chain):
+    - To enable dump support,  the following fragment must be present in the config file  (*important*: to generate a valid state dump, the fragment must be added *BEFORE* starting to sync the chain):
 
     ```
     evmStateDump {
@@ -19,7 +19,9 @@ We will need to interact with a node of each chain:
     }
     ```
     
-# How to create the dump data
+# How to obtain the dump data
+
+<img  src="/img/migration2.png"/>
 
 1. Execute a dump of ZEND balances at that specified height.
    ZEND is shipped with a dumper command line utility to do this:
@@ -58,12 +60,16 @@ We will need to interact with a node of each chain:
     - Third parameter is the local-path of the output dump.
     
 
-4. Convert ZEND csv dump in json format, with the script [zend_to_horizen.py](https://github.com/HorizenOfficial/horizen-migration/blob/dev/dump-scripts/python/zend_to_horizen.py):
-
+4. Convert ZEND csv dump in json format, with the script [zend_to_horizen.py](https://github.com/HorizenOfficial/horizen-migration/blob/dev/dump-scripts/python/zend_to_horizen.py): 
     ```
     python3 zend_to_horizen.py <zend dump file name> <output_file>
      ```
+    This step does the following:
+    - transform the addresses in Base58 decoded format (is easier to handle in the solidity code), without chain prefix
+    - trasform the balances in "wei" format (1 ZEN = 1 with 18 zeros)
+    - order the addresses alphabetically
 
+    Parameters:
     - First parameter of the method is the path of the file generated at step 1
     - Second parameter is the local-path of the output json file.
 
@@ -79,6 +85,9 @@ We will need to interact with a node of each chain:
 
      The *keys* represent the ZEND address in an Base58check decoded format, without the first 2bytes chain prefix (so 20 bytes in total), prepended with 0x.<br/>
      The *values* represent the ZEND balance, in "wei format" (1 ZEN = 1 with 18 zeros).
+
+
+
    
 
 5. Convert EON  dump in json format, with the script [setup_eon2_json.py](https://github.com/HorizenOfficial/horizen-migration/blob/dev/dump-scripts/python/setup_eon2_json.py):
@@ -87,6 +96,14 @@ We will need to interact with a node of each chain:
     python3 setup_eon2_json.pyy <Eon dump file name> <Eon stakes file name> <output_file>
      ```
 
+    This step does the following:
+    - filters out the smart contracts addresses and the stakes belonging to smart contracts
+    - filters out addresses with 0 balance and no stakes
+    - filters out the 0x0000000000000000000000000000000000000000 account
+    - trasform the balances in "wei" format (1 ZEN = 1 with 18 zeros)
+    - order the addresses alphabetically
+
+    Parameters:
     - First parameter of the method is the path of the file generated at step 2
     - Second parameter of the method is the path of the file generated at step 3
     - Third parameter is the local-path of the output json file.
