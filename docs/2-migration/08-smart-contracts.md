@@ -1,9 +1,9 @@
-# Smart contracts architecture
+# Smart contracts
 
 Here a more technical deep dive of the smart contracts used for the migration.<br/>
-Their solidity code is publicly available [in this repo](https://github.com/HorizenOfficial/horizen-migration/tree/dev/erc20-migration/contracts).<br/>
+Their solidity code is publicly available [in this repository](https://github.com/HorizenOfficial/horizen-migration/tree/dev/erc20-migration/contracts).<br/>
 
-## ERC-20 official ZEN contract
+## ZenToken (ERC-20 official ZEN contract)
 
 - Official ERC-20 contract representing ZEN.
 - Has a maximum capped supply of 21 Millions of ZEN (the same as the old Manchain)
