@@ -10,7 +10,7 @@ The amounts staked by forgers or delegators will also be migrated: you don't nee
 Smart contracts, ZEN balances locked in smart contracts and stakes delegated by smart contracts will **not** be migrated: if you have any ZEN locked in a smart contract, be sure to move it before the migration day. 
 
 - For **ZEND Mainchain**: the migration will cover all $ZEN funds locked in UTXOs of type PayToPubKeyHash (single address) or  PayToScriptHash Multisig (multisig address). Note: we have estimated that 99% of current UTXOs are part of these groups.<br/>
-A simple manual claim of the funds will be required because the address format on the two chains is different (Bitcoin-format in the old Horizen chain, Ethereum format in the new Horizen chain). An automatic migration like the one from EON can't be performed here, because the on-chain UTXO structure does not track the original key/address owning it, making it impossible an automatic mapping between old and new addresses.
+A simple manual claim of the funds will be required because the address format on the two chains is different (Bitcoin-format in the old Horizen chain, Ethereum format in the new Horizen chain). An automatic migration like the one from EON can't be performed here, because the on-chain UTXO structure does not track the original key/address owning it, making it impossible a mapping between old and new addresses.
 
 ## Overview of the process
 

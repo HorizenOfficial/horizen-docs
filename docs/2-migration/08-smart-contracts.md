@@ -60,4 +60,8 @@ Their solidity code is publicly available [in this repository](https://github.co
 | -------- | ------- |
 | Solidity source code: | TODO    |
 
+<br/>
+<br/>
+**The diagram below represents the sequence of the main contract's calls:**
 
+<img  src="/img/migration3.png"/>
