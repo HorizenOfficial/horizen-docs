@@ -26,7 +26,7 @@ The Solidity method to claim this kind of UTXOs is the following:
 ```
     function claimP2PKH(address destAddress, 
                         bytes memory hexSignature, 
-                        bytes32 pubKeyX, bytes32 pubKeyY) public 
+                        PubKey calldata pubKey) public 
 ```
 
 #### Parameters details:
@@ -36,8 +36,8 @@ The Solidity method to claim this kind of UTXOs is the following:
 - hexSignature:  ECDSA/Secp256k1 Signature generated with the private key associated with the UTXOs to claim, of the following message:<br/>
   “ZENCLAIM” + destAddress <br/>
   (destAddress here is represented in the hex form according to EIP-55, with “0x” prefix. No space has to be inserted after “ZENCLAIM” string).
-- pubKeyX and pubKeyY: X and Y part of the public key associated to the same private key used for the signature and owning the UTXOs.
-  Must be always sent in the uncompressed form, and split into the two parts (X represents the first 32 bytes, Y the other 32 bytes). 
+- pubKey: public key associated to the same private key used for the signature and owning the UTXOs.
+  Must be always sent in uncompressed form: the PubKey data structure is composed of two bytes32 fields, that represents two components x and y (first 32 bytes and second 32 bytes). 
 
 
 #### Events emitted:
