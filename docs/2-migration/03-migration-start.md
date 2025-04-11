@@ -1,40 +1,40 @@
-# Migration block hashes
+# Migration starting points
 
 > :warning: **For this step no action is required for ZEN holders** 
 
-The activation of the EON 1.5 hard-fork will mark the starting of the migration process.<br/>
-As usual with EON, the hard-fork will be triggered at a specific consensus epoch, with milliseconds precision.<br/>
+The activation of the EON 1.5 hard-fork will mark the start of the migration process.<br/>
+As usual with EON, the hard-fork will be triggered at a specific consensus epoch, with millisecond precision.<br/>
 
-We will need also the activation of ZEND hardfork: it will be trigger at a specific height.<br/>
+We will also need the activation of the ZEND hardfork: it will be triggered at a specific height.<br/>
 Although we can’t plan the exact time a predefined height will be reached, the estimated precision  is +-2 hours.<br/>
 
-The two harforks  will be coordinated to happen at the same day.
+The two hard forks  will be coordinated to happen on the same day.
 
-# Final block hash determination
+## Final block hash determination
 
-The rules below are used to univoquely identify the final block-hash of both  chains: this will mark the block at which the balances will be migrated, and <b>any transaction recorded after this will have no value</b>.
+The rules below are used to uniquely identify the final block hash of both  chains: this will mark the block at which the balances will be migrated, and <b>any transaction recorded after this will have no value</b>.
 
 - For ZEND Mainchain, the blockhash at the hardfork height will be the final block hash.
 
 - For EON, the block including the reference to the above mainchain block  will be considered the final block. <br/>
-All mainchain blocks are referenced in EON only after 6 confirmations: so around 20 minutes  will be needed after the ZEND hardfork to see its block included in EON.
+All mainchain blocks are referenced in EON only after 6 confirmations, so around 20 minutes  will be needed after the ZEND hardfork to see its block included in EON.
 
-Additionally, <b>both of the previous will be considered final only after the final mainchain block will have 100 confirmations, and all 100 confirmations will be included in the EON chain</b>.<br/>
-We can then estimate that the final blockhash on both chains will be known around 20 minutes after the mainchain Hardfork, but definitively confirmed **within 5 hours** after the mainchain Hardfork.
+Additionally, <b>both of the previous will be considered final only after the final mainchain block has 100 confirmations, and all 100 confirmations have been included in the EON chain</b>.<br/>
+We can then estimate that the final blockhash on both chains will be known around 20 minutes after the mainchain hardfork, but  fully confirmed **within 5 hours** after the mainchain hardfork.
 
-# Useful commands to get the block hashes
+## Useful commands to get the block hashes
 
-### For ZEND:
+    **For ZEND:**
 
-- To obtain the hash of the block at a specific height:
+    To obtain the hash of the block at a specific height:
 
     ```
     getblockhash <height>
     ```
 
-### For EON:
+    **For EON:**
 
-- To obtain the block that reference a specific ZEND block by height:
+    To obtain the block that references a specific ZEND block by height:
 
     ```
     curl -sX POST 'http://127.0.0.1:9085/mainchain/blockReferenceInfoBy' -H 'Content-Type: application/json' -H 'accept: application/json' -d '{"height":1654690, "format": true}'
@@ -42,8 +42,8 @@ We can then estimate that the final blockhash on both chains will be known aroun
     ```
 
     The result will be in this format:
-    - The field *mainchainHeaderSidechainBlockId* is the EON block hash.
-    - The field *hash* is the ZEND hash (double check is equals to the ZEND getblockhash result)<br/><br/>
+    - The field *mainchainHeaderSidechainBlockId* is the EON block hash referencing the mainchain block.
+    - The field *hash* is the ZEND hash (double check it is equals to the ZEND getblockhash result)<br/><br/>
 
 
     ```
