@@ -59,7 +59,7 @@ The Solidity method to claim this kind of UTXOs is the following:
     function claimP2SH(address destAddress, 
                        bytes[] memory hexSignatures, 
                        bytes memory script, 
-                       bytes32[] memory pubKeysX, bytes32[] memory pubKeysY)
+                       PubKey[] calldata pubKeys)
 ```
 #### Parameters details:
 
@@ -75,9 +75,9 @@ The Solidity method to claim this kind of UTXOs is the following:
 For example: if the scripts accepts 2 out of 3 signatures, and we have only A and C signatures, the hexSignatures list will be:
 [SigA, 0, SigC]
 - script: full UTXO redeem script.
-- pubKeysX and pubKeysY: List of public keys accepted by the script. Must be always sent in uncompressed form and split in the two components x and y (first 32 bytes and second 32 bytes).<br/>
+- pubKeys: List of public keys accepted by the script. Must be always sent in uncompressed form: the PubKey data structure is composed of two bytes32 fields, that represents two components x and y (first 32 bytes and second 32 bytes).<br/>
   The array length and  position of elements must correspond to those defined in the script and to the array of signatures.<br/>
-  If a key signature is not present, also the corresponding pubKeysX and pubKeysY must value *bytes32(0)*
+  If a key signature is not present, also the corresponding pubKeys X and Y must value *bytes32(0)*
 
 #### Events emitted:
 
