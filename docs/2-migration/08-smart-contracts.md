@@ -20,11 +20,11 @@ Their solidity code is publicly available [in this repository](https://github.co
 
 ## EONBackupVault
 
-- Contract used to store the EON balances and automatically distrubute them.
+- Contract used to store the EON balances and automatically distribute them.
 - Accepts in the constructor the whitelisted admin address: is the only one able to call contract's write methods.
 - Methods **setERC20** and **setCumulativeHashCheckpoint** have to be called before the loading: the first one sets the reference to the ERC-20, the second
-  sets the expected cumulative hash after the loading will be completed,.
-- The data loading is done in batch, by calling the method **batchInsert**. Logic to recalculate the cumulative hash is present in the method.
+  sets the expected cumulative hash after the loading will be completed.
+- The data loading is done in batches, by calling the method **batchInsert**. Logic to recalculate the cumulative hash is present in the method.
 - After all the data has been loaded, multiple calls to the **distribute** method will mint the amounts to the payee
 
 
@@ -38,12 +38,12 @@ Their solidity code is publicly available [in this repository](https://github.co
 - Contract used to store the ZEND balances and allow their manual claiming.
 - Accepts in the constructor the whitelisted admin address and the message string constants to be used (concatenated with the token symbol) for the claiming signature's message prefix. (For mainnet this  will correspond to "ZENCLAIM")
 - Methods **setERC20** and **setCumulativeHashCheckpoint** must be called before the loading: the first one sets the reference to the ERC-20, and the second
-  sets the expected cumulative hash after the loading is completed,.
+  sets the expected cumulative hash after the loading is completed.
 - The data loading is done in batches, by calling the method **batchInsert**. During the loading, the contract will mint the corresponding ZEN values to itself.
 - Manual claiming is possible through the methods **claimP2PKH** and **claimP2SH**.<br/>
   They will be enabled only once the expected cumulative hash will be reached.<br/>
   After each successful claim, the corresponding ZEN amount will be transferred
-  to the payee (this means that the total balance of the contracts will correspond to the unclaimed total value at any given time)
+  to the payee (this means that the total balance of the contract will correspond to the unclaimed total value at any given time)
 
 |      |  |
 | -------- | ------- |

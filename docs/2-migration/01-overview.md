@@ -6,7 +6,7 @@ After the migration, both old chains will be discontinued, and all coin transfer
 ## What will be migrated?
 
 - For **EON**: all EOA (Externally owned accounts) balances will be automatically migrated  to the same address (EON and Base share the same address format, and users will be able to use the same wallet keys). <br/>
-The amounts staked by forgers or delegators will also be migrated: you don't need to unstake them before the migration, they will be automatically unstacked and moved to the same address in the new chain.<br/>
+The amounts staked by forgers or delegators will also be migrated: you don't need to unstake them before the migration, they will be automatically unstaked and moved to the same address in the new chain.<br/>
 Smart contracts, ZEN balances locked in smart contracts and stakes delegated by smart contracts will **not** be migrated: if you have any ZEN locked in a smart contract, be sure to move it before the migration day. 
 
 - For **ZEND Mainchain**: the migration will cover all $ZEN funds locked in UTXOs of type PayToPubKeyHash (single address) or  PayToScriptHash Multisig (multisig address). Note: we have estimated that 99% of current UTXOs are part of these groups.<br/>

@@ -66,7 +66,7 @@ We will need to interact with a node of each chain:
      ```
     This step does the following:
     - transform the addresses in Base58 decoded format (is easier to handle in the solidity code), without chain prefix
-    - trasform the balances in "wei" format (1 ZEN = 1 with 18 zeros)
+    - transform the balances in "wei" format (1 ZEN = 1 with 18 zeros)
     - order the addresses alphabetically
 
     Parameters:
@@ -83,7 +83,7 @@ We will need to interact with a node of each chain:
     }
      ```
 
-     The *keys* represent the ZEND address in an Base58check decoded format, without the first 2bytes chain prefix (so 20 bytes in total), prepended with 0x.<br/>
+     The *keys* represent the ZEND address in a Base58check decoded format, without the first 2 bytes chain prefix (so 20 bytes in total), prepended with 0x.<br/>
      The *values* represent the ZEND balance, in "wei format" (1 ZEN = 1 with 18 zeros).
 
 
@@ -93,15 +93,15 @@ We will need to interact with a node of each chain:
 5. Convert EON  dump in json format, with the script [setup_eon2_json.py](https://github.com/HorizenOfficial/horizen-migration/blob/dev/dump-scripts/python/setup_eon2_json.py):
 
     ```
-    python3 setup_eon2_json.pyy <Eon dump file name> <Eon stakes file name> <output_file>
+    python3 setup_eon2_json.py <Eon dump file name> <Eon stakes file name> <output_file>
      ```
 
     This step does the following:
     - filters out the smart contracts addresses and the stakes belonging to smart contracts
     - filters out addresses with 0 balance and no stakes
     - filters out the 0x0000000000000000000000000000000000000000 account
-    - trasform the balances in "wei" format (1 ZEN = 1 with 18 zeros)
-    - order the addresses alphabetically
+    - transforms the balances in "wei" format (1 ZEN = 1 with 18 zeros)
+    - orders the addresses alphabetically
 
     Parameters:
     - First parameter of the method is the path of the file generated at step 2
@@ -118,7 +118,7 @@ We will need to interact with a node of each chain:
     }
      ```
 
-     The *keys* represent the EON address in the hex form (EIP-55 format), with “0x” prefix.<br/>
+     The *keys* represent the EON address in the hex form with “0x” prefix.<br/>
      The *values* represent the EON balance, in "wei format" (1 ZEN = 1 with 18 zeros).
 
 
