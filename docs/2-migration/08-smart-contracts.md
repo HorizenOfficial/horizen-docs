@@ -10,7 +10,10 @@ Their solidity code is publicly available [in this repository](https://github.co
 - Accepts in the constructor:
     - The token name and symbol
     - The address of the EONBackupVault and ZendBackupVault contracts
+    - The address of the vesting contracts beneficiaries of the remaining supply after the migration (Horizen foundation and HorizenDAO)
 - Minting authority is granted only to the vault smart contracts
+- Exposes a "callback" method **notifyMintingDone**: is called by the vault smart contracts when the minting has been completed. When both of them have completed
+  the process, the contract will mint the remaining supply with the rules determined by the ZENIP Tokenomics.
 
 |      |  |
 | -------- | ------- |
@@ -54,7 +57,15 @@ Their solidity code is publicly available [in this repository](https://github.co
 ## ZenMigrationFactory contract
 
 - Responsible to deploy all the previous contracts and set the correct references between them.
-- Method **deployMigrationContracts** will perform the task. Accepted parameters will be the token name and symbol, and the claim message string constant.
+- Method **deployMigrationContracts** will perform the task. Accepted parameters will be the token name and symbol, the claim message string constant and the beneficiaries of the remaining supply after the migration (Horizen foundation and HorizenDAO)
+
+|      |  |
+| -------- | ------- |
+| Solidity source code: | TODO    |
+
+## LinearTokenVesting contract
+
+- A contract that locks an amount of ERC-20 tokens and release them to a predefined beneficiary. The vesting is linear, and the number of intervals and time between each interval will be configurable.
 
 |      |  |
 | -------- | ------- |
