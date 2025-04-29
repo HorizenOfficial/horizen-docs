@@ -1,7 +1,7 @@
 # Smart contracts
 
 Here a more technical deep dive of the smart contracts used for the migration.<br/>
-Their solidity code is publicly available [in this repository](https://github.com/HorizenOfficial/horizen-migration/tree/dev/erc20-migration/contracts).<br/>
+Their solidity code is publicly available [in this repository](https://github.com/HorizenOfficial/horizen-migration/blob/main/erc20-migration/contracts).<br/>
 
 ## ZenToken (ERC-20 official ZEN contract)
 
@@ -10,15 +10,15 @@ Their solidity code is publicly available [in this repository](https://github.co
 - Accepts in the constructor:
     - The token name and symbol
     - The address of the EONBackupVault and ZendBackupVault contracts
-    - The address of the vesting contracts beneficiaries of the remaining supply after the migration (Horizen foundation and HorizenDAO)
+    - The address who will receive the remaining portion of Zen after the migration (Horizen foundation and HorizenDAO)
 - Minting authority is granted only to the vault smart contracts
 - Exposes a "callback" method **notifyMintingDone**: is called by the vault smart contracts when the minting has been completed. When both of them have completed
-  the process, the contract will mint the remaining supply with the rules determined by the ZENIP Tokenomics.
+  the process, the contract will mint the remaining supply with the rules determined by the [ZenIP 42409](https://snapshot.box/#/s:horizenfoundationtechnical.eth/proposal/0x3a0ce870c5a894f4468f72d9fde843e9f25e8268890a44ebcc1cb0d5dbbe89cf) .
 
 |      |  |
 | -------- | ------- |
 | Address on BASE mainnet: | TODO   |
-| Solidity source code: | TODO    |
+| Solidity source code: | [ZenToken.sol](https://github.com/HorizenOfficial/horizen-migration/blob/main/erc20-migration/contracts/ZenToken.sol)    |
 
 
 ## EONBackupVault
@@ -34,7 +34,7 @@ Their solidity code is publicly available [in this repository](https://github.co
 |      |  |
 | -------- | ------- |
 | Address on BASE mainnet: | TODO   |
-| Solidity source code: | TODO    |
+| Solidity source code: | [EONBackupVault.sol](https://github.com/HorizenOfficial/horizen-migration/blob/main/erc20-migration/contracts/EONBackupVault.sol) |
 
 ## ZendBackupVault
 
@@ -51,8 +51,16 @@ Their solidity code is publicly available [in this repository](https://github.co
 |      |  |
 | -------- | ------- |
 | Address on BASE mainnet: | TODO   |
-| Solidity source code: | TODO    |
+| Solidity source code: | [ZendBackupVault.sol](https://github.com/HorizenOfficial/horizen-migration/blob/main/erc20-migration/contracts/ZendBackupVault.sol)    |
 
+## LinearTokenVesting contract
+
+- A contract that locks an amount of ERC-20 tokens and release them to a predefined beneficiary. The vesting is linear, and the number of intervals and time between each interval will be configurable. <br/>
+  An admin address set in the constructor has the rights to modify the beneficiary or the vesting parameters (will be subject to offchain DAO voting).
+
+|      |  |
+| -------- | ------- |
+| Solidity source code: | [LinearTokenVesting.sol](https://github.com/HorizenOfficial/horizen-migration/blob/main/erc20-migration/contracts/LinearTokenVesting.sol)    |
 
 ## ZenMigrationFactory contract
 
@@ -61,15 +69,7 @@ Their solidity code is publicly available [in this repository](https://github.co
 
 |      |  |
 | -------- | ------- |
-| Solidity source code: | TODO    |
-
-## LinearTokenVesting contract
-
-- A contract that locks an amount of ERC-20 tokens and release them to a predefined beneficiary. The vesting is linear, and the number of intervals and time between each interval will be configurable.
-
-|      |  |
-| -------- | ------- |
-| Solidity source code: | TODO    |
+| Solidity source code: | [ZenMigrationFactory.sol](https://github.com/HorizenOfficial/horizen-migration/blob/main/erc20-migration/contracts/ZenMigrationFactory.sol)    |
 
 <br/>
 <br/>
