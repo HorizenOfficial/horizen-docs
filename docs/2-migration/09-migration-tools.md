@@ -36,7 +36,7 @@ If you have your seed phrase, you can use [Sphere](https://github.com/HorizenOff
 2. Verify that your wallet addresses and balances are correct.
 3. To generate a signature, click on this icon in your Sphere wallet and enter this message: `"ZT1CLAIM" + destinationAddress`; Example: `ZT1CLAIM0x1B9aCc8d2c9e20aC2e78904e6f123f2D22Dd2A8w`. <!-- Update prefix -->
 
-    ![Sign a message with Sphere](/img/migration-tools/sphere-3.png) <!-- Update image -->
+    ![Sign a message with Sphere](/img/migration-tools/sphere-1.png) <!-- Update image -->
 
 4. Click **Create Signature**. This will be used in the claim process.
 
