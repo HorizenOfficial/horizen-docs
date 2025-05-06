@@ -48,7 +48,7 @@ If you have your seed phrase, you can use [Sphere](https://github.com/HorizenOff
 ### Ledger Signing Tool
 If your funds are stored on a Ledger hardware wallet, use the [Ledger Signing Tool](https://github.com/HorizenOfficial/ledger-signing-tool).
 
-> **Note**: For security, we recommend downloading the tool and running it offline. Download the static files [here](https://github.com/HorizenOfficial/ledger-signing-tool/releases/tag/v0.1.0), then open index.html locally. <!-- Update download link -->
+> **Note**: For security, we recommend downloading the tool and running it offline. Download the static files [here](https://github.com/HorizenOfficial/ledger-signing-tool/releases/tag/v0.1.0), then open `index.html` locally. <!-- Update download link -->
 
 
 **Prerequisites**
@@ -85,7 +85,9 @@ If your funds are stored on a Ledger hardware wallet, use the [Ledger Signing To
 ### Private Key Signing Tool
 If you have direct access to your private key, use the [Private Key Signing Tool](https://github.com/HorizenOfficial/signing-tool-private-key).
 
-> **Note**: For security, we recommend downloading the tool and running it offline. Download the static files [here](https://github.com/HorizenOfficial/signing-tool-private-key/releases/tag/v0.0.1-ZT1CLAIM), then open index.html locally. <!-- Update download link -->
+If you only have your seed phrase, you'll need to derive your private key using a tool such as [Ian Coleman's BIP39 tool](https://github.com/iancoleman/bip39/releases/tag/0.5.6). For security, **always use this tool offline** by downloading the `bip39-standalone.html` file from the official GitHub release. After downloading, open the file in a web browser with your internet connections disabled. Be sure to select the **Coin** to "ZEN - Horizen" in the dropdown.
+
+> **Note**: For security, we recommend downloading the tool and running it offline. Download the static files [here](https://github.com/HorizenOfficial/signing-tool-private-key/releases/tag/v0.0.1-ZT1CLAIM), then open `index.html` locally. <!-- Update download link -->
 
 ![Private Key Signing Tool](/img/migration-tools/private-key-1.png)
 
