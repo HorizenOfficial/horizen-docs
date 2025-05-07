@@ -19,13 +19,17 @@ Use either:
 Before claiming, you must generate a valid signature using the message format:
 <!-- Update prefix -->
 ```
-"ZT1CLAIM" + destinationAddress
+"ZENCLAIM" + destinationAddress
 ```
 For example:
 
 ```
-ZT1CLAIM0x1B9aCc8d2c9e20aC2e78904e6f123f2D22Dd2A8w
+ZENCLAIM0x1B9aCc8d2c9e20aC2e78904e6f123f2D22Dd2A8w
 ```
+
+
+> Note: For testing purposes on testnet, the message prefix will be `ZT1CLAIM`, so for example `ZT1CLAIM0x1B9aCc8d2c9e20aC2e78904e6f123f2D22Dd2A8w`
+
 
 This section outlines how to do this using the three available tools.
 
@@ -34,7 +38,7 @@ If you have your seed phrase, you can use [Sphere](https://github.com/HorizenOff
 
 1. Open Sphere and import your seed phrase (if not already imported).
 2. Verify that your wallet addresses and balances are correct.
-3. To generate a signature, click on this icon in your Sphere wallet and enter this message: `"ZT1CLAIM" + destinationAddress`; Example: `ZT1CLAIM0x1B9aCc8d2c9e20aC2e78904e6f123f2D22Dd2A8w`. <!-- Update prefix -->
+3. To generate a signature, click on this icon in your Sphere wallet and enter this message: `"ZENCLAIM" + destinationAddress`; Example: `ZENCLAIM0x1B9aCc8d2c9e20aC2e78904e6f123f2D22Dd2A8w`. <!-- Update prefix -->
 
     ![Sign a message with Sphere](/img/migration-tools/sphere-1.png) <!-- Update image -->
 
