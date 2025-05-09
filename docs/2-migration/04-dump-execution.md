@@ -18,6 +18,15 @@ We will need to interact with a node of each chain:
         enabled = true
     }
     ```
+
+    - If using Docker and the Docker image zencash/evmapp:1.5.0 , you can configure the following env property:
+
+    ```
+     SCNODE_EVM_STATE_DUMP_ENABLED=true
+     ```
+
+     This will set automatically the previous property in the container.
+
     
 # How to obtain the dump data
 
