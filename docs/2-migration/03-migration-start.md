@@ -29,7 +29,12 @@ We can then estimate that the final blockhash on both chains will be known aroun
     To obtain the hash of the block at a specific height:
 
     ```
-    getblockhash <height>
+    zen-cli getblockhash <height>
+    ```
+
+    In case of testnet, the command is:
+    ```
+    zen-cli -testnet getblockhash <height>
     ```
 
     **For EON:**
