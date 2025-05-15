@@ -15,6 +15,7 @@ A simple manual claim of the funds is required because the address format on the
 
 The old mainchain is a Bitcoin-like chain, where funds are locked in multiple cryptographic "boxes" called UTXO.<br/>
 To unlock funds, you will need to generate a signature of a specific message with the same private key able to "unlock" the corresponding UTXOs.<br/>
+An additional method is developed to allow a "direct" claim that doesn't need any signed message.<br/>
 The claim will then be performed on-chain, by calling a method on the official Horizen migration contract.<br/>
 Here the details about the method call:
 
@@ -82,6 +83,69 @@ For example: if the scripts accepts 2 out of 3 signatures, and we have only A an
 #### Events emitted:
 
 After a successful  claim the following event will be emitted:
+
+```
+event Claimed(address destAddress, bytes20 zenAddress, uint256 amount)
+```
+
+### Direct Claim
+
+This method can be invoked by anyone and it is used to claim any P2PKH UTXO received on a Zend address moving the funds to a Base address that can be calculated from the Zend address itself. Anyone can invoke the method for any Base address that has a corresponding Zend address with a dumped value different from 0.
+
+The Solidity method to execute this claim is the following:
+
+```
+    function claimDirect(address baseDestAddress) public 
+```
+
+#### Parameters details:
+
+- baseDestAddress: Destination address on Base of the funds to be claimed.<br/>
+
+Any Base address is a valid *baseDestAddress*, and that address could claim the funds for the Zend Address generated as such:
+
+1) Calculate SHA256 hash of the baseDestAddress;
+2) Calculate Ripemd160 hash of the output from step 1
+3) Concatenate prefix: `0x2089` for ZEND Mainnet
+4) Encode it in Base 58
+
+The procedure could be resumed by the formula:
+`base58.encode(‘0x2089’  + Ripemd160(SHA256(baseDestAddress)))`
+
+And can be calculated using the following Javascript code
+
+```javascript
+ const createHash = require('create-hash')
+ const bs58check = require('bs58check')
+ 
+ const prefix = '2089'
+ const baseDestAddress = //Base address in string form without '0x' prefix
+ 
+ const ZENDTransferAddress = bs58check.encode(
+   Buffer.from(
+     prefix +
+     createHash('rmd160').update(
+       createHash('sha256').update(
+         Buffer.from(baseDestAddress, 'hex')
+       ).digest()
+     ).digest('hex'),
+   'hex')
+ )
+ console.log(ZENDTransferAddress)
+```
+
+The owner of an arbitrary Zend address should migrate its funds on the Zend address generated in this way before the Zend Backup is extrapolated.
+
+As example, we consider a Zend address owner preparing for the migration that want to use the direct claim:
+1) They generate a Base wallet and get its address, for example: `0x6ebacd4a2a48728e98aAAA101C59f2e0c57fA987`
+2) They execute the code above with parameter `baseDestAddress = 6ebacd4a2a48728e98aAAA101C59f2e0c57fA987`. The output is `zncwpByDSdYjCw3HipRY8MS5dRRsxSR7AGU`
+3) Before the Zend snapshot block is generated, it sends a transaction to move their ZEN from their original address to the generated one (`zncwpByDSdYjCw3HipRY8MS5dRRsxSR7AGU`)
+4) After the snapshot is taken, they invoke the method `claimDirect(0x6ebacd4a2a48728e98aAAA101C59f2e0c57fA987)` on the migration Smart Contract. Any address could be the sender of this transaction
+5) The ZEN balance will be restored as ZEN ERC-20 token balance on Base chain on the address `0x6ebacd4a2a48728e98aAAA101C59f2e0c57fA987`
+
+#### Events emitted:
+
+After a successful claim the following event will be emitted:
 
 ```
 event Claimed(address destAddress, bytes20 zenAddress, uint256 amount)
