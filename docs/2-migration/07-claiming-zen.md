@@ -136,6 +136,13 @@ And can be calculated using the following Javascript code
 
 The owner of an arbitrary Zend address should migrate its funds on the Zend address generated in this way before the Zend Backup is extrapolated.
 
+As example, we consider a Zend address owner preparing for the migration that want to use the direct claim:
+1) They generate a Base wallet and get its address, for example: `0x6ebacd4a2a48728e98aAAA101C59f2e0c57fA987`
+2) They execute the code above with parameter `baseDestAddress = 6ebacd4a2a48728e98aAAA101C59f2e0c57fA987`. The output is `zncwpByDSdYjCw3HipRY8MS5dRRsxSR7AGU`
+3) Before the Zend snapshot block is generated, it sends a transaction to move their ZEN from their original address to the generated one (`zncwpByDSdYjCw3HipRY8MS5dRRsxSR7AGU`)
+4) After the snapshot is taken, they invoke the method `claimDirect(0x6ebacd4a2a48728e98aAAA101C59f2e0c57fA987)` on the migration Smart Contract. Any address could be the sender of this transaction
+5) The ZEN balance will be restored as ZEN ERC-20 token balance on Base chain on the address `0x6ebacd4a2a48728e98aAAA101C59f2e0c57fA987`
+
 #### Events emitted:
 
 After a successful claim the following event will be emitted:
