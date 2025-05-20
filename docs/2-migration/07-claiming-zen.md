@@ -15,7 +15,7 @@ A simple manual claim of the funds is required because the address format on the
 
 The old mainchain is a Bitcoin-like chain, where funds are locked in multiple cryptographic "boxes" called UTXO.<br/>
 To unlock funds, you will need to generate a signature of a specific message with the same private key able to "unlock" the corresponding UTXOs.<br/>
-An additional method is developed to allow a "direct" claim that doesn't need any signed message.<br/>
+Two additional method are developed to allow a "direct" claim that doesn't need any signed message.<br/>
 The claim will then be performed on-chain, by calling a method on the official Horizen migration contract.<br/>
 Here the details about the method call:
 
@@ -88,9 +88,9 @@ After a successful  claim the following event will be emitted:
 event Claimed(address destAddress, bytes20 zenAddress, uint256 amount)
 ```
 
-### Direct Claim
+### Direct Claim - 1st method
 
-This method can be invoked by anyone and it is used to claim any P2PKH UTXO received on a Zend address moving the funds to a Base address that can be calculated from the Zend address itself. Anyone can invoke the method for any Base address that has a corresponding Zend address with a dumped value different from 0.
+This method can be invoked by anyone and it is used to claim any P2PKH UTXO received on a Zend address calculated from the Base address on which you want to claim. Anyone can invoke the method for any Base address that has a corresponding Zend address with a dumped value different from 0.
 
 The Solidity method to execute this claim is the following:
 
@@ -104,7 +104,7 @@ The Solidity method to execute this claim is the following:
 
 Any Base address is a valid *baseDestAddress*, and that address could claim the funds for the Zend Address generated as such:
 
-1) Calculate SHA256 hash of the baseDestAddress;
+1) Calculate SHA256 hash of the baseDestAddress
 2) Calculate Ripemd160 hash of the output from step 1
 3) Concatenate prefix: `0x2089` for ZEND Mainnet
 4) Encode it in Base 58
@@ -151,5 +151,50 @@ After a successful claim the following event will be emitted:
 event Claimed(address destAddress, bytes20 zenAddress, uint256 amount)
 ```
 
+### Direct Claim - 2nd method
 
+This method can be invoked by anyone and it is used to claim any P2PKH UTXO received on a 1-of-2 multisig Zend address on which one of the public keys can be calculated from the Base address on which you want to claim. The other public key can be anyone, so it is possible for the user to remain in control of their funds on Zend using an owned key. Anyone can invoke the method for any Base address that has a corresponding multisig Zend address with a dumped value different from 0.
 
+The Solidity method to execute this claim is the following:
+
+```
+    function claimDirectMultisig(bytes memory script, address baseDestAddress) public
+```
+
+#### Parameters details:
+
+- script: P2SH Script of the 1-of-2 multisig address to claim
+- baseDestAddress: Destination address on Base of the funds to be claimed.<br/>
+
+Any Base address is a valid *baseDestAddress*, and that address could claim the funds for the multisig Zend Address generated as such:
+
+1) Calculate SHA256 hash of the baseDestAddress
+2) Create a 1-of-2 multisig address using as **second** public key the hash calculated at Step 1 with "02" as prefix
+
+The address can be created using the following Javascript code:
+
+```javascript
+ const zencashjs = require('zencashjs')
+ const bs58check = require('bs58check')
+ const createHash = require('create-hash')
+ 
+ const baseDestAddress = //Base address in string form without '0x' prefix
+
+ const directMultisigPubKey1 = //Insert any owned public key
+ const directMultisigPubKey2 = "02"+createHash('sha256').update(Buffer.from(baseDestAddress, 'hex')).digest('hex')
+
+ multisigScript = zencashjs.address.mkMultiSigRedeemScript([directMultisigPubKey1, directMultisigPubKey2], 1, 2);
+ const zenDirectMultisigAddress = zencashjs.address.multiSigRSToAddress(multisigScript); 
+
+ console.log(multisigScript)
+ console.log(zenDirectMultisigAddress)
+```
+
+The owner of an arbitrary Zend address should migrate its funds on the multisig Zend address generated in this way before the Zend Backup is extrapolated, then invoke `claimDirectMultisig` method on claim smart contract with `multisigScript` and `baseDestAddress` as parameters.
+
+#### Events emitted:
+
+After a successful claim the following event will be emitted:
+
+```
+event Claimed(address destAddress, bytes20 zenAddress, uint256 amount)
