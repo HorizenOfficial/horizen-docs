@@ -137,13 +137,13 @@ An example Javascript implementation is the following:
  console.log(ZENDTransferAddress)
 ```
 
-The owner of an arbitrary Zend address should migrate its funds on the Zend address generated in this way before the Zend Migration.
+The owner of an arbitrary Zend address should migrate its funds on the Zend address generated in this way **BEFORE** the Zend Migration.
 
 As example, we consider a Zend address owner preparing for the migration that want to use the direct claim:
-1) They generate a Base wallet and get its address, for example: `0x6ebacd4a2a48728e98aAAA101C59f2e0c57fA987`
-2) They execute the code above with parameter `baseDestAddress = 6ebacd4a2a48728e98aAAA101C59f2e0c57fA987`. The output is `zncwpByDSdYjCw3HipRY8MS5dRRsxSR7AGU`
-3) Before the Zend Migration, it sends a transaction to move the ZEN from their original address to the generated one (`zncwpByDSdYjCw3HipRY8MS5dRRsxSR7AGU`)
-4) After the migration, they can invoke the method `claimDirect(0x6ebacd4a2a48728e98aAAA101C59f2e0c57fA987)` on the migration Smart Contract. Any address could be the sender of this transaction
+1) He generates a Base wallet and get its address, for example: `0x6ebacd4a2a48728e98aAAA101C59f2e0c57fA987`
+2) He executes the code above with parameter `baseDestAddress = 6ebacd4a2a48728e98aAAA101C59f2e0c57fA987`. The output is `zncwpByDSdYjCw3HipRY8MS5dRRsxSR7AGU`
+3) Before the Zend Migration, he sends a transaction to move the ZEN from his original address to the generated one (`zncwpByDSdYjCw3HipRY8MS5dRRsxSR7AGU`)
+4) After the migration, he (or anyone else) can invoke the method `claimDirect(0x6ebacd4a2a48728e98aAAA101C59f2e0c57fA987)` on the migration Smart Contract.
 5) The ZEN balance will be restored as ZEN ERC-20 token balance on Base chain on the address `0x6ebacd4a2a48728e98aAAA101C59f2e0c57fA987`
 
 #### Events emitted:
@@ -157,8 +157,10 @@ event Claimed(address destAddress, bytes20 zenAddress, uint256 amount)
 ### Direct Claim - 2nd method
 
 This method allows a direct claim of special UTXOs generated deterministically from a BaseAddress.<br/>
-This is a special usecase for users that can't generate a signed message, and requires they create this special UTXO in the old mainchain before the migration.
+This is a special usecase for users that can't generate a signed message, and requires they create this special UTXO in the old mainchain before the migration.<br/>
 It is similar to the previous 'Direct Claim - 1st method', but here the  UTXO is a P2SH  1-of-2 multisig, on which one of the public keys is calculated from the beneficiary Base address. The other public key is a real one, so it is possible for the user to remain in control of their funds on Zend using this owned key. 
+
+This method can be invoked by anyone (not mandatory the sender of the claim tx  to be the same destination address).
 
 The Solidity method to execute this claim is the following:
 
