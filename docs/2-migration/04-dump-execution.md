@@ -57,7 +57,7 @@ We will need to interact with a node of each chain:
 
 # How to create the restore artifacts
 
-1. Download and follow the README instructions of  [this folder](https://github.com/HorizenOfficial/horizen-migration/tree/dev/dump-scripts) to    execute the  *create_restore_artifacts.sh* bash script.
+3. Download and follow the README instructions of  [this folder](https://github.com/HorizenOfficial/horizen-migration/tree/dev/dump-scripts) to    execute the  *create_restore_artifacts.sh* bash script.
 
 The result of the script will be two restore artifacts:
 
