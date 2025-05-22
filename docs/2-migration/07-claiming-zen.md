@@ -15,6 +15,7 @@ A simple manual claim of the funds is required because the address format on the
 
 The old mainchain is a Bitcoin-like chain, where funds are locked in multiple cryptographic "boxes" called UTXO.<br/>
 To unlock funds, you will need to generate a signature of a specific message with the same private key able to "unlock" the corresponding UTXOs.<br/>
+Two additional methods are developed to allow a "direct" claim that doesn't need any signed message.<br/>
 The claim will then be performed on-chain, by calling a method on the official Horizen migration contract.<br/>
 Here the details about the method call:
 
@@ -87,5 +88,120 @@ After a successful  claim the following event will be emitted:
 event Claimed(address destAddress, bytes20 zenAddress, uint256 amount)
 ```
 
+### Direct Claim - 1st method
 
+This method allows a direct claim of special UTXOs generated deterministically from a BaseAddress.<br/>
+This is a special usecase for users that can't generate a signed message, and requires they create this special UTXO in the old mainchain before the migration.
 
+This method can be invoked by anyone (not mandatory the sender of the claim tx  to be the same destination address).
+
+The Solidity method to execute this claim is the following:
+
+```
+    function claimDirect(address baseDestAddress) public 
+```
+
+#### Parameters details:
+
+- baseDestAddress: Destination address on Base of the funds to be claimed.<br/>
+
+Any Base address is a valid *baseDestAddress*, and that address could claim the funds for the Zend Address generated as such:
+
+1) Calculate SHA256 hash of the baseDestAddress
+2) Calculate Ripemd160 hash of the output from step 1
+3) Concatenate prefix: `0x2089` for ZEND Mainnet or `0x2098` for ZEND testnet
+4) Encode it in Base 58
+
+The procedure could be resumed by the formula:
+`base58.encode(‘0x2089’  + Ripemd160(SHA256(baseDestAddress)))`
+
+An example Javascript implementation is the following:
+
+```javascript
+ const createHash = require('create-hash')
+ const bs58check = require('bs58check')
+ 
+ const prefix = '2089'
+ const baseDestAddress = //Base address in string form without '0x' prefix
+ 
+ const ZENDTransferAddress = bs58check.encode(
+   Buffer.from(
+     prefix +
+     createHash('rmd160').update(
+       createHash('sha256').update(
+         Buffer.from(baseDestAddress, 'hex')
+       ).digest()
+     ).digest('hex'),
+   'hex')
+ )
+ console.log(ZENDTransferAddress)
+```
+
+The owner of an arbitrary Zend address should migrate its funds on the Zend address generated in this way **BEFORE** the Zend Migration.
+
+As example, we consider a Zend address owner preparing for the migration that wants to use the direct claim:
+1) He generates a Base wallet and gets its address, for example: `0x6ebacd4a2a48728e98aAAA101C59f2e0c57fA987`
+2) He executes the code above with parameter `baseDestAddress = 6ebacd4a2a48728e98aAAA101C59f2e0c57fA987`. The output is `zncwpByDSdYjCw3HipRY8MS5dRRsxSR7AGU`
+3) Before the Zend Migration, he sends a transaction to move the ZEN from his original address to the generated one (`zncwpByDSdYjCw3HipRY8MS5dRRsxSR7AGU`)
+4) After the migration, he (or anyone else) can invoke the method `claimDirect(0x6ebacd4a2a48728e98aAAA101C59f2e0c57fA987)` on the migration Smart Contract.
+5) The ZEN balance will be restored as ZEN ERC-20 token balance on Base chain on the address `0x6ebacd4a2a48728e98aAAA101C59f2e0c57fA987`
+
+#### Events emitted:
+
+After a successful claim the following event will be emitted:
+
+```
+event Claimed(address destAddress, bytes20 zenAddress, uint256 amount)
+```
+
+### Direct Claim - 2nd method
+
+This method allows a direct claim of special UTXOs generated deterministically from a BaseAddress.<br/>
+This is a special usecase for users that can't generate a signed message, and requires they create this special UTXO in the old mainchain before the migration.<br/>
+It is similar to the previous 'Direct Claim - 1st method', but here the  UTXO is a P2SH  1-of-2 multisig, on which one of the public keys is calculated from the beneficiary Base address. The other public key is a real one, so it is possible for the user to remain in control of their funds on Zend using this owned key. 
+
+This method can be invoked by anyone (not mandatory the sender of the claim tx  to be the same destination address).
+
+The Solidity method to execute this claim is the following:
+
+```
+    function claimDirectMultisig(bytes memory script, address baseDestAddress) public
+```
+
+#### Parameters details:
+
+- script: P2SH redeem Script of the 1-of-2 multisig address to claim
+- baseDestAddress: Destination address on Base of the funds to be claimed.<br/>
+
+Any Base address is a valid *baseDestAddress*, and that address could claim the funds for the multisig Zend Address generated as such:
+
+1) Calculate SHA256 hash of the baseDestAddress
+2) Create a 1-of-2 multisig address using as **second** public key the hash calculated at Step 1 with "02" as prefix
+
+An example Javascript implementation for the multisig Zend Address calculation is the following:
+
+```javascript
+ const zencashjs = require('zencashjs')
+ const bs58check = require('bs58check')
+ const createHash = require('create-hash')
+ 
+ const baseDestAddress = //Base address in string form without '0x' prefix
+
+ const directMultisigPubKey1 = //Insert any owned public key
+ const directMultisigPubKey2 = "02"+createHash('sha256').update(Buffer.from(baseDestAddress, 'hex')).digest('hex')
+
+ multisigScript = zencashjs.address.mkMultiSigRedeemScript([directMultisigPubKey1, directMultisigPubKey2], 1, 2);
+ const zenDirectMultisigAddress = zencashjs.address.multiSigRSToAddress(multisigScript); 
+
+ console.log(multisigScript)
+ console.log(zenDirectMultisigAddress)
+```
+
+The owner of an arbitrary Zend address should migrate its funds on the multisig Zend address generated in this way before the migration, then invoke `claimDirectMultisig` method on claim smart contract with `multisigScript` and `baseDestAddress` as parameters.
+
+#### Events emitted:
+
+After a successful claim the following event will be emitted:
+
+```
+event Claimed(address destAddress, bytes20 zenAddress, uint256 amount)
