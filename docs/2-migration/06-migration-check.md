@@ -11,33 +11,8 @@ We have already described in previous sections the concept of dumps, migration d
 The verification process will require to take a new dump, recalculating the hash locally with the same algorithm, and compare it with the one stored in the vault smart contracts. <br/>
 
 
-## Instructions:
-
-### Prerequisites:
-
-The following software is needed:
-
-1. Fully synched ZEND Mainchain node (version 6) :
-
-    - Download latest ZEND release from here: https://github.com/HorizenOfficial/zen/releases
-    - Compile the node, start and have it fully synched with the old mainchain 
-    
-
-2.  Fully synched EON Chain node (version 1.5) with dump support enabled:
-
-    - Download latest EON release node
-    - Add the following fragment in the config file to enable state dump support (important: the fragment must be added *BEFORE* starting to synch the chain):
-
-    ```
-    evmStateDump {
-        enabled = true
-    }
-    ```
-
-    - Start the node and have it fully synched with the old mainchain 
-
 ### Instructions: 
 
-1. Execute the dumps with the procedure already [described here](./04-dump-execution.md)
+1. Execute the dumps and create the restore artifacts with the procedure already [described here](./04-dump-execution.md) (you will need a fully-synched mainchain node and a fully-sunched EON node)
 
-2. Download the Github repository [horizen-migration-check](https://github.com/HorizenOfficial/horizen-migration-check) and follow the README instructions to recalculate the hash from the dumps and compare it with the on-chain one.
+2. Download the Github repository [horizen-migration-check](https://github.com/HorizenOfficial/horizen-migration-check) and follow the README instructions to recalculate the hash from the restore artifacts and compare it with the on-chain one.
