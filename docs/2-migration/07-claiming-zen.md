@@ -15,7 +15,7 @@ A simple manual claim of the funds is required because the address format on the
 
 The old mainchain is a Bitcoin-like chain, where funds are locked in multiple cryptographic "boxes" called UTXO.<br/>
 To unlock funds, you will need to generate a signature of a specific message with the same private key able to "unlock" the corresponding UTXOs.<br/>
-Two additional method are developed to allow a "direct" claim that doesn't need any signed message.<br/>
+Two additional methods are developed to allow a "direct" claim that doesn't need any signed message.<br/>
 The claim will then be performed on-chain, by calling a method on the official Horizen migration contract.<br/>
 Here the details about the method call:
 
@@ -139,8 +139,8 @@ An example Javascript implementation is the following:
 
 The owner of an arbitrary Zend address should migrate its funds on the Zend address generated in this way **BEFORE** the Zend Migration.
 
-As example, we consider a Zend address owner preparing for the migration that want to use the direct claim:
-1) He generates a Base wallet and get its address, for example: `0x6ebacd4a2a48728e98aAAA101C59f2e0c57fA987`
+As example, we consider a Zend address owner preparing for the migration that wants to use the direct claim:
+1) He generates a Base wallet and gets its address, for example: `0x6ebacd4a2a48728e98aAAA101C59f2e0c57fA987`
 2) He executes the code above with parameter `baseDestAddress = 6ebacd4a2a48728e98aAAA101C59f2e0c57fA987`. The output is `zncwpByDSdYjCw3HipRY8MS5dRRsxSR7AGU`
 3) Before the Zend Migration, he sends a transaction to move the ZEN from his original address to the generated one (`zncwpByDSdYjCw3HipRY8MS5dRRsxSR7AGU`)
 4) After the migration, he (or anyone else) can invoke the method `claimDirect(0x6ebacd4a2a48728e98aAAA101C59f2e0c57fA987)` on the migration Smart Contract.
