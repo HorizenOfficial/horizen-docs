@@ -90,7 +90,10 @@ event Claimed(address destAddress, bytes20 zenAddress, uint256 amount)
 
 ### Direct Claim - 1st method
 
-This method can be invoked by anyone and it is used to claim any P2PKH UTXO received on a Zend address calculated from the Base address on which you want to claim. Anyone can invoke the method for any Base address that has a corresponding Zend address with a dumped value different from 0.
+This method allows a direct claim of special UTXOs generated deterministically from a BaseAddress.<br/>
+This is a special usecase for users that can't generate a signed message, and requires they create this special UTXO in the old mainchain before the migration.
+
+This method can be invoked by anyone (not mandatory the sender of the claim tx  to be the same destination address).
 
 The Solidity method to execute this claim is the following:
 
@@ -106,13 +109,13 @@ Any Base address is a valid *baseDestAddress*, and that address could claim the 
 
 1) Calculate SHA256 hash of the baseDestAddress
 2) Calculate Ripemd160 hash of the output from step 1
-3) Concatenate prefix: `0x2089` for ZEND Mainnet
+3) Concatenate prefix: `0x2089` for ZEND Mainnet or `0x2098` for ZEND testnet
 4) Encode it in Base 58
 
 The procedure could be resumed by the formula:
 `base58.encode(‘0x2089’  + Ripemd160(SHA256(baseDestAddress)))`
 
-And can be calculated using the following Javascript code
+An example Javascript implementation is the following:
 
 ```javascript
  const createHash = require('create-hash')
@@ -134,13 +137,13 @@ And can be calculated using the following Javascript code
  console.log(ZENDTransferAddress)
 ```
 
-The owner of an arbitrary Zend address should migrate its funds on the Zend address generated in this way before the Zend Backup is extrapolated.
+The owner of an arbitrary Zend address should migrate its funds on the Zend address generated in this way before the Zend Migration.
 
 As example, we consider a Zend address owner preparing for the migration that want to use the direct claim:
 1) They generate a Base wallet and get its address, for example: `0x6ebacd4a2a48728e98aAAA101C59f2e0c57fA987`
 2) They execute the code above with parameter `baseDestAddress = 6ebacd4a2a48728e98aAAA101C59f2e0c57fA987`. The output is `zncwpByDSdYjCw3HipRY8MS5dRRsxSR7AGU`
-3) Before the Zend snapshot block is generated, it sends a transaction to move their ZEN from their original address to the generated one (`zncwpByDSdYjCw3HipRY8MS5dRRsxSR7AGU`)
-4) After the snapshot is taken, they invoke the method `claimDirect(0x6ebacd4a2a48728e98aAAA101C59f2e0c57fA987)` on the migration Smart Contract. Any address could be the sender of this transaction
+3) Before the Zend Migration, it sends a transaction to move the ZEN from their original address to the generated one (`zncwpByDSdYjCw3HipRY8MS5dRRsxSR7AGU`)
+4) After the migration, they can invoke the method `claimDirect(0x6ebacd4a2a48728e98aAAA101C59f2e0c57fA987)` on the migration Smart Contract. Any address could be the sender of this transaction
 5) The ZEN balance will be restored as ZEN ERC-20 token balance on Base chain on the address `0x6ebacd4a2a48728e98aAAA101C59f2e0c57fA987`
 
 #### Events emitted:
@@ -153,7 +156,9 @@ event Claimed(address destAddress, bytes20 zenAddress, uint256 amount)
 
 ### Direct Claim - 2nd method
 
-This method can be invoked by anyone and it is used to claim any P2PKH UTXO received on a 1-of-2 multisig Zend address on which one of the public keys can be calculated from the Base address on which you want to claim. The other public key can be anyone, so it is possible for the user to remain in control of their funds on Zend using an owned key. Anyone can invoke the method for any Base address that has a corresponding multisig Zend address with a dumped value different from 0.
+This method allows a direct claim of special UTXOs generated deterministically from a BaseAddress.<br/>
+This is a special usecase for users that can't generate a signed message, and requires they create this special UTXO in the old mainchain before the migration.
+It is similar to the previous 'Direct Claim - 1st method', but here the  UTXO is a P2SH  1-of-2 multisig, on which one of the public keys is calculated from the beneficiary Base address. The other public key is a real one, so it is possible for the user to remain in control of their funds on Zend using this owned key. 
 
 The Solidity method to execute this claim is the following:
 
@@ -163,7 +168,7 @@ The Solidity method to execute this claim is the following:
 
 #### Parameters details:
 
-- script: P2SH Script of the 1-of-2 multisig address to claim
+- script: P2SH redeem Script of the 1-of-2 multisig address to claim
 - baseDestAddress: Destination address on Base of the funds to be claimed.<br/>
 
 Any Base address is a valid *baseDestAddress*, and that address could claim the funds for the multisig Zend Address generated as such:
@@ -171,7 +176,7 @@ Any Base address is a valid *baseDestAddress*, and that address could claim the 
 1) Calculate SHA256 hash of the baseDestAddress
 2) Create a 1-of-2 multisig address using as **second** public key the hash calculated at Step 1 with "02" as prefix
 
-The address can be created using the following Javascript code:
+An example Javascript implementation for the multisig Zend Address calculation is the following:
 
 ```javascript
  const zencashjs = require('zencashjs')
@@ -190,7 +195,7 @@ The address can be created using the following Javascript code:
  console.log(zenDirectMultisigAddress)
 ```
 
-The owner of an arbitrary Zend address should migrate its funds on the multisig Zend address generated in this way before the Zend Backup is extrapolated, then invoke `claimDirectMultisig` method on claim smart contract with `multisigScript` and `baseDestAddress` as parameters.
+The owner of an arbitrary Zend address should migrate its funds on the multisig Zend address generated in this way before the migration, then invoke `claimDirectMultisig` method on claim smart contract with `multisigScript` and `baseDestAddress` as parameters.
 
 #### Events emitted:
 
