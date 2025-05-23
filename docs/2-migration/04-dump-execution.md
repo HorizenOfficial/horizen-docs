@@ -59,6 +59,27 @@ We will need to interact with a node of each chain:
 
 3. Download and follow the README instructions of  [this folder](https://github.com/HorizenOfficial/horizen-migration/tree/dev/dump-scripts) to    execute the  *create_restore_artifacts.sh* bash script.
 
+    The script will process the following data:
+    - two previous full dumps
+    - the list of the staked ZEN at the specific dump height, obtained by querying a running EON node
+    - a list of ["auto mapped" addresses](https://github.com/HorizenOfficial/horizen-migration/tree/dev/dump-scripts/python): they are hardcoded mappings that comes from offchain agreements between selected partners (centralized exchanges) and HorizenLabs.
+
+    The script will perform the following:
+
+    - For ZEND:
+        - transform the addresses in Base58 decoded format (is easier to handle in the solidity code), without chain prefix
+        - transform the balances in "wei" format (1 ZEN = 1 with 18 zeros)
+        - exclude the automapped addresses
+        - order the addresses alphabetically
+
+    - For EON:
+        - filters out the smart contracts addresses and the stakes belonging to smart contracts
+        - filters out addresses with 0 balance and no stakes
+        - filters out the 0x0000000000000000000000000000000000000000 account
+        - transforms the balances in "wei" format (1 ZEN = 1 with 18 zeros)
+        - include the automapped addresses 
+        - orders the addresses alphabetically
+
 The result of the script will be two restore artifacts:
 
 - a *zend.json* file, containing a key-value json data structure like this:
