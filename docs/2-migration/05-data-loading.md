@@ -5,7 +5,7 @@
 The scope of this step is to load the balances obtained in the previous dump step into the vault smart contracts used for the migration.<br/>
 This operation is performed by firing a batch of transactions, only by an authorized Horizen admin (its address is whitelisted in the vault contracts).<br/>
 
-Detailed instructions are in the [README.md](https://github.com/HorizenOfficial/horizen-migration/blob/st/HZN-2253/erc20-migration/README.md) file of the **horizen-migration** Git repository, together with the scripts to be executed (they use the Hardhat framework).
+Detailed instructions are in the [README.md](https://github.com/HorizenOfficial/horizen-migration/blob/main/erc20-migration/README.md) file of the **horizen-migration** Git repository, together with the scripts to be executed (they use the Hardhat framework).
 
 ## Migration data cumulative hash
 
