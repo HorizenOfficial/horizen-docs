@@ -107,13 +107,13 @@ The Solidity method to execute this claim is the following:
 
 Any Base address is a valid *baseDestAddress*, and that address could claim the funds for the Zend Address generated as such:
 
-1) Calculate SHA256 hash of the baseDestAddress
+1) Calculate SHA256 hash of the baseDestAddress hex
 2) Calculate Ripemd160 hash of the output from step 1
 3) Concatenate prefix: `0x2089` for ZEND Mainnet or `0x2098` for ZEND testnet
 4) Encode it in Base 58
 
 The procedure could be resumed by the formula:
-`base58.encode(‘0x2089’  + Ripemd160(SHA256(baseDestAddress)))`
+`base58.encode(‘0x2089’  + Ripemd160(SHA256(baseDestAddress hex)))`
 
 An example Javascript implementation is the following:
 
@@ -175,7 +175,7 @@ The Solidity method to execute this claim is the following:
 
 Any Base address is a valid *baseDestAddress*, and that address could claim the funds for the multisig Zend Address generated as such:
 
-1) Calculate SHA256 hash of the baseDestAddress
+1) Calculate SHA256 hash of the baseDestAddress hex
 2) Create a 1-of-2 multisig address using as **second** public key the hash calculated at Step 1 with "02" as prefix
 
 An example Javascript implementation for the multisig Zend Address calculation is the following:
