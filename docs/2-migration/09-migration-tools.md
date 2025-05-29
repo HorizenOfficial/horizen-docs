@@ -45,7 +45,7 @@ If you have your seed phrase, you can use [Sphere Testnet](https://github.com/Ho
 ### Ledger Signing Tool
 If your funds are stored on a Ledger hardware wallet, use the [Ledger Signing Tool](https://github.com/HorizenOfficial/horizen-migration-ledger-signing-tool).
 
-> **Note**: For security, we recommend downloading the tool and running it offline. Download the static files [here](https://github.com/HorizenOfficial/horizen-migration-ledger-signing-tool/releases/tag/v1.0.0-ZT3CLAIM), then open `index.html` locally. <!-- Update download link -->
+> **Note**: For security, we recommend downloading the tool and running it offline. Download and extract the static files [here](https://github.com/HorizenOfficial/horizen-migration-ledger-signing-tool/releases/tag/v1.0.0-ZT3CLAIM), then open `index.html` locally. <!-- Update download link -->
 
 
 **Prerequisites**
