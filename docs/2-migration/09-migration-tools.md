@@ -13,7 +13,7 @@ Use one of the following tools to generate a signed message:
 
 Use either:
 - [Claim Page](#claim-page)
-- [CLI](#cli)
+- [CLI Tool](#cli-tool)
 
 ## Sign Message
 Before claiming, you must generate a valid signature using the message format:
@@ -28,13 +28,13 @@ ZENCLAIM0x1B9aCc8d2c9e20aC2e78904e6f123f2D22Dd2A8w
 ```
 
 
-> Note: For testing purposes on testnet, the message prefix will be `ZT1CLAIM`, so for example `ZT1CLAIM0x1B9aCc8d2c9e20aC2e78904e6f123f2D22Dd2A8w`
+> Note: For testing purposes on testnet, the message prefix will be `ZT2CLAIM`, so for example `ZT2CLAIM0x1B9aCc8d2c9e20aC2e78904e6f123f2D22Dd2A8w`
 
 
 This section outlines how to do this using the three available tools.
 
 ### Sphere Wallet
-If you have your seed phrase, you can use [Sphere](https://github.com/HorizenOfficial/Sphere_by_Horizen/releases/tag/desktop-v1.22.0) to sign a message.
+If you have your seed phrase, you can use [Sphere](https://github.com/HorizenOfficial/Sphere_by_Horizen/releases/tag/desktop-v1.22.0) or [Sphere Testnet](https://github.com/HorizenOfficial/Sphere_by_Horizen_Testnet/releases/tag/desktop-v1.13.0-testnet) to sign a message.
 
 1. Open Sphere and import your seed phrase (if not already imported).
 2. Verify that your wallet addresses and balances are correct.
@@ -128,6 +128,23 @@ You can claim ZEN directly through the official web interface:
     Click **Claim** to initiate the transfer of $ZEN from the Horizen chain to the Base Mainnet. 
 
 
-### CLI
+### CLI Tool
 
-[Coming Soon]
+The CLI tool provides functionality for claiming tokens from ZEN addresses, both standard transparent and multisignature addresses. It also supports signing and verifying messages. The CLI can be used directly from the command line or imported as a module into a Node.js project.
+
+#### Available Commands
+
+- **`claimzenaddress`**  
+  Claim tokens from a transparent ZEN address.
+
+- **`claimzenmultisigaddress`**  
+  Claim tokens from a multisignature ZEN address.
+
+- **`signmessage`** 
+  Sign a message with a ZEN private key.
+
+- **`verifymessage`** 
+  Verify a signed message against a ZEN address.
+
+For detailed usage examples and other supported commands, refer to the [GitHub README](https://github.com/HorizenOfficial/horizen-migration-cli/tree/main).
+
