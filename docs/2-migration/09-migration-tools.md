@@ -84,7 +84,7 @@ If you have direct access to your private key, use the [Private Key Signing Tool
 
 If you only have your seed phrase, you'll need to derive your private key using a tool such as [Ian Coleman's BIP39 tool](https://github.com/iancoleman/bip39/releases/tag/0.5.6). For security, **always use this tool offline** by downloading the `bip39-standalone.html` file from the official GitHub release. After downloading, open the file in a web browser with your internet connections disabled. Be sure to select the **Coin** to "ZEN - Horizen" in the dropdown.
 
-> **Note**: For security, we recommend downloading the tool and running it offline. Download the static files [here](https://github.com/HorizenOfficial/horizen-migration-signing-tool-private-key/releases/tag/v1.0.0-ZT3CLAIM), then open `index.html` locally. <!-- Update download link -->
+> **Note**: For security, we recommend downloading the tool and running it offline. Download and extract the static files [here](https://github.com/HorizenOfficial/horizen-migration-signing-tool-private-key/releases/tag/v1.0.0-ZT3CLAIM), then open `index.html` locally. <!-- Update download link -->
 
 ![Private Key Signing Tool](/img/migration-tools/private-key-1.png)
 
