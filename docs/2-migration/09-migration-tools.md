@@ -19,12 +19,12 @@ Use either to submit the claim:
 ## Sign Message
 Before claiming, you must generate a valid signature using the message format:
 ```
-"ZT3CLAIM" + destinationAddress
+"tZENCLAIM" + destinationAddress
 ```
 For example:
 
 ```
-ZT3CLAIM0x1B9aCc8d2c9e20aC2e78904e6f123f2D22Dd2A8w
+tZENCLAIM0x1B9aCc8d2c9e20aC2e78904e6f123f2D22Dd2A8w
 ```
 
 
@@ -35,7 +35,7 @@ If you have your seed phrase, you can use [Sphere Testnet](https://github.com/Ho
 
 1. Open Sphere and import your seed phrase (if not already imported).
 2. Verify that your wallet addresses and balances are correct.
-3. To generate a signature, click on this icon in your Sphere wallet and enter this message: `"ZT3CLAIM" + destinationAddress`; Example: `ZT3CLAIM0x1B9aCc8d2c9e20aC2e78904e6f123f2D22Dd2A8w`. <!-- Update prefix -->
+3. To generate a signature, click on this icon in your Sphere wallet and enter this message: `"tZENCLAIM" + destinationAddress`; Example: `tZENCLAIM0x1B9aCc8d2c9e20aC2e78904e6f123f2D22Dd2A8w`. <!-- Update prefix -->
 
     ![Sign a message with Sphere](/img/migration-tools/sphere-1.png) <!-- Update image -->
 
@@ -45,7 +45,7 @@ If you have your seed phrase, you can use [Sphere Testnet](https://github.com/Ho
 ### Ledger Signing Tool
 If your funds are stored on a Ledger hardware wallet, use the [Ledger Signing Tool](https://github.com/HorizenOfficial/horizen-migration-ledger-signing-tool).
 
-> **Note**: For security, we recommend downloading the tool and running it offline. Download and extract the static files [here](https://github.com/HorizenOfficial/horizen-migration-ledger-signing-tool/releases/tag/v1.0.0-ZT3CLAIM), then open `index.html` locally. <!-- Update download link -->
+> **Note**: For security, we recommend downloading the tool and running it offline. Download and extract the static files [here](https://github.com/HorizenOfficial/horizen-migration-ledger-signing-tool/releases/tag/v1.0.0-tZENCLAIM), then open `index.html` locally. <!-- Update download link -->
 
 
 **Prerequisites**
@@ -84,7 +84,7 @@ If you have direct access to your private key, use the [Private Key Signing Tool
 
 If you only have your seed phrase, you'll need to derive your private key using a tool such as [Ian Coleman's BIP39 tool](https://github.com/iancoleman/bip39/releases/tag/0.5.6). For security, **always use this tool offline** by downloading the `bip39-standalone.html` file from the official GitHub release. After downloading, open the file in a web browser with your internet connections disabled. Be sure to select the **Coin** to "ZEN - Horizen" in the dropdown.
 
-> **Note**: For security, we recommend downloading the tool and running it offline. Download and extract the static files [here](https://github.com/HorizenOfficial/horizen-migration-signing-tool-private-key/releases/tag/v1.0.0-ZT3CLAIM), then open `index.html` locally. <!-- Update download link -->
+> **Note**: For security, we recommend downloading the tool and running it offline. Download and extract the static files [here](https://github.com/HorizenOfficial/horizen-migration-signing-tool-private-key/releases/tag/v1.0.0-tZENCLAIM), then open `index.html` locally. <!-- Update download link -->
 
 ![Private Key Signing Tool](/img/migration-tools/private-key-1.png)
 
@@ -106,7 +106,7 @@ The CLI tool provides functionality for signing and verifying messages. It also 
 - **`verifymessage`** 
   Verify a signed message against a ZEN address.
 
-For detailed usage examples and other supported commands, refer to the [GitHub README](https://github.com/HorizenOfficial/horizen-migration-cli/tree/1.0.0-ZT3CLAIM).
+For detailed usage examples and other supported commands, refer to the [GitHub README](https://github.com/HorizenOfficial/horizen-migration-cli/tree/1.0.0-tZENCLAIM).
 
 ## Claim Process
 Once you have a valid signature, use the claim interface to submit your request.
@@ -114,7 +114,7 @@ Once you have a valid signature, use the claim interface to submit your request.
 ### Claim Page
 You can claim ZEN directly through the official web interface:
 
-👉 [Launch the Claim Page](https://horizen.io/zt3claim)<!-- Update to production link before publishing -->
+👉 [Launch the Claim Page](https://horizen.io/tzenclaim)<!-- Update to production link before publishing -->
 
 1. **Connect Wallet**
 
@@ -152,5 +152,5 @@ The CLI tool provides functionality for claiming tokens from ZEN addresses, both
   Claim tokens from a multisignature ZEN address.
 
 
-For detailed usage examples and other supported commands, refer to the [GitHub README](https://github.com/HorizenOfficial/horizen-migration-cli/tree/1.0.0-ZT3CLAIM).
+For detailed usage examples and other supported commands, refer to the [GitHub README](https://github.com/HorizenOfficial/horizen-migration-cli/tree/1.0.0-tZENCLAIM).
 
