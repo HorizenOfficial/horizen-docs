@@ -139,23 +139,23 @@ You can claim ZEN directly through the official web interface:
 
    ```
    Network Name: Base Sepolia
-   RPC Endpoint https://sepolia.base.org
-   Chain ID 84532
-   Currency Symbol ETH
+   RPC Endpoint: https://sepolia.base.org
+   Chain ID: 84532
+   Currency Symbol: ETH
    Block Explorer: https://sepolia-explorer.base.org
    ```
 
 2. **Import Token**
-   Make sure to import either tZEN (if on testnet) or ZEN (on mainnet) so that the tokens appear in Metamask. Under the tokens tab select the "Import Tokens" button and enter the following for the appropriate environment,
+   Make sure to import either tZEN (if on testnet) or ZEN (on mainnet) so that the tokens appear in Metamask. Under the tokens tab select the "Import Tokens" button and enter the following for the appropriate environment.
 
    ```
-   Sepolia Testnet:
+   Sepolia Testnet
    Contract: 0x107fdE93838e3404934877935993782F977324BB
    Symbol: tZEN
    ```
 
    ```
-   Base Mainnet:
+   Base Mainnet
    Contract: tbd
    Symbol: ZEN
    ```
