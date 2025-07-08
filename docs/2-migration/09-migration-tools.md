@@ -25,24 +25,24 @@ Use either to submit the claim:
 Before claiming, you must generate a valid signature using the message format:
 
 ```
-"tZENCLAIM" + destinationAddress
+"ZENCLAIM" + destinationAddress
 ```
 
 For example:
 
 ```
-tZENCLAIM0x1B9aCc8d2c9e20aC2e78904e6f123f2D22Dd2A8w
+ZENCLAIM0x1B9aCc8d2c9e20aC2e78904e6f123f2D22Dd2A8w
 ```
 
 This section outlines how to do this using the three available tools.
 
 ### Sphere Wallet
 
-If you have your seed phrase, you can use [Sphere Testnet](https://github.com/HorizenOfficial/Sphere_by_Horizen_Testnet/releases/tag/desktop-v1.13.0-testnet) to sign a message.
+If you have your seed phrase, you can use [Sphere](https://github.com/HorizenOfficial/Sphere_by_Horizen_Private/releases/latest) to sign a message.
 
 1. Open Sphere and import your seed phrase (if not already imported).
 2. Verify that your wallet addresses and balances are correct.
-3. To generate a signature, click on this icon in your Sphere wallet and enter this message: `"tZENCLAIM" + destinationAddress`; Example: `tZENCLAIM0x1B9aCc8d2c9e20aC2e78904e6f123f2D22Dd2A8w`. <!-- Update prefix -->
+3. To generate a signature, click on this icon in your Sphere wallet and enter this message: `"ZENCLAIM" + destinationAddress`; Example: `ZENCLAIM0x1B9aCc8d2c9e20aC2e78904e6f123f2D22Dd2A8w`. <!-- Update prefix -->
 
    ![Sign a message with Sphere](/img/migration-tools/sphere-1.png) <!-- Update image -->
 
@@ -61,21 +61,20 @@ If your funds are stored on a Ledger hardware wallet, use the [Ledger Signing To
 
 **Signing Instructions**
 
-
 1. **Connect Your Ledger Device**
 
    Connect your Ledger device and open the **Horizen** app. Ensure the device is unlocked and displays "Application is ready" on the screen.
 
 2. **Launch the Ledger Signing Tool**
 
-   Open the Ledger Signing Tool and click **Connect**. 
-   > Make sure your Ledger device is unlocked, and the Horizen app is open. The Ledger screen will show "Application is ready".
+   Open the Ledger Signing Tool and click **Connect**.
 
+   > Make sure your Ledger device is unlocked, and the Horizen app is open. The Ledger screen will show "Application is ready".
 
    ![Connect Ledger](/img/migration-tools/ledger-1.png)
 
 3. **Enter the Destination Address**
-   
+
    Enter the **destination address**. This is the EVM address that will receive the migrated ZEN tokens. The "Message to Sign" will auto-populate.
 
    ![Enter destination address](/img/migration-tools/ledger-2.png)
@@ -85,7 +84,8 @@ If your funds are stored on a Ledger hardware wallet, use the [Ledger Signing To
    Enter the derivation path for the **ZEN address being claimed from**.
 
    To find this:
-   - Open the Ledger Live app 
+
+   - Open the Ledger Live app
    - Go to the Horizen account to claim from
    - Click **Edit Account &rarr; Advanced**
    - Note the `freshAddressPath`
@@ -95,14 +95,16 @@ If your funds are stored on a Ledger hardware wallet, use the [Ledger Signing To
    ![Edit account](/img/migration-tools/ledger-4.png)
 
    ![Find derivation path](/img/migration-tools/ledger-5.png)
+
 ---
+
       #### About Derivation Paths
 
       Ledger uses the following format for HD wallet derivation:
       ```
       m / purpose' / coin_type' / account' / change / address_index
       ```
-      
+
       For **Horizen**, the derivation path is:
       ```
       m / 44' / 121' / account' / change / address_index
@@ -112,41 +114,45 @@ If your funds are stored on a Ledger hardware wallet, use the [Ledger Signing To
          - `0` → receiving address
          - `1` → change address
       - `address_index` is the index of the address under that account
----
-   #### Understanding `freshAddressPath`
-
-   Ledger shows the **next unused address** as the `freshAddressPath`.
-
-   To find the **last used** address:
-
-   - Subtract `1` from the `address_index`.
-
-   > **Example**  
-   If the `freshAddressPath` is `m/44'/121'/0'/0/5`  
-   Then the last used receiving address is `m/44'/121'/0'/0/4`
 
 ---
-   #### Important: Check All Possible Addresses
 
-   To ensure **no funds are left behind**:
+#### Understanding `freshAddressPath`
 
-   1. **Scan backwards** from the `freshAddressPath`, checking each:
-      - `address_index` (e.g., 4, 3, 2, 1, 0)
-      - for both `change = 0` and `change = 1`
+Ledger shows the **next unused address** as the `freshAddressPath`.
 
-   2. This means you should check all paths like:
-      ```
-      m/44'/121'/0'/0/4
-      m/44'/121'/0'/1/4
-      m/44'/121'/0'/0/3
-      m/44'/121'/0'/1/3
-      ...
-      ```
-   
-   This ensures you catch both receiving and change addresses that may have ZEN balances.
+To find the **last used** address:
+
+- Subtract `1` from the `address_index`.
+
+> **Example**  
+>  If the `freshAddressPath` is `m/44'/121'/0'/0/5`  
+>  Then the last used receiving address is `m/44'/121'/0'/0/4`
+
+---
+
+#### Important: Check All Possible Addresses
+
+To ensure **no funds are left behind**:
+
+1.  **Scan backwards** from the `freshAddressPath`, checking each:
+
+    - `address_index` (e.g., 4, 3, 2, 1, 0)
+    - for both `change = 0` and `change = 1`
+
+2.  This means you should check all paths like:
+    ```
+    m/44'/121'/0'/0/4
+    m/44'/121'/0'/1/4
+    m/44'/121'/0'/0/3
+    m/44'/121'/0'/1/3
+    ...
+    ```
+
+This ensures you catch both receiving and change addresses that may have ZEN balances.
 
 5. **Verify the ZEN Address**
-   
+
    Paste each derived ZEN address into the [Horizen Explorer](https://explorer.horizen.io/) to check the balances.
 
    ![Copy ZEN address](/img/migration-tools/ledger-6.png)
@@ -183,7 +189,7 @@ The CLI tool provides functionality for signing and verifying messages. It also 
 - **`verifymessage`**
   Verify a signed message against a ZEN address.
 
-For detailed usage examples and other supported commands, refer to the [GitHub README](https://github.com/HorizenOfficial/horizen-migration-cli/tree/1.0.0-tZENCLAIM).
+For detailed usage examples and other supported commands, refer to the [GitHub README](https://github.com/HorizenOfficial/horizen-migration-cli/tree/1.0.0-ZENCLAIM).
 
 ## Claim Process
 
@@ -191,18 +197,15 @@ Once you have a valid signature, use the claim interface to submit your request.
 
 ### Claim Page
 
-You can claim ZEN directly through the official web interface:
-
-- Testnet Claim Page: [https://horizen.io/tzenclaim](https://horizen.io/tzenclaim)
-- Mainnet Claim Page: TBD
+You can claim ZEN directly through the official web interface: [https://horizen.io/zenclaim](https://horizen.io/zenclaim)
 
 1. **Connect Wallet**
 
-   Click Connect Wallet and choose your provider (e.g., MetaMask). Make sure you're connected to Base Mainnet or Base Sepolia Testnet (if doing a testnet claim).
+   Click Connect Wallet and choose your provider (e.g., MetaMask). Make sure you're connected to Base Mainnet.
 
    ![Connect MetaMask](/img/migration-tools/metamask.png)
 
-   **Instructions for connecting to Base Sepolia Testnet (if not already set up)**
+   **Instructions for connecting to Base Sepolia (if not already set up)**
 
    Click on the "Add Custom Network" from the network dropdown and enter in the following credentials
 
@@ -215,13 +218,7 @@ You can claim ZEN directly through the official web interface:
    ```
 
 2. **Import Token**
-   Make sure to import either tZEN (if on testnet) or ZEN (on mainnet) so that the tokens appear in Metamask. Under the tokens tab select the "Import Tokens" button and enter the following for the appropriate environment.
-
-   ```
-   Sepolia Testnet
-   Contract: 0x107fdE93838e3404934877935993782F977324BB
-   Symbol: tZEN
-   ```
+   Make sure to import ZEN so that the tokens appear in MetaMask. Under the tokens tab select the "Import Tokens" button and enter the following:
 
    ```
    Base Mainnet
@@ -260,4 +257,4 @@ The CLI tool provides functionality for claiming tokens from ZEN addresses, both
 - **`claimzenmultisigaddress`**  
   Claim tokens from a multisignature ZEN address.
 
-For detailed usage examples and other supported commands, refer to the [GitHub README](https://github.com/HorizenOfficial/horizen-migration-cli/tree/1.0.0-tZENCLAIM).
+For detailed usage examples and other supported commands, refer to the [GitHub README](https://github.com/HorizenOfficial/horizen-migration-cli/tree/1.0.0-ZENCLAIM).
