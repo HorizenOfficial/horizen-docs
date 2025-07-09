@@ -1,3 +1,6 @@
+---
+sidebar_class_name: 'hidden'
+---
 # Tools for Claiming Process
 
 This guide explains how to sign a message and complete the ZEN token claim process using official Horizen tools.
@@ -38,13 +41,13 @@ This section outlines how to do this using the three available tools.
 
 ### Sphere Wallet
 
-If you have your seed phrase, you can use [Sphere](https://github.com/HorizenOfficial/Sphere_by_Horizen_Private/releases/latest) to sign a message.
+If you have your seed phrase, you can use [Sphere Testnet](https://github.com/HorizenOfficial/Sphere_by_Horizen_Testnet/releases/tag/desktop-v1.13.0-testnet) to sign a message.
 
 1. Open Sphere and import your seed phrase (if not already imported).
 2. Verify that your wallet addresses and balances are correct.
-3. To generate a signature, click on this icon in your Sphere wallet and enter this message: `"ZENCLAIM" + destinationAddress`; Example: `ZENCLAIM0x1B9aCc8d2c9e20aC2e78904e6f123f2D22Dd2A8w`. <!-- Update prefix -->
+3. To generate a signature, click on this icon in your Sphere wallet and enter this message: `"ZENCLAIM" + destinationAddress`; Example: `ZENCLAIM0x1B9aCc8d2c9e20aC2e78904e6f123f2D22Dd2A8w`.
 
-   ![Sign a message with Sphere](/img/migration-tools/sphere-1.png) <!-- Update image -->
+   ![Sign a message with Sphere](/img/migration-tools/sphere-1.png)
 
 4. Click **Create Signature**. This will be used in the claim process.
 
@@ -61,20 +64,21 @@ If your funds are stored on a Ledger hardware wallet, use the [Ledger Signing To
 
 **Signing Instructions**
 
+
 1. **Connect Your Ledger Device**
 
    Connect your Ledger device and open the **Horizen** app. Ensure the device is unlocked and displays "Application is ready" on the screen.
 
 2. **Launch the Ledger Signing Tool**
 
-   Open the Ledger Signing Tool and click **Connect**.
-
+   Open the Ledger Signing Tool and click **Connect**. 
    > Make sure your Ledger device is unlocked, and the Horizen app is open. The Ledger screen will show "Application is ready".
+
 
    ![Connect Ledger](/img/migration-tools/ledger-1.png)
 
 3. **Enter the Destination Address**
-
+   
    Enter the **destination address**. This is the EVM address that will receive the migrated ZEN tokens. The "Message to Sign" will auto-populate.
 
    ![Enter destination address](/img/migration-tools/ledger-2.png)
@@ -84,8 +88,7 @@ If your funds are stored on a Ledger hardware wallet, use the [Ledger Signing To
    Enter the derivation path for the **ZEN address being claimed from**.
 
    To find this:
-
-   - Open the Ledger Live app
+   - Open the Ledger Live app 
    - Go to the Horizen account to claim from
    - Click **Edit Account &rarr; Advanced**
    - Note the `freshAddressPath`
@@ -95,16 +98,14 @@ If your funds are stored on a Ledger hardware wallet, use the [Ledger Signing To
    ![Edit account](/img/migration-tools/ledger-4.png)
 
    ![Find derivation path](/img/migration-tools/ledger-5.png)
-
 ---
-
       #### About Derivation Paths
 
       Ledger uses the following format for HD wallet derivation:
       ```
       m / purpose' / coin_type' / account' / change / address_index
       ```
-
+      
       For **Horizen**, the derivation path is:
       ```
       m / 44' / 121' / account' / change / address_index
@@ -114,45 +115,41 @@ If your funds are stored on a Ledger hardware wallet, use the [Ledger Signing To
          - `0` → receiving address
          - `1` → change address
       - `address_index` is the index of the address under that account
+---
+   #### Understanding `freshAddressPath`
+
+   Ledger shows the **next unused address** as the `freshAddressPath`.
+
+   To find the **last used** address:
+
+   - Subtract `1` from the `address_index`.
+
+   > **Example**  
+   If the `freshAddressPath` is `m/44'/121'/0'/0/5`  
+   Then the last used receiving address is `m/44'/121'/0'/0/4`
 
 ---
+   #### Important: Check All Possible Addresses
 
-#### Understanding `freshAddressPath`
+   To ensure **no funds are left behind**:
 
-Ledger shows the **next unused address** as the `freshAddressPath`.
+   1. **Scan backwards** from the `freshAddressPath`, checking each:
+      - `address_index` (e.g., 4, 3, 2, 1, 0)
+      - for both `change = 0` and `change = 1`
 
-To find the **last used** address:
-
-- Subtract `1` from the `address_index`.
-
-> **Example**  
->  If the `freshAddressPath` is `m/44'/121'/0'/0/5`  
->  Then the last used receiving address is `m/44'/121'/0'/0/4`
-
----
-
-#### Important: Check All Possible Addresses
-
-To ensure **no funds are left behind**:
-
-1.  **Scan backwards** from the `freshAddressPath`, checking each:
-
-    - `address_index` (e.g., 4, 3, 2, 1, 0)
-    - for both `change = 0` and `change = 1`
-
-2.  This means you should check all paths like:
-    ```
-    m/44'/121'/0'/0/4
-    m/44'/121'/0'/1/4
-    m/44'/121'/0'/0/3
-    m/44'/121'/0'/1/3
-    ...
-    ```
-
-This ensures you catch both receiving and change addresses that may have ZEN balances.
+   2. This means you should check all paths like:
+      ```
+      m/44'/121'/0'/0/4
+      m/44'/121'/0'/1/4
+      m/44'/121'/0'/0/3
+      m/44'/121'/0'/1/3
+      ...
+      ```
+   
+   This ensures you catch both receiving and change addresses that may have ZEN balances.
 
 5. **Verify the ZEN Address**
-
+   
    Paste each derived ZEN address into the [Horizen Explorer](https://explorer.horizen.io/) to check the balances.
 
    ![Copy ZEN address](/img/migration-tools/ledger-6.png)
@@ -169,7 +166,7 @@ If you only have your seed phrase, you'll need to derive your private key using 
 
 > **Note**: For security, we recommend downloading the tool and running it offline. Download and extract the static files [here](https://github.com/HorizenOfficial/horizen-migration-signing-tool-private-key/releases/latest), then open `index.html` locally.
 
-![Private Key Signing Tool](/img/migration-tools/private-key-1.png)
+<img src="/img/migration-tools/private-key-1.png" alt="Private Key Signing Tool" style={{ maxWidth: "500px", width: "100%" }} />
 
 1. Enter your **private key** and confirm the ZEN address is correct.
 
@@ -197,36 +194,37 @@ Once you have a valid signature, use the claim interface to submit your request.
 
 ### Claim Page
 
-You can claim ZEN directly through the official web interface: [https://horizen.io/zenclaim](https://horizen.io/zenclaim)
+You can claim ZEN directly through the official web interface:
+- Mainnet Claim Page: [https://horizen.io/zenclaim](https://horizen.io/zenclaim)
 
 1. **Connect Wallet**
 
    Click Connect Wallet and choose your provider (e.g., MetaMask). Make sure you're connected to Base Mainnet.
 
-   ![Connect MetaMask](/img/migration-tools/metamask.png)
+   <img src="/img/migration-tools/metamask.png" alt="Connect MetaMask" style={{ maxWidth: "400px", width: "100%" }} />
 
-   **Instructions for connecting to Base Sepolia (if not already set up)**
+   **Instructions for connecting to Base Sepolia Testnet (if not already set up)**
 
    Click on the "Add Custom Network" from the network dropdown and enter in the following credentials
 
    ```
-   Network Name: Base Sepolia
-   RPC Endpoint: https://sepolia.base.org
-   Chain ID: 84532
-   Currency Symbol: ETH
-   Block Explorer: https://sepolia-explorer.base.org
+   Network Name: Base Mainnet
+   RPC URL: https://mainnet.base.org
+   Chain ID: 8453
+   Symbol: ETH
+   Block Explorer URL: https://basescan.org
    ```
 
 2. **Import Token**
-   Make sure to import ZEN so that the tokens appear in MetaMask. Under the tokens tab select the "Import Tokens" button and enter the following:
+   Make sure to import either tZEN (if on testnet) or ZEN (on mainnet) so that the tokens appear in Metamask. Under the tokens tab select the "Import Tokens" button and enter the following for the appropriate environment.
 
    ```
    Base Mainnet
-   Contract: tbd
+   Contract: 0xf43eB8De897Fbc7F2502483B2Bef7Bb9EA179229
    Symbol: ZEN
    ```
 
-   ![Import ZE  token](/img/migration-tools/import-token.png)
+   <img src="/img/migration-tools/import-token.png" alt="Import ZEN token" style={{ maxWidth: "400px", width: "100%" }} />
 
 3. **Enter ZEN Address**
 
