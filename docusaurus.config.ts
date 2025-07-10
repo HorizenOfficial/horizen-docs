@@ -74,7 +74,7 @@ const config: Config = {
           type: "docSidebar",
           sidebarId: "mainnetMigrationSidebar",
           position: "left",
-          label: "Mainnet Migration Guide",
+          label: "Mainnet Claim Instructions",
         },    
         {
           href: "https://github.com/HorizenLabs/horizen-2-docs",
