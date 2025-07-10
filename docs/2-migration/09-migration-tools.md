@@ -25,8 +25,8 @@ The most straightforward way to get ETH on Base is by using a centralized exchan
 
 1. Buy ETH on your preferred exchange.
 2. Withdraw it to your Base wallet address (e.g., MetaMask).
-  - If using Coinbase and Binance, select “Base” as the destination network.
-  - For other exchanges, users may need to first withdraw to Ethereum and then bridge to Base using a third-party bridge. See below for bridging instructions. 
+   - If using Coinbase and Binance, select “Base” as the destination network.
+   - For other exchanges, users may need to first withdraw to Ethereum and then bridge to Base using a third-party bridge. See below for bridging instructions. 
 
 #### Option 2: Bridge ETH from Ethereum or Other Chains to Base
 If your exchange doesn’t support direct Base withdrawals, or if you already have ETH on another network (like Ethereum Mainnet, Arbitrum, or Optimism), you can bridge ETH to Base using a third-party bridge. For bridging ETH from Ethereum to Base, the recommendation is to use [Superbridge](https://superbridge.app/base).
@@ -43,7 +43,7 @@ Some services allow you to buy ETH directly on Base using a debit card, credit c
 To confirm that you’ve received ETH on Base, check your wallet (e.g., MetaMask) or visit https://basescan.org. Once you see ETH in your Base wallet, you’re ready to claim your ZEN.
 
 ## Claim Process
-Claiming is a two step process, first you will sign a message with your old Horizen wallet, then you will submit a claim with your new wallet on Base.
+Claiming is a two step process. First you will sign a message with your old Horizen wallet, then you will submit a claim with your new wallet on Base.
 
 ### Step 1: Create a Signature  
 Before claiming, you must generate a valid signature. You must do this to confirm ownership of your wallet.
@@ -76,10 +76,10 @@ ZENCLAIM0x1B9aCc8d2c9e20aC2e78904e6f123f2D22Dd2A8w
 
 Save your message format as it will be used when generating a signature. Use one of the following tools to generate a signed message. 
 
-- [Sphere Wallet](#sphere-wallt): For users who manage ZEN with Sphere Wallet.
-- [Ledger Signing Tool](#ledger-signing-tool): For users who manage ZEN with Ledger Wallet.
-- [Private Key Signing Tool](#private-key-signing-tool): For users who manage ZEN with other wallets not listed above. Note that users need access to their private keys in order to use this tool.
-- [CLI Tool](#cli-tool): For users or organizations who manage multiple wallet addresses, have access to private keys, and need to generate multiple signatures. This tool can also be used to claim from multiple wallets.
+- [Sphere Wallet](#sphere-wallet): <br/>For users who manage ZEN with Sphere Wallet.
+- [Ledger Signing Tool](#ledger-signing-tool): <br/>For users who manage ZEN with Ledger Wallet.
+- [Private Key Signing Tool](#private-key-signing-tool): <br/>For users who manage ZEN with other wallets not listed above. Note that users need access to their private keys in order to use this tool.
+- [CLI Tool](#cli-tool): <br/>For users or organizations who manage multiple wallet addresses, have access to private keys, and need to generate multiple signatures. This tool can also be used to claim from multiple wallets.
 
 ### Sphere Wallet
 
@@ -89,7 +89,7 @@ If you have your seed phrase, you can use [Sphere](https://github.com/HorizenOff
 2. Verify that your wallet addresses and balances are correct.
 3. To generate a signature, click on this icon in your Sphere address and enter the message in the “Message to be signed” box as shown below.
 
-   ![Sign a message with Sphere](/img/migration-tools/sphere-1.png) <!-- Update image -->
+   ![Sign a message with Sphere](/img/migration-tools/sphere-1.png)
 
 4. Click **Create Signature**. This will generate a signature for you, save this as it will be used in the claim process.
 
@@ -109,27 +109,22 @@ If your funds are stored on a Ledger hardware wallet, use the [Ledger Signing To
 **Signing Instructions**
 
 1. **Connect Your Ledger Device**
-
-   Connect your Ledger device and open the **Horizen** app. Ensure the device is unlocked and displays "Application is ready" on the screen.
+   <br/>Connect your Ledger device and open the **Horizen** app. Ensure the device is unlocked and displays "Application is ready" on the screen.
 
 2. **Launch the Ledger Signing Tool**
-
-   Open the Ledger Signing Tool and click **Connect**. Make sure your Ledger device is unlocked, and the Horizen app is open. The Ledger screen will show "Application is ready".
+   <br/>Open the Ledger Signing Tool and click **Connect**. Make sure your Ledger device is unlocked, and the Horizen app is open. The Ledger screen will show "Application is ready".
 
    ![Connect Ledger](/img/migration-tools/ledger-1.png)
 
 3. **Enter the Destination Address**
-
-   Enter the **destination address**. This is the EVM address that will receive the migrated ZEN tokens. The "Message to Sign" will auto-populate.
+   <br/>Enter the **destination address**. This is the EVM address that will receive the migrated ZEN tokens. The "Message to Sign" will auto-populate.
 
    ![Enter destination address](/img/migration-tools/ledger-2.png)
 
 4. **Locate and Adjust the Derivation Path**
-
-   Enter the derivation path for the **ZEN address being claimed from**.
+   <br/>Enter the derivation path for the **ZEN address being claimed from**.
 
    To find this:
-
    - Open the Ledger Live app
    - Go to the Horizen account to claim from
    - Click **Edit Account &rarr; Advanced**
@@ -193,8 +188,7 @@ To ensure **no funds are left behind**:
     m/44'/121'/0'/1/3
     ...
     ```
-
-This ensures you catch both receiving and change addresses that may have ZEN balances.
+   This ensures you catch both receiving and change addresses that may have ZEN balances.
 
 3. **Verify the ZEN Address**
 
@@ -214,7 +208,7 @@ If you only have your seed phrase, you'll need to derive your private key using 
 
 > **Note**: For security, we recommend downloading the tool and running it offline. Download and extract the static files [here](https://github.com/HorizenOfficial/horizen-migration-signing-tool-private-key/releases/latest), then open `index.html` locally.
 
-![Private Key Signing Tool](/img/migration-tools/private-key-1.png)
+<img src="/img/migration-tools/private-key-1.png" alt="Private Key Signing Tool" style={{ maxWidth: "500px", width: "100%" }} />
 
 1. Enter your **private key** and confirm the ZEN address is correct.
 
@@ -245,8 +239,7 @@ You can claim ZEN directly through the official web interface:
 1. **Connect Wallet**
 
    Click Connect Wallet and choose your provider (e.g., MetaMask). Make sure you're connected to Base Mainnet.
-
-   ![Connect MetaMask](/img/migration-tools/metamask.png)
+   <img src="/img/migration-tools/metamask.png" alt="Connect MetaMask" style={{ maxWidth: "400px", width: "100%" }} />
 
 2. **Import Token**
   Make sure to import eitherZEN (on mainnet) so that the tokens appear in Metamask. Under the tokens tab select the "Import Tokens" button and enter the following for the appropriate environment.
@@ -257,7 +250,7 @@ You can claim ZEN directly through the official web interface:
    Symbol: ZEN
    ```
 
-   ![Import ZEN token](/img/migration-tools/import-token.png)
+   <img src="/img/migration-tools/import-token.png" alt="Import ZEN token" style={{ maxWidth: "400px", width: "100%" }} />
 
 3. **Enter ZEN Address**
 
@@ -284,15 +277,15 @@ You can claim ZEN directly through the official web interface:
 The smart contracts have been audited by two independent furs and the website has also been fully audited. Audit reports are available below:
 
 - **Smart Contract Code Audit:**
-Link to summary, full download link in upper right corner: 
-https://cantina.xyz/portfolio/1586d855-a063-4449-918b-39c2a038b9bb
+<br/>Link to summary, full download link in upper right corner: 
+<br/>https://cantina.xyz/portfolio/1586d855-a063-4449-918b-39c2a038b9bb
 
 - **Smart Contract Code Review:**
-https://www.halborn.com/audits/the-horizen-foundation/horizen-migration---code-review-0aa462
+<br/>https://www.halborn.com/audits/the-horizen-foundation/horizen-migration---code-review-0aa462
 
 
 - **Claim Tools Audit:**
-Link to summary, full download link in upper right corner: https://cantina.xyz/portfolio/f3d1defb-1686-41ea-b602-0a03e6b824b2
+<br/>Link to summary, full download link in upper right corner: <br/>https://cantina.xyz/portfolio/f3d1defb-1686-41ea-b602-0a03e6b824b2
 
 ## Troubleshooting & FAQ
 **1. I’ve copied my address from Sphere wallet but I get an error saying I’m using a testnet address?**
@@ -304,7 +297,7 @@ There are two versions of Sphere, one for testnet, and one for mainnet. Make sur
 
 You may see a message like the following
 
-<!-- ![Insufficient funds screen](/img/migration-tools/insufficient-funds.png) -->
+<img src="/img/migration-tools/insufficient-funds.png" alt="Insufficient funds screen" style={{ maxWidth: "400px", width: "100%" }} />
 
 Make sure you have ETH in your wallet on Base L2. Instructions for getting ETH are in the intro section of this document: 
 
@@ -318,7 +311,7 @@ Using Metamask as the example wallet (Network credentials are the same for other
 
 Click on the **Add Custom Network** button at the bottom of the dropdown on the top left of Metmask wallet.
 
-<!-- ![Select a Network screen](/img/migration-tools/select-a-network.png) -->
+<img src="/img/migration-tools/select-a-network.png" alt="Select a Network screen" style={{ maxWidth: "400px", width: "100%" }} />
 
 Enter the following credentials for Base Mainnet network.
 ```
@@ -347,15 +340,15 @@ Make sure that you have a wallet extension installed on your browser/device. A c
 
 If you see the message below it is common and not to worry, just click the **Got It** button
 
-<!-- ![1st Interaction screen](/img/migration-tools/first-interaction.png) -->
+<img src="/img/migration-tools/first-interaction.png" alt="1st Interaction screen" style={{ maxWidth: "400px", width: "100%" }} />
 
 **7. I have a wallet installed but I don’t know how to connect it.**
 
-On the claim portal page there is a Connect Wallet button, click this and follow the steps. Make sure that popups are not blocked as this is how wallets connect to a dApp.
+On the claim portal page there is a Connect Wallet button. Click this and follow the steps. Make sure that popups are not blocked as this is how wallets connect to a dApp.
 
-<!-- ![](/img/migration-tools/connect-1.png) -->
+![Claim page connect wallet button](/img/migration-tools/connect-1.png)
 Once connected you should see your wallet address show up where the button is. 
-<!-- ![](/img/migration-tools/connect-2.png) -->
+![Claim page address displayed](/img/migration-tools/connect-2.png)
 
 **8. I’ve finished my claim but ZEN is not showing up in my wallet.**
 
@@ -375,4 +368,4 @@ For the most accurate result, check the precise token amounts on the block explo
 When doing your addition, make sure to use the exact numbers shown on the explorers - not the rounded balances in MetaMask.
 
 ![Check balance on BaseScan](/img/migration-tools/basescan-balance.png)
-![See balance on MetaMask](/img/migration-tools/metamask-balance.png)
+<img src="/img/migration-tools/metamask-balance.png" alt="See balance on MetaMask" style={{ maxWidth: "400px", width: "100%" }} />
