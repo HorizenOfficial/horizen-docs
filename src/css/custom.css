@@ -58,3 +58,7 @@ img.bordered {
 .footer {
   background-color: #272729;
 }
+
+.menu__list-item.hidden {
+  display: none;
+}
