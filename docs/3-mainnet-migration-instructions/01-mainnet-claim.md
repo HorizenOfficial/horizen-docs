@@ -12,7 +12,7 @@ The most straightforward way to get ETH on Base is by using a centralized exchan
 
 1. Buy ETH on your preferred exchange.
 2. Withdraw it to your Base wallet address (e.g., MetaMask).
-   - If using Coinbase and Binance, select “Base” as the destination network.
+   - If using Coinbase and Binance, select "Base" as the destination network.
    - For other exchanges, users may need to first withdraw to Ethereum and then bridge to Base using a third-party bridge. See below for bridging instructions. 
 
 #### Option 2: Bridge ETH from Ethereum or Other Chains to Base

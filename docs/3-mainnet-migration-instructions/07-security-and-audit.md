@@ -1,7 +1,7 @@
 # Security and Audits
-**Important:** Make sure to only use the official claim page from Horizen's website: https://www.horizen.io/zenclaim. Be on the lookout for scams or nefarious actors sending you to other websites which may look like Horizen’s. Be sure to always check the URL when claiming.
+**Important:** Make sure to only use the official claim page from Horizen’s website: https://www.horizen.io/zenclaim. Be on the lookout for scams or nefarious actors sending you to other websites which may look like Horizen’s. Be sure to always check the URL when claiming.
 
-The smart contracts have been audited by two independent furs and the website has also been fully audited. Audit reports are available below:
+The smart contracts have been audited by two independent firms and the website has also been fully audited. Audit reports are available below:
 
 - **Smart Contract Code Audit:**
 <br/>Link to summary, full download link in upper right corner: 
