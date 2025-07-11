@@ -12,7 +12,7 @@ You may see a message like the following
 
 Make sure you have ETH in your wallet on Base L2. Instructions for getting ETH are in the intro section of this document: 
 
-[Introduction](#introduction)
+[Get ETH First](/mainnet-migration-instructions/mainnet-claim#get-eth-first)
 
 **3. It’s saying I need to connect to the Base network but I don’t know how.**
 
@@ -38,7 +38,7 @@ Block Explorer URL: https://basescan.org
 - Message format should  
   - Not have any commas, apostrophes, or quotations.  
   - Use the appropriate claim prefix.   
-  - Message format is as described here: [Message Signing Instructions](#message-signing-instructions)  
+  - Message format is as described here: [Create a Message](/mainnet-migration-instructions/mainnet-claim#create-a-signature)  
 - Make sure the signature was made from the same Horizen wallet address you created the signature with.  
 - Importantly you need to enter the same destination address as the one you used to sign the message.   
 - Double check to make sure the wallet addresses entered have no typos.
@@ -63,7 +63,7 @@ Once connected you should see your wallet address show up where the button is.
 
 **8. I’ve finished my claim but ZEN is not showing up in my wallet.**
 
-Make sure to import the token as described in step 2 of the [Claim Page](#claim-page) section.
+Make sure to import the token as described in step 2 of the [Claim Page](/mainnet-migration-instructions/claim-page#2-import-token).
 
 
 **9. I added up my Mainchain ZEND balance and EON balance, but the total doesn’t exactly match what I see in MetaMask. Why?**
