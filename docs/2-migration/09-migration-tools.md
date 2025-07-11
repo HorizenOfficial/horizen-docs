@@ -1,3 +1,6 @@
+---
+sidebar_class_name: 'hidden'
+---
 # Tools for Claiming Process
 
 This guide explains how to sign a message and complete the ZEN token claim process using official Horizen tools.
@@ -25,13 +28,13 @@ Use either to submit the claim:
 Before claiming, you must generate a valid signature using the message format:
 
 ```
-"tZENCLAIM" + destinationAddress
+"ZENCLAIM" + destinationAddress
 ```
 
 For example:
 
 ```
-tZENCLAIM0x1B9aCc8d2c9e20aC2e78904e6f123f2D22Dd2A8w
+ZENCLAIM0x1B9aCc8d2c9e20aC2e78904e6f123f2D22Dd2A8w
 ```
 
 This section outlines how to do this using the three available tools.
@@ -42,9 +45,9 @@ If you have your seed phrase, you can use [Sphere Testnet](https://github.com/Ho
 
 1. Open Sphere and import your seed phrase (if not already imported).
 2. Verify that your wallet addresses and balances are correct.
-3. To generate a signature, click on this icon in your Sphere wallet and enter this message: `"tZENCLAIM" + destinationAddress`; Example: `tZENCLAIM0x1B9aCc8d2c9e20aC2e78904e6f123f2D22Dd2A8w`. <!-- Update prefix -->
+3. To generate a signature, click on this icon in your Sphere wallet and enter this message: `"ZENCLAIM" + destinationAddress`; Example: `ZENCLAIM0x1B9aCc8d2c9e20aC2e78904e6f123f2D22Dd2A8w`.
 
-   ![Sign a message with Sphere](/img/migration-tools/sphere-1.png) <!-- Update image -->
+   ![Sign a message with Sphere](/img/migration-tools/sphere-1.png)
 
 4. Click **Create Signature**. This will be used in the claim process.
 
@@ -163,7 +166,7 @@ If you only have your seed phrase, you'll need to derive your private key using 
 
 > **Note**: For security, we recommend downloading the tool and running it offline. Download and extract the static files [here](https://github.com/HorizenOfficial/horizen-migration-signing-tool-private-key/releases/latest), then open `index.html` locally.
 
-![Private Key Signing Tool](/img/migration-tools/private-key-1.png)
+<img src="/img/migration-tools/private-key-1.png" alt="Private Key Signing Tool" style={{ maxWidth: "500px", width: "100%" }} />
 
 1. Enter your **private key** and confirm the ZEN address is correct.
 
@@ -183,7 +186,7 @@ The CLI tool provides functionality for signing and verifying messages. It also 
 - **`verifymessage`**
   Verify a signed message against a ZEN address.
 
-For detailed usage examples and other supported commands, refer to the [GitHub README](https://github.com/HorizenOfficial/horizen-migration-cli/tree/1.0.0-tZENCLAIM).
+For detailed usage examples and other supported commands, refer to the [GitHub README](https://github.com/HorizenOfficial/horizen-migration-cli/tree/1.0.0-ZENCLAIM).
 
 ## Claim Process
 
@@ -192,44 +195,36 @@ Once you have a valid signature, use the claim interface to submit your request.
 ### Claim Page
 
 You can claim ZEN directly through the official web interface:
-
-- Testnet Claim Page: [https://horizen.io/tzenclaim](https://horizen.io/tzenclaim)
-- Mainnet Claim Page: TBD
+- Mainnet Claim Page: [https://horizen.io/zenclaim](https://horizen.io/zenclaim)
 
 1. **Connect Wallet**
 
-   Click Connect Wallet and choose your provider (e.g., MetaMask). Make sure you're connected to Base Mainnet or Base Sepolia Testnet (if doing a testnet claim).
+   Click Connect Wallet and choose your provider (e.g., MetaMask). Make sure you're connected to Base Mainnet.
 
-   ![Connect MetaMask](/img/migration-tools/metamask.png)
+   <img src="/img/migration-tools/metamask.png" alt="Connect MetaMask" style={{ maxWidth: "400px", width: "100%" }} />
 
    **Instructions for connecting to Base Sepolia Testnet (if not already set up)**
 
    Click on the "Add Custom Network" from the network dropdown and enter in the following credentials
 
    ```
-   Network Name: Base Sepolia
-   RPC Endpoint: https://sepolia.base.org
-   Chain ID: 84532
-   Currency Symbol: ETH
-   Block Explorer: https://sepolia-explorer.base.org
+   Network Name: Base Mainnet
+   RPC URL: https://mainnet.base.org
+   Chain ID: 8453
+   Symbol: ETH
+   Block Explorer URL: https://basescan.org
    ```
 
 2. **Import Token**
    Make sure to import either tZEN (if on testnet) or ZEN (on mainnet) so that the tokens appear in Metamask. Under the tokens tab select the "Import Tokens" button and enter the following for the appropriate environment.
 
    ```
-   Sepolia Testnet
-   Contract: 0x107fdE93838e3404934877935993782F977324BB
-   Symbol: tZEN
-   ```
-
-   ```
    Base Mainnet
-   Contract: tbd
+   Contract: 0xf43eB8De897Fbc7F2502483B2Bef7Bb9EA179229
    Symbol: ZEN
    ```
 
-   ![Import ZE  token](/img/migration-tools/import-token.png)
+   <img src="/img/migration-tools/import-token.png" alt="Import ZEN token" style={{ maxWidth: "400px", width: "100%" }} />
 
 3. **Enter ZEN Address**
 
@@ -260,4 +255,4 @@ The CLI tool provides functionality for claiming tokens from ZEN addresses, both
 - **`claimzenmultisigaddress`**  
   Claim tokens from a multisignature ZEN address.
 
-For detailed usage examples and other supported commands, refer to the [GitHub README](https://github.com/HorizenOfficial/horizen-migration-cli/tree/1.0.0-tZENCLAIM).
+For detailed usage examples and other supported commands, refer to the [GitHub README](https://github.com/HorizenOfficial/horizen-migration-cli/tree/1.0.0-ZENCLAIM).
