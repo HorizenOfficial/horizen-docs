@@ -19,7 +19,7 @@ If your funds are stored on a Ledger hardware wallet, use the [Ledger Signing To
    ![Connect Ledger](/img/migration-tools/ledger-1.png)
 
 3. **Enter the Destination Address**
-   <br/>Enter the **destination address**. This is the EVM address that will receive the migrated ZEN tokens. The "Message to Sign" will auto-populate.
+   <br/>Enter the **destination address**. The destination address is where ZEN will be sent to, make sure you are the owner of this address. The "Message to Sign" will auto-populate.
 
    ![Enter destination address](/img/migration-tools/ledger-2.png)
 

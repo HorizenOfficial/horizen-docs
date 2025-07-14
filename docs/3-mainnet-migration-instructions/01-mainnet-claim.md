@@ -3,7 +3,7 @@
 This guide will explain how to claim ZEN from the Horizen ZEND mainchain to Base L2 chain. Importantly, there is no time window in place for claiming tokens.
 
 ## Get ETH First
-Before going through the claim process you will need to have some ETH on Base L2 to process the claim. Please ensure you have at least **0.004 ETH per claim** to cover the necessary transaction costs. If you have multiple claims, the total amount in your wallet must be sufficient to cover all of them.
+Before going through the claim process you will need to have some ETH on Base L2 to process the claim. Please ensure you have at least **0.000002 ETH per claim** to cover the necessary transaction costs. If you have multiple claims, the total amount in your wallet must be sufficient to cover all of them.
 
 **Getting ETH on Base (Required to Claim ZEN)**
 

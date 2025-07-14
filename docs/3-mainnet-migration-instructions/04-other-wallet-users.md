@@ -10,7 +10,7 @@ If you only have your seed phrase, you'll need to derive your private key using 
 
 1. Enter your **private key** and confirm the ZEN address is correct.
 
-2. Enter the **destination EVM address**. The "Message to Sign" will auto-populate.
+2. Enter the **destination EVM address**. The destination address is where ZEN will be sent to, make sure you are the owner of this address. The "Message to Sign" will auto-populate.
 
 3. Click **Sign Message** to generate and copy the signed message.
 
