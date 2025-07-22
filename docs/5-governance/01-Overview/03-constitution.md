@@ -31,8 +31,8 @@ A strong social layer that builds trust and maintains integrity across the Horiz
 - The "Horizen DAO" or "DAO" means, collectively, the decentralized community of individuals that own, as evidenced by the Horizen blockchain, the $ZEN token.
 - The "Total Circulating Supply" means all of the $ZEN tokens currently in circulation.
 - The "ZenIP Process" means the rules and procedures for submitting and voting on ZenIPs, detailed further below in this Constitution.
-- The "Bylaws" means the bylaws of the Foundation as adopted by the Foundation in accordance with the Foundation Articles (as amended from time to time). A copy of the Bylaws is available here: [Foundational Documents](/governance/foundational-documents).
-- The "Foundation Articles" means the Memorandum and Articles of Association of the Foundation (as may be amended from time to time). A copy of the Foundation Articles is available here: [Foundational Documents](/governance/foundational-documents).
+- The "Bylaws" means the bylaws of the Foundation as adopted by the Foundation in accordance with the Foundation Articles (as amended from time to time). A copy of the Bylaws is available here: [Foundational Documents](/governance/Reference/foundational_docs).
+- The "Foundation Articles" means the Memorandum and Articles of Association of the Foundation (as may be amended from time to time). A copy of the Foundation Articles is available here: [Foundational Documents](/governance/Reference/foundational_docs).
 - "Technical ZenIP" means any ZenIP which requires a technical implementation or upgrade to the Horizen blockchain, or which requires the modification of the Foundation Governing Documents or this Constitution.
 - "Non-Technical ZenIP" means any other ZenIP which does not require a technical upgrade to the Horizen blockchain, including but not limited to making grants, proposing arrangements with third parties and conducting Foundation governance.
 
