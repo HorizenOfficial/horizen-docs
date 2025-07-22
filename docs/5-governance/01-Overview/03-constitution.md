@@ -31,8 +31,8 @@ A strong social layer that builds trust and maintains integrity across the Horiz
 - The "Horizen DAO" or "DAO" means, collectively, the decentralized community of individuals that own, as evidenced by the Horizen blockchain, the $ZEN token.
 - The "Total Circulating Supply" means all of the $ZEN tokens currently in circulation.
 - The "ZenIP Process" means the rules and procedures for submitting and voting on ZenIPs, detailed further below in this Constitution.
-- The "Bylaws" means the bylaws of the Foundation as adopted by the Foundation in accordance with the Foundation Articles (as amended from time to time). A copy of the Bylaws is available here: Foundational Documents.
-- The "Foundation Articles" means the Memorandum and Articles of Association of the Foundation (as may be amended from time to time). A copy of the Foundation Articles is available here: Foundational Documents.
+- The "Bylaws" means the bylaws of the Foundation as adopted by the Foundation in accordance with the Foundation Articles (as amended from time to time). A copy of the Bylaws is available here: [Foundational Documents](/governance/foundational-documents).
+- The "Foundation Articles" means the Memorandum and Articles of Association of the Foundation (as may be amended from time to time). A copy of the Foundation Articles is available here: [Foundational Documents](/governance/foundational-documents).
 - "Technical ZenIP" means any ZenIP which requires a technical implementation or upgrade to the Horizen blockchain, or which requires the modification of the Foundation Governing Documents or this Constitution.
 - "Non-Technical ZenIP" means any other ZenIP which does not require a technical upgrade to the Horizen blockchain, including but not limited to making grants, proposing arrangements with third parties and conducting Foundation governance.
 
@@ -89,7 +89,7 @@ Once your proposal has completed the seven (7) day community review and feedback
 
 You must then draft your ZenIP according to a specific format and structure as outlined below:
 
-- Preamble -- Headers containing metadata about the ZenIP (see below). The License field of the preamble indicates the licensing terms, which MUST be acceptable according to the ZenIP licensing requirements which can be found here for Horizen.
+- Preamble -- Headers containing metadata about the ZenIP (see below). The License field of the preamble indicates the licensing terms, which MUST be acceptable according to the ZenIP licensing requirements which can be found [here for Horizen](https://github.com/HorizenOfficial/zen/blob/main/COPYING).
 - Terminology -- Definitions of technical or non-obvious terms used in the document.
 - Abstract -- A short (~200 word) description of the technical issue being addressed.
 - Motivation -- The motivation is critical for ZenIPs that want to change the Horizen blockchain. It should clearly explain why the current state of the blockchain is inadequate to address the problem that the ZenIP solves.
@@ -127,21 +127,20 @@ If additional information is not needed, your ZenIP will proceed to the voting s
 
 **g. Vote**
 
-Now that your ZenIP has been approved for voting, it will go to a live Snapshot vote. Voting can be accessed at Snapshot. As a $ZEN tokenholder, you can participate in this Snapshot voting.
+Now that your ZenIP has been approved for voting, it will go to a live Snapshot vote. Voting can be accessed at [Snapshot](https://snapshot.org/#/horizenfoundation.eth). As a $ZEN tokenholder, you can participate in this Snapshot voting.
 
 ZenIPs are divided into two main categories, that each have their own requirements for adoption subject to a vote, in addition to the above requirements for drafting and submitting the proposals before they are put to a vote.
 
 **i. Non-Technical ZenIP**
 
-- Majority: The proposal must receive more votes in favor than against to pass; and
-- Quorum: There must be at least 3% of total circulating supply of $ZEN participating in the vote.
+- Majority: The proposal must receive more votes in favor than against to pass; and - Quorum: There must be at least 3% of total circulating supply of $ZEN participating in the vote.
 
-         **ii. Technical ZenIP**
+**ii. Technical ZenIP**
 
 - Majority: Of the total votable $ZEN tokens participating in the vote, the proposal must receive at least 67% votes in favor of the proposal to pass; and
 - Quorum: There must be at least 5% of total circulating supply of $ZEN participating in the vote.
 
-To vote on a proposal using a wallet that contains delegating voting power, you must login to Snapshot. $ZEN tokens that are delegated must have been delegated to the wallet address that is voting before the voting period begins.
+To vote on a proposal using a wallet that contains delegating voting power, you must login to [Snapshot](https://snapshot.org/#/horizenfoundation.eth). $ZEN tokens that are delegated must have been delegated to the wallet address that is voting before the voting period begins.
 
 Voting remains open for a period of 72 hours. At this time, anyone who meets the qualifications to vote may vote once for every $ZEN contained in (or delegated to) the wallet they are voting from. Following 72 hours, voting closes, and no more votes may be cast.
 

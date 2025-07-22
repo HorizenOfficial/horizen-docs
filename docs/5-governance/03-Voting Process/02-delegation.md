@@ -9,12 +9,12 @@ Note: The MetaMask crypto wallet is used in this example.
 
 ## Delegate Your Vote
 
-1. Open the Delegate tab to delegate your vote.
-   // insert image
+1. Open the [Delegate](https://snapshot.org/#/delegate/horizenfoundation.eth) tab to delegate your vote.
+   <img src="/img/governance/snapshot-delegate.png" alt="Delegate on Snapshot"/>
 
-2. Click Connect Wallet.
+2. Click Connect Wallet.<br/>
    Note: Make sure that your crypto wallet is configured to the Ethereum Mainnet network.
-   // image
+   <img src="/img/governance/connect-wallet.png" alt="Connect Wallet" style={{ maxWidth: "500px", width: "100%" }} />
 
 3. In the To field, enter the delegate’s crypto wallet address or Ethereum Name Service (ENS) name.
 4. (Optional) If you decide to enable the slider to Limit the delegations to a specific space, you need to do this for each delegation sub-spaces. One for horizenfoundationtechnical.eth sub-space and for the horizenfoundationnontechnical.eth sub-space. The Space field becomes active.
@@ -26,4 +26,4 @@ Note: In case the delegate and the delegator both cast their respective vote, th
 
 ## Approved for Voting​
 
-Your ZENIP is now approved for voting and is tallied to a live Snapshot Vote.
+Your ZENIP is now approved for voting and is tallied to a live [Snapshot Vote](https://snapshot.org/#/horizenfoundation.eth).
