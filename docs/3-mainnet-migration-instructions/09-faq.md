@@ -38,7 +38,7 @@ Block Explorer URL: https://basescan.org
 - Message format should  
   - Not have any commas, apostrophes, or quotations.  
   - Use the appropriate claim prefix.   
-  - Message format is as described here: [Create a Message](/mainnet-migration-instructions/mainnet-claim#create-a-signature)  
+  - Message format is as described here: [Create a Message](/mainnet-migration-instructions/create-a-signature)  
 - Make sure the signature was made from the same Horizen wallet address you created the signature with.  
 - Importantly you need to enter the same destination address as the one you used to sign the message.   
 - Double check to make sure the wallet addresses entered have no typos.
