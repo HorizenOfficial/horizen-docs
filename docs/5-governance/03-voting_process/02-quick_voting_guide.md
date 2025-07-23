@@ -7,5 +7,5 @@ This quick guide is meant to help you go over the simple steps to vote on ZENIPs
 How much voting power do I have?
 
 Your voting power is a sum of the following criteria:
-$ZEN in your wallet.
-The total amount of $ZEN that was delegated to your wallet.
+
+- $ZEN in your wallet.

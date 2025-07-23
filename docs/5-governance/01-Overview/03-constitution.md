@@ -22,13 +22,13 @@ A strong social layer that builds trust and maintains integrity across the Horiz
 - Transparency: The Horizen DAO seeks to be open and honest to its mission of decentralized governance. Just as the blockchain is powered by open-source software with publicly visible transactions, decisions and activities undertaken by the Horizen community through this DAO should be clearly grounded, articulated and understandable to all.
 - Accountability: Members of the community are accountable to each other. The mechanisms outlined in this Constitution crystallize the ways in which this will be achieved.
 - Security: Security is at the heart of the Horizen ecosystem and must be taken seriously by all community members and tokenholders. Any changes to the Horizen blockchain should weigh security considerations heavily.
-  Community Involvement: The Horizen ecosystem and the Horizen DAO will only be as good as members of the community make it. Everyone has different skills to contribute and is encouraged to do so to ensure the success of the project.
+- Community Involvement: The Horizen ecosystem and the Horizen DAO will only be as good as members of the community make it. Everyone has different skills to contribute and is encouraged to do so to ensure the success of the project.
 - Continuous Improvement: The Horizen DAO should never rest on its laurels. There are always things the community can do better, and community members should take an active role in proposing and implementing such improvements.
 - Social Responsibility: You, as a community member and Tokenholder, are here because you want to help build the future of the internet – and of the world. As such, each of us must be responsible stewards of that mission and act with integrity in all that we do.
 
 ### For Reference:​
 
-- The "Horizen DAO" or "DAO" means, collectively, the decentralized community of individuals that own, as evidenced by the Horizen blockchain, the $ZEN token.
+- The "Horizen DAO" or "DAO" means, collectively, the decentralized community of individuals that own the $ZEN token.
 - The "Total Circulating Supply" means all of the $ZEN tokens currently in circulation.
 - The "ZenIP Process" means the rules and procedures for submitting and voting on ZenIPs, detailed further below in this Constitution.
 - The "Bylaws" means the bylaws of the Foundation as adopted by the Foundation in accordance with the Foundation Articles (as amended from time to time). A copy of the Bylaws is available here: [Foundational Documents](/governance/reference/foundational_docs).
@@ -38,9 +38,9 @@ A strong social layer that builds trust and maintains integrity across the Horiz
 
 ## 3. Chain Governance​
 
-This Constitution describes the decision-making framework for governance of both the Horizen blockchain unless stated otherwise.
+This Constitution describes the decision-making framework for governance for Horizen
 
-Currently, $ZEN is the governance token for both the Horizen blockchain. This Constitution lays out a dual-track process for implementing improvement proposals. Technical proposals follow a “rough consensus” model, where implementation happens when a majority of network participants, on the applicable chain, choose to run the new software version. This is the same model currently used by certain other blockchain networks, most notably Bitcoin and Ethereum. Non-Technical proposals, meanwhile, are enacted via a directive to the Foundation by means of a Tokenholder Vote. Further details regarding the process and voting thresholds are outlined below.
+Currently, $ZEN is the governance token for Horizen. This Constitution lays out a dual-track process for implementing improvement proposals. Technical proposals follow a “rough consensus” model, where implementation happens when a majority of network participants, on the applicable chain, choose to run the new software version. This is the same model currently used by certain other blockchain networks, most notably Bitcoin and Ethereum. Non-Technical proposals, meanwhile, are enacted via a directive to the Foundation by means of a Tokenholder Vote. Further details regarding the process and voting thresholds are outlined below.
 
 All DAO-approved proposals are reviewed by the Special Council for adherence to the mission of the Horizen DAO, this Constitution, the Foundation Governing Documents, and applicable law, before a ZenIP or EONIP is formally adopted. The responsibilities of the Special Council are described below and in the Foundation Governing Documents.
 
@@ -63,7 +63,7 @@ As detailed in this Constitution and further in the Foundation Governing Documen
 
 Before you can submit a ZenIP, you must first check to see whether there have been past discussions about your proposal idea, what issues were raised, any reasons a past ZenIP may have been rejected or not welcomed by the community during a vote, and whether any other facts and circumstances have changed that would make your proposal idea proposal infeasible or unwarranted. To do this, you must check past discussions on Discourse ("Discourse") and the Horizen Improvement Proposals Discord channel and confirm that either (1) your idea is novel and has not been proposed before (“Option 1”) or (2) if your idea has been proposed before, the idea you plan to propose is substantially different such that the likelihood of success during a vote by the community is high (“Option 2”). This is the initial research phase.
 
-To submit a Non-Technical ZenIP you must hold or be delegated at least 25,000 $ZEN. To submit a Technical ZenIP you must hold or be delegated at least 100,000 $ZEN.
+To submit a Non-Technical ZenIP you must hold at least 25,000 $ZEN. To submit a Technical ZenIP you must hold at least 100,000 $ZEN.
 
 Once you have completed the initial research phase, and your proposal idea meets either Option 1 or Option 2 above, you can post your idea to the Horizen Discourse following this template:
 
@@ -133,16 +133,15 @@ ZenIPs are divided into two main categories, that each have their own requiremen
 
 **i. Non-Technical ZenIP**
 
-- Majority: The proposal must receive more votes in favor than against to pass; and - Quorum: There must be at least 3% of total circulating supply of $ZEN participating in the vote.
+- Majority: The proposal must receive more votes in favor than against to pass; and
+- Quorum: There must be at least 3% of total circulating supply of $ZEN participating in the vote.
 
 **ii. Technical ZenIP**
 
 - Majority: Of the total votable $ZEN tokens participating in the vote, the proposal must receive at least 67% votes in favor of the proposal to pass; and
 - Quorum: There must be at least 5% of total circulating supply of $ZEN participating in the vote.
 
-To vote on a proposal using a wallet that contains delegating voting power, you must login to [Snapshot](https://snapshot.org/#/horizenfoundation.eth). $ZEN tokens that are delegated must have been delegated to the wallet address that is voting before the voting period begins.
-
-Voting remains open for a period of 72 hours. At this time, anyone who meets the qualifications to vote may vote once for every $ZEN contained in (or delegated to) the wallet they are voting from. Following 72 hours, voting closes, and no more votes may be cast.
+Voting remains open for a period of 72 hours. At this time, anyone who meets the qualifications to vote may vote once for every $ZEN contained in the wallet they are voting from. Following 72 hours, voting closes, and no more votes may be cast.
 
 **iii. Tie Votes or Conflicts**
 
