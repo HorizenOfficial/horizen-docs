@@ -19,4 +19,4 @@ Instructions for claiming will vary depending on where and how you are holding Z
 - **[Sphere Wallet Users](/mainnet-migration-instructions/sphere-wallet-users)**
 - **[Ledger Wallet Users](/mainnet-migration-instructions/ledger-wallet-users)**
 - **[Other Wallet Users](/mainnet-migration-instructions/other-wallet-users)** <br/>For users who manage ZEN with other wallets not listed above. Note that users need access to their private keys in order to use this tool.
-- **[Super Users - CLI Tool](#cli-tool)** <br/>For users or organizations who manage multiple wallet addresses, have access to private keys, and need to generate multiple signatures. This tool can also be used to claim from multiple wallets.
+- **[Super Users - CLI Tool](/mainnet-migration-instructions/cli)** <br/>For users or organizations who manage multiple wallet addresses, have access to private keys, and need to generate multiple signatures. This tool can also be used to claim from multiple wallets.

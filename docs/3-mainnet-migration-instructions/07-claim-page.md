@@ -27,7 +27,7 @@ You can claim ZEN directly through the official web interface: https://horizen.i
 
 ## 4. Paste Signature and Destination Address
 
-   - The signed message should have already been created. If you haven’t done this yet, please go to the [Create a Signature](/mainnet-migration-instructions/mainnet-claim#create-a-signature) section to generate a signature.
+   - The signed message should have already been created. If you haven’t done this yet, please go to the [Create a Signature](/mainnet-migration-instructions/create-a-signature) section to generate a signature.
    - Paste the **signed message** into the signature field. 
    - **Enter the same destination address used in the message signing step.**
 
