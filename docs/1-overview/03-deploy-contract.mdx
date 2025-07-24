@@ -1,0 +1,35 @@
+---
+title: "Deploy a contract"
+---
+
+## Prerequisites
+- A wallet with some testnet ETH on Horizen Testnet
+
+## Deploy a contract using Foundry
+
+Foundry is a Rust-based toolset for Ethereum development that helps developers manage dependencies, compile projects, run tests, deploy contracts, and interact with blockchains via the command line interface.
+Open a terminal and run the following commands to install Foundry:
+```bash
+curl -L https://foundry.paradigm.xyz | bash
+```
+
+```bash
+foundryup
+```
+
+Next we will create a project with Foundry. We will start with the basic Counter contract Foundry provides. Run the following command to create a Foundry project:
+```bash
+forge init hello_horizen && cd hello_horizen
+```
+
+After this we will compile our smart contracts using the following command:
+```bash
+forge build
+```
+
+Next we will deploy the counter contract located at ``src/Counter.sol``  using the ``forge create`` command. We would also need the [RPC_URL](./08-network-configuration/01-rpc.mdx) and the ``PRIVATE_KEY`` of the funded wallet to deploy the contracts. Use the following command to deploy your contracts:
+```bash
+forge create src/Counter.sol:Counter \
+--rpc-url https://horizen-rpc-testnet.appchain.base.org \
+--private-key <YOUR_PRIVATE_KEY>
+```
