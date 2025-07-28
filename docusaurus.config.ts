@@ -69,6 +69,12 @@ const config: Config = {
           sidebarId: "mainnetMigrationSidebar",
           position: "left",
           label: "Mainnet Claim Instructions",
+        },
+        {
+          type: "docSidebar",
+          sidebarId: "governanceSidebar",
+          position: "left",
+          label: "Governance",
         },    
         {
           href: "https://github.com/HorizenLabs/horizen-2-docs",
