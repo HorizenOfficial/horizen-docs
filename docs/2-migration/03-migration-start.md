@@ -1,26 +1,29 @@
 # Migration starting points
 
-> :warning: **For this step no action is required for ZEN holders** 
+The activation of the EON 1.5 hard-fork marked the start of the migration process.<br/>
+As usual with EON, the hard-fork has been triggered at a specific consensus epoch, with millisecond precision.<br/>
 
-The activation of the EON 1.5 hard-fork will mark the start of the migration process.<br/>
-As usual with EON, the hard-fork will be triggered at a specific consensus epoch, with millisecond precision.<br/>
+Also ZEND activated an hardfork at a specific height.<br/>
 
-We will also need the activation of the ZEND hardfork: it will be triggered at a specific height.<br/>
-Although we can’t plan the exact time a predefined height will be reached, the estimated precision  is +-2 hours.<br/>
-
-The two hard forks  will be coordinated to happen on the same day.
 
 ## Final block hash determination
 
 The rules below are used to uniquely identify the final block hash of both  chains: this will mark the block at which the balances will be migrated, and <b>any transaction recorded after this will have no value</b>.
 
-- For ZEND Mainchain, the blockhash at the hardfork height will be the final block hash.
+- For ZEND Mainchain, the blockhash at the hardfork height has been marked as the final block hash.
 
-- For EON, the block including the reference to the above mainchain block  will be considered the final block. <br/>
-All mainchain blocks are referenced in EON only after 6 confirmations, so around 20 minutes  will be needed after the ZEND hardfork to see its block included in EON.
+- For EON, the block including the reference to the above mainchain block  has been considered the final block. <br/>
 
-Additionally, <b>both of the previous will be considered final only after the final mainchain block has 100 confirmations, and all 100 confirmations have been included in the EON chain</b>.<br/>
-We can then estimate that the final blockhash on both chains will be known around 20 minutes after the mainchain hardfork, but  fully confirmed **within 5 hours** after the mainchain hardfork.
+Before starting the migration process, both of them have been confirmed by more than 100 following blocks on mainchain, making infeasebale a block revert.
+
+Here the final confirmed hashes:
+
+|     |  |
+| -------- | ------- |
+| **ZEND Mainchain final block hash and height:**  | d3e837c2939917f8a676f9a4b626c1024718636740732db05fc6de811a8e32aa (1807300)   |
+| **EON final block hash and height:** | 0xc17c420f2d4bDFE7Fe3471F123b55817f732aBE4 (3573401) |
+
+
 
 ## Useful commands to get the block hashes
 
