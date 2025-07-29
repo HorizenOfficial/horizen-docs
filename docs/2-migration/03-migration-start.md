@@ -20,9 +20,9 @@ Here the final confirmed hashes:
 
 |     |  |
 | -------- | ------- |
-| **ZEND Mainchain final block hash:**  | d3e837c2939917f8a676f9a4b626c1024718636740732db05fc6de811a8e32aa  |
+| **ZEND Mainchain final block hash:**  | 000000000059963d5021a9c29167878916e476a249ca988dd828bac4a8a3351a  |
 | **ZEND Mainchain final block height:**  | 1807300   |
-| **EON final block hash:** | 0xc17c420f2d4bDFE7Fe3471F123b55817f732aBE4 |
+| **EON final block hash:** | d3e837c2939917f8a676f9a4b626c1024718636740732db05fc6de811a8e32aa |
 | **EON final block height:** | 3573401 |
 
 
