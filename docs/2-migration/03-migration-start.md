@@ -8,21 +8,22 @@ Also ZEND activated an hardfork at a specific height.<br/>
 
 ## Final block hash determination
 
-The rules below are used to uniquely identify the final block hash of both  chains: this will mark the block at which the balances will be migrated, and <b>any transaction recorded after this will have no value</b>.
+The rules below uniquely identify the final block hash of both  chains: this marks the block at which the balances have been migrated, and <b>any transaction recorded after this will have no value</b>.
 
 - For ZEND Mainchain, the blockhash at the hardfork height has been marked as the final block hash.
 
 - For EON, the block including the reference to the above mainchain block  has been considered the final block. <br/>
 
-Before starting the migration process, both of them have been confirmed by more than 100 following blocks on mainchain, making infeasebale a block revert.
+Before starting the migration process, both of them have been confirmed by *more than 100 following blocks* on mainchain, making *infeasebale* a block revert before the migration point.
 
 Here the final confirmed hashes:
 
 |     |  |
 | -------- | ------- |
-| **ZEND Mainchain final block hash and height:**  | d3e837c2939917f8a676f9a4b626c1024718636740732db05fc6de811a8e32aa (1807300)   |
-| **EON final block hash and height:** | 0xc17c420f2d4bDFE7Fe3471F123b55817f732aBE4 (3573401) |
-
+| **ZEND Mainchain final block hash:**  | d3e837c2939917f8a676f9a4b626c1024718636740732db05fc6de811a8e32aa  |
+| **ZEND Mainchain final block height:**  | 1807300   |
+| **EON final block hash:** | 0xc17c420f2d4bDFE7Fe3471F123b55817f732aBE4 |
+| **EON final block height:** | 3573401 |
 
 
 ## Useful commands to get the block hashes

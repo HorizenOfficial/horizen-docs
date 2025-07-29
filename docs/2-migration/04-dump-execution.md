@@ -108,3 +108,11 @@ The result of the script will be two restore artifacts:
      The *values* represent the EON balance, in "wei format" (1 ZEN = 1 with 18 zeros).
 
 These artifacts will be the ones used for the data loading and migration check steps.
+
+# Final restore artifacts
+
+For transparency, the restore artifacs are also available on Github at the following url:
+
+[https://github.com/HorizenOfficial/horizen-migration/tree/main/snapshots/mainnet](https://github.com/HorizenOfficial/horizen-migration/tree/main/snapshots/mainnet)
+
+**Everyone is encouraged to verify and confirm this data**, by adding a signature on the signature/ subfolder: [see here for more detailed instructions on how to participate](https://github.com/HorizenOfficial/horizen-migration/blob/main/snapshots/README.md).
