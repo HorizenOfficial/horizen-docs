@@ -13,7 +13,7 @@ Horizen is designed to be the natural evolution of both the previous Horizen's c
 
 |     |  |
 | -------- | ------- |
-| **ZEN Official ERC-20 contract:**  | [0xf43eB8De897Fbc7F2502483B2Bef7Bb9EA179229](https://basescan.org/address/)   |
+| **ZEN Official ERC-20 contract:**  | [0xf43eB8De897Fbc7F2502483B2Bef7Bb9EA179229](https://basescan.org/address/0xf43eB8De897Fbc7F2502483B2Bef7Bb9EA179229)   |
 | RPC Endpoint: | https://mainnet.base.org  |
 | Chain ID:     | 8453    |
 | Explorer:     | [https://sepolia.basescan.org/](https://basescan.org/)    |

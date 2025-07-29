@@ -1,9 +1,7 @@
 # Data loading
 
-> :warning: **This step will be executed by Horizen admins and does not require actions for ZEN holders** 
-
-The scope of this step is to load the balances obtained in the previous dump step into the vault smart contracts used for the migration.<br/>
-This operation is performed by firing a batch of transactions, only by an authorized Horizen admin (its address is whitelisted in the vault contracts).<br/>
+In this step all the balances obtained in the previous dump step have been loaded into the vault smart contracts.<br/>
+This operation has been performed by firing a batch of transactions, by an authorized Horizen admin (its address was whitelisted in the vault contracts).<br/>
 
 Detailed instructions are in the [README.md](https://github.com/HorizenOfficial/horizen-migration/blob/main/erc20-migration/README.md) file of the **horizen-migration** Git repository, together with the scripts to be executed (they use the Hardhat framework).
 
@@ -18,7 +16,7 @@ Assuming we have a list of dump tuples composed by [address,balance], ordered by
         overall_hash = keccak-256-hash(overall_hash, tuple.address, tuple.value)
     ```
 
-In the data loading process, it is:
+In the data loading process, it has been:
 - first calculated off-chain
 - fed into the smart contract
 - Inside the solidity code:

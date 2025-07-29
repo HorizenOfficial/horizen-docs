@@ -1,9 +1,7 @@
 # Dump execution
 
-> :warning: **This step will be executed by Horizen admins and does not require action from ZEN holders, unless they want to perform a [migration check](./06-migration-check.md)** 
-
 In the previous step, the network has reached  the  migration heights, and the final block hashes/heights of both chains are now revealed.<br/>
-This section will describe how to generate the data with all the balances to be migrated.<br/>
+This section will describe how the data with all the balances to be migrated has been generated.<br/>
 
 We will need to interact with a node of each chain:
 

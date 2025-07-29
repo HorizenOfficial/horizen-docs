@@ -1,8 +1,6 @@
 # Migration check
 
-> :warning: **This step is optional, can be executed by any third party interested in checking fairness of the migration** 
-
-Assuming the data loading process has been successfully completed by Horizen, anyone can check that the migrated data correctly reflects the old chains state by following the steps described in this section.
+The data loading process has been successfully completed by Horizen, but anyone can check that the migrated data correctly reflects the old chains state by following the steps described in this section.
 
 ## How it works:
 
