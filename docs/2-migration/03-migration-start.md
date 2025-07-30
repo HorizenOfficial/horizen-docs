@@ -16,7 +16,7 @@ The rules below uniquely identify the final block hash of both  chains: this mar
 
 Before starting the migration process, both of them have been confirmed by *more than 100 following blocks* on mainchain, making *infeasebale* a block revert before the migration point.
 
-Here the final confirmed hashes:
+Here are the final confirmed hashes:
 
 |     |  |
 | -------- | ------- |
