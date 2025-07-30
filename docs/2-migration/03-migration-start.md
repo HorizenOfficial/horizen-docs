@@ -3,7 +3,7 @@
 The activation of the EON 1.5 hard-fork marked the start of the migration process.<br/>
 As usual with EON, the hard-fork has been triggered at a specific consensus epoch, with millisecond precision.<br/>
 
-Also ZEND activated an hardfork at a specific height.<br/>
+ZEND also activated a hard-fork at a specific height.<br/>
 
 
 ## Final block hash determination
