@@ -1,7 +1,7 @@
 # Dump execution
 
 In the previous step, the network has reached  the  migration heights, and the final block hashes/heights of both chains are now revealed.<br/>
-This section will describe how the data with all the balances to be migrated has been generated.<br/>
+This section describes how the data, which includes all the balances to be migrated, was generated.<br/>
 
 We will need to interact with a node of each chain:
 
