@@ -25,7 +25,7 @@ A simple manual claim of the funds will be required because the address format o
     - an [EONBackupVault](https://basescan.org/address/0x1Cc689233837A0b96e1f176d49FC08462f70C47F), used to store the EON balances and automatically mint them to BASE.
     - A [ZENDBackupVault](https://basescan.org/address/0x1Ee188bDf19eBF04B73Ab6FFcec2a864cd4774F2), used to store the ZEND balances and expose methods for manual claiming.
 
-      HorizenLabs was responsible for deploying the contracts and loading the dump data. 
+      Horizen Labs was responsible for deploying the contracts and loading the dump data. 
 
 3. A migration check procedure will allow third parties to challenge the fairness of the loaded data.
 4. ZEND owners will be able to claim funds via on-chain calls to the ZENDBackupVault contract.
