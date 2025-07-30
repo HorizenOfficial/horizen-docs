@@ -12,7 +12,7 @@ The amounts staked by forgers or delegators have also been migrated and moved to
 Smart contracts, ZEN balances locked in smart contracts and stakes delegated by smart contracts have **not** be migrated. 
 
 - For **ZEND Mainchain**: the migration covered all $ZEN funds locked in UTXOs of type PayToPubKeyHash (single address) or  PayToScriptHash Multisig (multisig address). Note: we estimated that 99% of current UTXOs are part of these groups.<br/>
-A simple manual claim of the funds will be required because the address format on the two chains is different (Bitcoin-format in the old Horizen chain, Ethereum format on Base). An automatic migration like the one from EON has not been performed here, because the on-chain UTXO structure does not track the original key/address owning it, making it impossible a mapping between old and new addresses.
+A simple manual claim of the funds will be required because the address format on the two chains is different (Bitcoin-format in the old Horizen chain, Ethereum format on Base). An automatic migration like the one from EON has not been performed here, because the on-chain UTXO structure does not track the original key/address owning it, making it impossible to map between old and new addresses.
 
 ## Overview of the process
 
