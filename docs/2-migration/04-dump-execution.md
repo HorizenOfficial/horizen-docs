@@ -1,9 +1,7 @@
 # Dump execution
 
-> :warning: **This step will be executed by Horizen admins and does not require action from ZEN holders, unless they want to perform a [migration check](./06-migration-check.md)** 
-
 In the previous step, the network has reached  the  migration heights, and the final block hashes/heights of both chains are now revealed.<br/>
-This section will describe how to generate the data with all the balances to be migrated.<br/>
+This section describes how the data, which includes all the balances to be migrated, was generated.<br/>
 
 We will need to interact with a node of each chain:
 
@@ -110,3 +108,11 @@ The result of the script will be two restore artifacts:
      The *values* represent the EON balance, in "wei format" (1 ZEN = 1 with 18 zeros).
 
 These artifacts will be the ones used for the data loading and migration check steps.
+
+# Final restore artifacts
+
+For transparency, the restore artifacs are also available on Github at the following url:
+
+[https://github.com/HorizenOfficial/horizen-migration/tree/main/snapshots/mainnet](https://github.com/HorizenOfficial/horizen-migration/tree/main/snapshots/mainnet)
+
+**Everyone is encouraged to verify and confirm this data**, by adding a signature on the signature/ subfolder: [see here for more detailed instructions on how to participate](https://github.com/HorizenOfficial/horizen-migration/blob/main/snapshots/README.md).

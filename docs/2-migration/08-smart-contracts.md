@@ -17,7 +17,7 @@ Their solidity code is publicly available [in this repository](https://github.co
 
 |      |  |
 | -------- | ------- |
-| Address on BASE mainnet: | TODO   |
+| Address on BASE mainnet: | [0xf43eB8De897Fbc7F2502483B2Bef7Bb9EA179229](https://basescan.org/address/0xf43eB8De897Fbc7F2502483B2Bef7Bb9EA179229)   |
 | Solidity source code: | [ZenToken.sol](https://github.com/HorizenOfficial/horizen-migration/blob/main/erc20-migration/contracts/ZenToken.sol)    |
 
 
@@ -33,7 +33,7 @@ Their solidity code is publicly available [in this repository](https://github.co
 
 |      |  |
 | -------- | ------- |
-| Address on BASE mainnet: | TODO   |
+| Address on BASE mainnet: | [0x1Cc689233837A0b96e1f176d49FC08462f70C47F](https://basescan.org/address/0x1Cc689233837A0b96e1f176d49FC08462f70C47F)    |
 | Solidity source code: | [EONBackupVault.sol](https://github.com/HorizenOfficial/horizen-migration/blob/main/erc20-migration/contracts/EONBackupVault.sol) |
 
 ## ZendBackupVault
@@ -50,7 +50,7 @@ Their solidity code is publicly available [in this repository](https://github.co
 
 |      |  |
 | -------- | ------- |
-| Address on BASE mainnet: | TODO   |
+| Address on BASE mainnet: | [0x1Ee188bDf19eBF04B73Ab6FFcec2a864cd4774F2](https://basescan.org/address/0x1Ee188bDf19eBF04B73Ab6FFcec2a864cd4774F2)     |
 | Solidity source code: | [ZendBackupVault.sol](https://github.com/HorizenOfficial/horizen-migration/blob/main/erc20-migration/contracts/ZendBackupVault.sol)    |
 
 ## LinearTokenVesting contract
