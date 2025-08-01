@@ -1,8 +1,13 @@
 # Env files
 .env
 
+
 # Dependencies
 /node_modules
+.yarn
+.pnp.*
+yarn.lock
+.yarnrc.yml
 
 # VSCode
 .vscode
