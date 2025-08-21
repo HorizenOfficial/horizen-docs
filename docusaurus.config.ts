@@ -75,7 +75,13 @@ const config: Config = {
           sidebarId: "governanceSidebar",
           position: "left",
           label: "Governance",
-        },    
+        },
+        {
+          type: "docSidebar",
+          sidebarId: "darkswapSidebar",
+          position: "left",
+          label: "DarkSwap",
+        },
         {
           href: "https://github.com/HorizenLabs/horizen-2-docs",
           label: "GitHub",
