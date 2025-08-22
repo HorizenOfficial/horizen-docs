@@ -1,6 +1,9 @@
 # Make a Trade on DarkSwap (Horizen Testnet)
 
-This is the video, step by step guide: [Link](https://next.frame.io/share/f5f81519-c482-4af5-bc72-f99813ced875/view/42c1688a-50d4-4ea5-b24c-56ea27c094a2).
+
+## Video Guide
+
+This is the video, step by step guide that you can follow: [Link here](https://next.frame.io/share/f5f81519-c482-4af5-bc72-f99813ced875/view/42c1688a-50d4-4ea5-b24c-56ea27c094a2).
 
 ## Prerequisites
 

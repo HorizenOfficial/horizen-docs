@@ -1,6 +1,8 @@
 # How to Bridge ETH from Sepolia to Horizen Testnet
 
-This is the video, step by step guide: [Link](https://next.frame.io/share/8595fc25-cc47-4a4d-9df8-07c3d46a2a5a/view/82ab09ec-68dd-4174-9e49-5ddd0ee23677).
+## Video Guide
+
+This is the video, step by step guide that you can follow: [Link here](https://next.frame.io/share/8595fc25-cc47-4a4d-9df8-07c3d46a2a5a/view/82ab09ec-68dd-4174-9e49-5ddd0ee23677).
 
 Follow these steps to move ETH from Sepolia into the Horizen Testnet so you can trade on DarkSwap.
 
