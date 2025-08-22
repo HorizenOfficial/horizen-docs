@@ -35,5 +35,5 @@ In a DeFi landscape flooded with alpha leaks, MEV bots, sandwich attacks, and fr
 
 ### Support
 
--[DarkSwap User Support](https://discord.gg/ua3vg4Z5Bh)
+- [DarkSwap User Support](https://discord.gg/ua3vg4Z5Bh)
 
