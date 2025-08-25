@@ -19,7 +19,7 @@ Follow these steps to move ETH from Sepolia into the Horizen Testnet so you can 
 
 ## Step 3: Bridge Base Sepolia → Horizen Testnet
 
-1. Go to [Horizen Bridge](https://horizen-bridge-l3.vercel.app/).
+1. Go to [Horizen Bridge](https://horizen-bridge.vercel.app/).
 2. **Create a Base Smart Wallet**: The bridge will prompt you to create one if you don’t have it already.
 3. **Fund your Smart Wallet**: Transfer your Base SepoliaETH into the Base Smart Wallet. 
 4. **Change Receiver**: On the bridge, set the receiver to your **Horizen wallet address** (click “Send to 0x… on Horizen”).
@@ -51,5 +51,5 @@ Follow these steps to move ETH from Sepolia into the Horizen Testnet so you can 
 
 - Network Name: Horizen Testnet (Base Appchain)
 - New RPC URL: https://horizen-rpc-testnet.appchain.base.org
-- Chain ID: 84532009
+- Chain ID: 845320009
 - Currency Symbol: ETH
