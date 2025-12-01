@@ -30,6 +30,38 @@ forge build
 Next we will deploy the counter contract located at ``src/Counter.sol``  using the ``forge create`` command. We would also need the [RPC_URL](./08-network-configuration/01-rpc.mdx) and the ``PRIVATE_KEY`` of the funded wallet to deploy the contracts. Use the following command to deploy your contracts:
 ```bash
 forge create src/Counter.sol:Counter \
---rpc-url https://horizen-rpc-testnet.appchain.base.org \
+--rpc-url https://horizen-testnet.rpc.caldera.xyz/http \
 --private-key <YOUR_PRIVATE_KEY>
+```
+
+## Deploy a contract using Hardhat
+
+Hardhat is a flexible and extensible development environment for Ethereum software. It helps you write, test, debug, and deploy your smart contracts with ease, whether you’re building a simple prototype or a complex production system.
+
+You can initialize a hardhat project with the following commands
+```bash
+mkdir hardhat-tutorial
+cd hardhat-tutorial
+npx hardhat --init
+```
+
+And then compile the project using this command
+```bash
+npx hardhat build
+```
+
+In the `hardhat.config.ts` file, we will need to add configuration for Horizen:
+```js
+networks: {
+    horizen: {
+      type: "http",
+      url: "https://horizen-testnet.rpc.caldera.xyz/http",
+      accounts: ["<PRIVATE_KEY>"],
+    },
+  },
+```
+
+And then you can use the following command to deploy the `Counter` smart contract on Horizen testnet
+```bash
+npx hardhat ignition deploy ignition/modules/Counter.ts --network horizen
 ```
