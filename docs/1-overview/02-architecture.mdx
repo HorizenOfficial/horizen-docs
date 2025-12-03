@@ -2,23 +2,79 @@
 title: "Architecture"
 ---
 
-Horizen is an EVM L3 powered by op-enclave built on top of Base L2, which is one of the most high performant L2 in Ethereum ecosystem. OP-enclave is a modified version of the OP Stack that leverages Trusted Execution Environments (TEEs) for state transition proofs. This replaces the traditional optimistic rollup challenge period with a TEE-based trusted proof security model, enabling near-instant withdrawals.
+Horizen is an EVM L3 powered by op-stack built on top of Base L2, which is one of the most high performant L2 in Ethereum ecosystem. OP Stack is an open-source, modular framework developed by the Optimism Collective, enabling the creation of scalable, Ethereum-aligned rollups. By leveraging Base as its settlement layer, Horizen L3 inherits the security and decentralization of Ethereum while benefiting from Base's low fees and high throughput.
 
-## Proposer
-The proposer used in Horizen is almost the same as OP Stack just with an addition to an AWS nitro TEE interface which runs the op-enclave. Proposer maintains the updated state and upon getting withdrwal requests ensures that the proof includes the new block before submitting a proposal to Base L2. It only proposes safe blocks, or if no withdrawals have occured it submits a proof every 15 minutes.
+The OP Stack architecture is composed of modular layers: Data Availability (DA), Sequencing, Derivation, Execution, and Settlement. These layers work together to form a cohesive optimistic rollup. Below, we detail the primary components relevant to Horizen's implementation.
+
+## Sequencer
+
+The Sequencer is the central actor responsible for ordering and processing user transactions on Horizen. A dedicated node collects transactions from users, executes them locally to compute the new state, and prepares batches for submission.
+### Functionality:
+- Aggregates transactions into blocks.
+- Computes the resulting state transitions using the Execution Engine.
+- Compresses transaction data for efficiency.
+- Publishes batches to the Data Availability layer.
+- Ensures soft finality on Horizen, where transactions are considered "safe" shortly after inclusion but require settlement on Base for full finalization.
+
 
 ## Batcher
-The batcher posts the transactions batches for deriving the Horizen L3 state. It is just slightly modified from the vanilla OP Stack implementation, where if a block contains a withdrawal event the batcher immediately treats the current channel as full and submits the batch to L2, this helps in prioritizing withdrawal transactions for rapid processing. Similat to the proposer, the batcher will also submit a batch every 15 minutes if no withdrawals events are triggered.
 
-## Data Availability
-Horizen leverages Amazon S3 to store batch data, with only an identifier to that data recorded onchain. As only a small identifier is stored onchain per batch, there is significant gas savings for end users. There is not much resilience on decentralized DA as the state is verified independently through the op-enclave.
+The Batcher is a specialized component that handles the compression and submission of transaction batches to the DA layer.
+
+### Functionality:
+- Collects sequenced transactions and compresses them using techniques like zlib or custom OP Stack compression to reduce gas costs.
+- Submits batches as calldata to the Batch Inbox contract on Base L2.
+- Manages channel framing: Batches are grouped into channels, which are submitted when full or timed out.
+- Supports EIP-4844 blob transactions if configured, further reducing costs by offloading data to blobs on Ethereum L1 (via Base).
+
+## Proposer
+The Proposer submits commitments to Horizen's state (output roots) to the settlement layer on Base.
+
+### Functionality:
+- Monitors the Sequencer's output and derives the L3 state root after batch processing.
+- Submits proposals to the L2OutputOracle contract on Base.
+- Proposals include the output root, block number, and other metadata.
+- Only "safe" (finalized on Horizen) blocks are proposed, with submissions triggered by withdrawals or periodic intervals.
+
+## Derivation Layer
+
+The Derivation layer processes raw data from the DA layer to generate inputs for the Execution Engine.
+### Functionality:
+- Fetches batches and deposit events from Base (e.g., via the Batch Inbox and Deposit contracts).
+- Reconstructs the transaction list and applies it to the current state.
+- Handles L2 (Base) attributes, such as gas fees and block metadata.
+- Ensures the chain derives correctly from Base blocks, maintaining synchronization.
+
+
+
+## Rollup Module
+The core of derivation, parsing sequencer batches and L2-originated deposits (e.g., bridge transactions from Base to Horizen).
+Indexer Module (Proposed): For advanced tracking of specific Base contracts or events.
+Interactions: The derivation pipeline feeds into the Engine API, allowing any node to sync and verify the chain independently by replaying data from Base.
+
+## Execution Engine
+Horizen uses a near-vanilla Ethereum Virtual Machine (EVM) for state transitions It processes derived inputs to execute transactions and update the state trie. Supports all Ethereum opcodes, with minor OP Stack extensions (e.g., L2 data fee for batches).
+Maintains compatibility with Ethereum tools and smart contracts.
+
+## Fault Proofs and Settlement
+Settlement verifies and finalizes Horizen's state on Base, enabling secure withdrawals and cross-chain interactions.
+### Optimistic Model: 
+- State proposals from the Proposer are assumed correct unless challenged during the dispute window (7 days in standard configuration).
+- **Fault Proof System**: Initial proposals can be disputed by a multisig of trusted parties. If a threshold attests to an invalid state, the proposal is rejected.
+- Anyone can submit a fault proof using on-chain verification games. This involves interactive disputes resolved by bisecting state transitions until the fault is pinpointed.
+
+## Withdrawal Process: 
+- Users initiate withdrawals on Horizen, which are included in batches. 
+- After proposal and the challenge window, funds are released on Base via the OptimismPortal contract.
+- **Security**: Relies on the economic incentive for honest challengers and the immutability of DA on Base.
+
 
 ## Understanding the workflow
+- **Transaction Submission**: Users send transactions to the Horizen Sequencer (via RPC endpoints).
+- **Sequencing and Batching**: The Sequencer orders transactions, executes them locally, and passes data to the Batcher. The Batcher compresses and submits batches to Base (as calldata or blobs).
+- **Data Availability**: Batches are recorded on Ethereum blobs, making them immutable and retrievable.
+- **Derivation**: Full nodes (including verifiers) fetch data from Base, derive the transaction list, and feed it to the Execution Engine to update the state.
+- **Proposal**: The Proposer submits the computed output root to the L2OutputOracle on Base.
+- **Settlement and Challenges**: The proposal enters a 7-day challenge window. If no valid dispute, the state is finalized. Disputes trigger fault proof games.
+- **Withdrawals**: For cross-layer transfers, users prove message inclusion after finalization, claiming funds on Base.
 
-![](./img/base-L3.jpeg)
-
-- Users submits transactions to Horizen. The batcher collects these transactions and commits the identifier of the batch to Base L2 and the compressed transaction data is stored in Amazon S3.
-- The proposer submits all the required information to op-enclave to execute the transactions statelessly. At the end of this execution you get the new Horizen state.
-- After execution, op-enclave generates an attestation which includes all the required information along with Horizen's new output root and a signature from enclave's private key.
-- The proposer receives the output root along with the attestation and then submits it to the OutputOracle contract on Base L2. The proposer only submits this data when a withdrawal occurs or 15 minutes passes.
-- The OutputOracle contract checks if the signer is registered on the SystemConfigGlobal contract. If it is, the output root is accepted as this means it came from an attested AWS Nitro enclave running the correct code.

@@ -1,0 +1,14 @@
+---
+title: "Subgraph Indexing"
+---
+
+Goldsky is a high-performance data indexing provider for Horizen that makes it easy to extract, transform, and load on-chain data to power both application and analytics use cases. Goldsky offers two primary approaches to indexing and accessing blockchain data: Subgraphs (high-performance subgraphs) and Mirror (real-time data replication pipelines).
+
+Horizen Testnet is available with the chain slug `horizen-testnet`.
+
+Horizen subgraphs can be deployed on Goldsky in 2 ways:
+
+- Via CLI from a local subgraph configuration file. If you are familiar with developing subgraphs already, you’ll be familiar with this approach; after defining a subgraph locally (with a subgraph.yaml file, a schema.graphql file, and the necessary mappings to translate raw event data into the entities defined in the schema), you can deploy subgraphs to Goldsky (once the Goldsky CLI is installed) using `goldsky subgraph deploy <name>/<version> --path`.
+- Via instant subgraphs, where you can pass through a contract address and the ABI for that contract. This is a quick-start option that automatically generates the underlying subgraph configuration files on your behalf, making it easy to extract blockchain event data and serve it as an API endpoint without complex setup. Use the `--from-abi` flag in the command above instead of `--path`.
+
+[Here](https://docs.goldsky.com/subgraphs/deploying-subgraphs) are the documentation for deploying subgraphs on Goldsky.

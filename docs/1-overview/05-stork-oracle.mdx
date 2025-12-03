@@ -1,0 +1,14 @@
+---
+title: "Oracle"
+---
+
+Stork is an oracle protocol that enables ultra-low latency connections between data providers and both on-chain and off-chain applications.
+Stork is implemented as a pull oracle and supports automated on-chain delivery. Stork continuously aggregates, verifies, and audits data from trusted publishers, and makes that aggregated data available at sub-second latency and frequency.
+
+You can fetch all these [datapoints](https://docs.stork.network/resources/asset-id-registry) using Stork on Horizen. And for most of the usecases on Horizen, we will be using a consumer based data model with Stork. As Stork is a pull based oracle, all the feeds are not maintained on-chain. Based on the demand of the applications anyone can publish verifiable data feeds for any data pools supported by Stork.
+
+- You can fetch the required data directly using [Stork REST API](https://docs.stork.network/api-reference/rest-api#get-v1-prices-latest)
+- Then you can push these feeds to Stork contracts using [updateTemporalNumericValuesV1](https://docs.stork.network/api-reference/contract-apis/evm#update-temporal-numeric-values-v1)
+- Lastly you can fetch the data feeds onchain by interacting with [getTemporalNumericValueV1](https://docs.stork.network/api-reference/contract-apis/evm#get-temporal-numeric-value-v1)
+
+Here's an example project on consuming data feeds onchain, [Stork EVM SDK Example](https://github.com/Stork-Oracle/stork-external/tree/main/chains/evm/examples/stork)
