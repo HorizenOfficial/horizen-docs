@@ -27,7 +27,7 @@ After this we will compile our smart contracts using the following command:
 forge build
 ```
 
-Next we will deploy the counter contract located at ``src/Counter.sol``  using the ``forge create`` command. We would also need the [RPC_URL](./08-network-configuration/01-rpc.mdx) and the ``PRIVATE_KEY`` of the funded wallet to deploy the contracts. Use the following command to deploy your contracts:
+Next we will deploy the counter contract located at ``src/Counter.sol``  using the ``forge create`` command. We would also need the [RPC_URL](./03-rpc.mdx) and the ``PRIVATE_KEY`` of the funded wallet to deploy the contracts. Use the following command to deploy your contracts:
 ```bash
 forge create src/Counter.sol:Counter \
 --rpc-url https://horizen-testnet.rpc.caldera.xyz/http \
