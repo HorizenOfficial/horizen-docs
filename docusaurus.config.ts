@@ -72,6 +72,12 @@ const config: Config = {
         },
         {
           type: "docSidebar",
+          sidebarId: "zenriseSidebar",
+          position: "left",
+          label: "Zenrise",
+        },
+        {
+          type: "docSidebar",
           sidebarId: "governanceSidebar",
           position: "left",
           label: "Governance",
