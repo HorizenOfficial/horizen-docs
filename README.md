@@ -11,6 +11,11 @@ npm i
 ### Local Development
 
 ```bash
+npm run clear
+```
+(remove cached stuff)
+
+```bash
 npm run start
 ```
 
