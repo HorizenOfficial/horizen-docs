@@ -23,6 +23,6 @@ In the data loading process, it has been:
     - recalculated during the batch data loading 
     - compared with the initial one, to check the correctness of the loading and to receive confirmation that the loading has been completed (claiming methods will be enabled only at this point)
 
-Furthermore, in the [migration check step](../2-migration/06-migration-check.md), the same hash can be recomputed off-chain by any third-party, and compared with the one stored in the smart contract.
+Furthermore, in the [migration check step](../3-migration/06-migration-check.md), the same hash can be recomputed off-chain by any third-party, and compared with the one stored in the smart contract.
 
 
