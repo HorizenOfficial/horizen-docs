@@ -1,5 +1,6 @@
 ---
 title: Horizen Hub
+description: "Quick reference for Horizen links, resources, block explorer, and recommended wallets."
 ---
 
 # Horizen Hub
@@ -9,11 +10,12 @@ title: Horizen Hub
 
 | Product | Link |
 | --- | --- |
-| Github | hhttps://github.com/HorizenOfficial/horizen |
-| Horizen Block Explorer | todo |
+| Github | https://github.com/HorizenOfficial/horizen |
+| Horizen Block Explorer | https://explorer.horizen.io/ |
+| Horizen Mainnet Hub | https://hub.horizen.io/ |
+| Horizen Testnet Hub | https://hub-testnet.horizen.io/ |
 | Monitoring | todo |
-| Documentation | todo |
-| RPC Gateway | todo |
+| Documentation | https://docs.horizen.io |
 
 
 ## Recommended Wallets

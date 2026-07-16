@@ -1,0 +1,13 @@
+.tocHeading {
+  font-family: var(--ifm-font-family-base);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #030E24;
+  margin: 0 0 0.6rem 0;
+}
+
+[data-theme='dark'] .tocHeading {
+  color: #ffffff;
+}

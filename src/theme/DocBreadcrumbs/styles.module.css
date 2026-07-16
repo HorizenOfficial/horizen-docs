@@ -1,0 +1,16 @@
+.breadcrumbRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.breadcrumbWrap {
+  flex: 1;
+  min-width: 0;
+}
+
+/* neutralize the nav's own bottom margin — the row controls spacing */
+.breadcrumbWrap :global(nav.theme-doc-breadcrumbs) {
+  margin-bottom: 0;
+}

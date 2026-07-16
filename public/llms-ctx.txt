@@ -1,0 +1,85 @@
+# Horizen — Quick Reference for AI Coding Assistants
+
+> Horizen is an EVM-compatible Layer-3 blockchain built on Base (chain ID 26514), an Ethereum Layer-2 powered by the OP (Optimism) Stack. Built for private onchain finance and compliance-forward blockchain app development, it brings regulatory-compliant, auditable confidentiality to where Ethereum's liquidity and activity already live. Ship standard Solidity and choose your confidentiality primitive per use case — TEE via Vela (https://vela.horizenlabs.io), ZK via zkVerify, or none. No new language, no mandated privacy stack. Horizen is the capital coordination and execution layer for privacy-first onchain applications spanning DeFi, payments, AI agents, and compliance-aware institutional finance — all composable with Base and the broader Ethereum ecosystem.
+>
+> Use this file for fast answers. For complete docs, see /llms-full.txt
+
+> **Docs URL note:** Primary docs live at `https://docs.horizen.io`. If that domain is unreachable or not yet indexed, use `https://horizen-docs.vercel.app` as a drop-in replacement — same paths, same content. Example: `https://docs.horizen.io/horizen-chain/network/mainnet` → `https://horizen-docs.vercel.app/horizen-chain/network/mainnet`
+
+
+
+## Network
+
+- [Mainnet Config](https://docs.horizen.io/horizen-chain/network/mainnet): Chain ID 26514 · RPC https://horizen.calderachain.xyz/http · WSS wss://horizen.calderachain.xyz/ws · Explorer https://explorer.horizen.io
+- [Testnet Config](https://docs.horizen.io/horizen-chain/network/testnet): Chain ID 2651420 · RPC https://horizen-testnet.rpc.caldera.xyz/http · Explorer https://explorer-testnet.horizen.io
+- [Block Explorer](https://docs.horizen.io/horizen-chain/network/block-explorer): Guide to the Horizen block explorer for browsing transactions, contracts, and verified sources
+- [Faucet](https://docs.horizen.io/horizen-chain/network/faucet): Get testnet ETH from the Horizen testnet faucet
+
+## API Reference
+
+- [JSON-RPC Endpoints](https://docs.horizen.io/horizen-chain/api-reference/json-rpc): Standard eth_ and OP Stack JSON-RPC methods, WebSocket endpoints
+- [Network & Contract Addresses](https://docs.horizen.io/horizen-chain/api-reference/contract-addresses): ZEN ERC-20 and OFT Adapter, USDC.e OFT, cbBTC OFT, bridge contracts, Stork oracle, PureFi verifier — mainnet and testnet
+- [Supported Wallets & Tools](https://docs.horizen.io/horizen-chain/api-reference/supported-wallets): Compatible wallets and developer tools for Horizen
+
+## Deploy a Contract (EVM — no changes needed from Base)
+
+- [Deploy with Foundry](https://docs.horizen.io/horizen-chain/deploy-contracts/using-foundry): Install forge, write contract, deploy with `forge create --rpc-url`, verify
+- [Deploy with Hardhat](https://docs.horizen.io/horizen-chain/deploy-contracts/using-hardhat): Configure hardhat.config.ts with Horizen network, deploy with ignition/scripts
+- [Verify a Contract](https://docs.horizen.io/horizen-chain/deploy-contracts/verify-contract): Source verification on the Horizen block explorer
+
+## Tokens & Gas
+
+- [Gas on Horizen](https://docs.horizen.io/horizen-chain/tokens-and-gas/gas-on-horizen): ETH for gas (L2+L1 fee model), typical costs
+- [ZEN Token](https://docs.horizen.io/horizen-chain/tokens-and-gas/zen-token): Coordination, value-accrual, and governance ERC-20 on Base (0xf43eB8De897Fbc7F2502483B2Bef7Bb9EA179229) · OFT Adapter (0x57da2D504bf8b83Ef304759d9f2648522D7a9280) — not used for gas
+- [USDC.e on Horizen](https://docs.horizen.io/horizen-chain/tokens-and-gas/usdc): Bridged stablecoin via Hydra OFT · Mainnet Horizen ERC-20: 0xDF7108f8B10F9b9eC1aba01CCa057268cbf86B6c
+- [cBTC on Horizen](https://docs.horizen.io/horizen-chain/tokens-and-gas/cbtc): Coinbase-wrapped Bitcoin (cbBTC) bridged to Horizen · Mainnet Horizen OFT: 0x68fb5BB8330C0b9d907F50f278143873276ee056
+
+## Bridging
+
+- [How Bridging Works](https://docs.horizen.io/horizen-chain/bridging/how-bridging-works): Two bridges available — native OP Stack bridge (ETH only, 7-day withdrawal window) and Stargate (ZEN/USDC/cbBTC, 80+ chains, ~2 min)
+- [Bridge Assets via Native Bridge](https://docs.horizen.io/horizen-chain/bridging/bridge-assets): Step-by-step guide for depositing ETH from Base to Horizen and withdrawing back — uses the OP Stack canonical bridge
+- [Bridge Assets via Stargate](https://docs.horizen.io/horizen-chain/bridging/bridge-assets-stargate): Cross-chain bridge for ZEN, USDC, cbBTC via LayerZero OFT standard — burn/mint across 80+ chains, ~2 min transfers, 0.06% fee, no wrapping
+
+## Vela (Confidential Execution — TEE coprocessor by Horizen Labs)
+
+- [What is Vela?](https://docs.horizen.io/vela/introduction): TEE-based confidential execution solution by Horizen Labs — hardware enclaves, cryptographic attestation, compliance without data exposure · https://vela.horizenlabs.io
+- [Prerequisites](https://docs.horizen.io/vela/getting-started/prerequisites): Required tools and setup before starting Vela development
+- [Local Environment Setup](https://docs.horizen.io/vela/getting-started/local-environment-setup): Docker-based local dev environment (Vela not yet on testnet/mainnet)
+- [Your First Confidential App](https://docs.horizen.io/vela/getting-started/hello-world): Deploy a private transfer app, deposit ETH into encrypted TEE account, verify private balance
+- [Current Limitations](https://docs.horizen.io/vela/limitations/limitations): Local/Docker only (no testnet/mainnet yet) · Emulated TEE (no hardware attestation in dev; contact team for AWS Nitro Enclave access) · Single WASM app per environment · Roadmap: multi-app support, self-deployment on testnet, ERC-20 support, deanonymization controls
+
+## Privacy & Compliance
+
+- [Privacy Tools](https://docs.horizen.io/horizen-chain/privacy-tools): Overview of privacy primitives on Horizen — VELA (TEE confidential execution) and zkVerify (on-chain ZK proof verification)
+- [Compliance](https://docs.horizen.io/horizen-chain/compliance): Compliance patterns on Horizen — contract-level rules (Solidity), confidential enforcement via VELA/TEE, and AML/KYC gating via PureFi
+
+## Integrations
+
+- [Subgraph Indexing (Goldsky)](https://docs.horizen.io/horizen-chain/integrations/goldsky): Index Horizen contracts with Goldsky subgraphs (The Graph compatible)
+- [Oracles (Stork)](https://docs.horizen.io/horizen-chain/integrations/stork-oracle): Pull oracle for sub-second price feeds — fetch signed data off-chain via REST API, push on-chain via `updateTemporalNumericValuesV1` · Contract: 0xacC0a0cF13571d30B4b8637996F5D6D774d4fd62 (mainnet + testnet) · ETH_USD feed ID: 0x7404e3d104ea7841c3d9e6fd20adfe99b4ad586bc08d8f3bd3afef894cf184de
+- [Multisig (Den)](https://docs.horizen.io/horizen-chain/integrations/multisig): Safe-compatible multisig wallets via Den · https://safe.horizen.io/welcome
+- [Compliance Gating (PureFi)](https://docs.horizen.io/horizen-chain/integrations/purefi): AML/compliance gating — off-chain issuer check with synchronous on-chain enforcement · SDK: `@purefi/sdk-solidity-v5@5.2.0` · Verifier proxy: 0x681Edd4906e2a0a277E2A6c394A4595f83e1329c · Verifier impl: 0x61C468B554B6F0b0842242F7Df079bb392EE0555 · Chain ID: 26514
+
+## Tutorials — Horizen Chain
+
+- [Deploy an ERC-20 Token](https://docs.horizen.io/tutorials/horizen-chain/deploy-erc20): End-to-end ERC-20 deployment with Foundry and Hardhat — capped, burnable token with owner-controlled mint, plus contract verification on the Horizen explorer
+- [Deploy an NFT Collection](https://docs.horizen.io/tutorials/horizen-chain/deploy-nft-collection): Deploy an ERC-721 NFT collection on Horizen with metadata and minting using Foundry or Hardhat
+- [Build a Price-Triggered ETH Escrow](https://docs.horizen.io/tutorials/horizen-chain/price-triggered-escrow): Stork-powered escrow contract that releases ETH when ETH/USD crosses a threshold — full Solidity contract plus Next.js frontend integration
+- [Bridge Assets from Base to Horizen](https://docs.horizen.io/tutorials/horizen-chain/bridge-assets): Mainnet programmatic bridging — ZEN via Stargate LayerZero OFT (ZEN ERC-20 on Base: 0xf43eB8De897Fbc7F2502483B2Bef7Bb9EA179229 · OFT Adapter: 0x57da2D504bf8b83Ef304759d9f2648522D7a9280 · Horizen EID: 30399 · Base EID: 30184) and ETH via native OP Stack bridge (L1StandardBridge on Base: 0xf4a6cc4171fda694439f856d912777aa6ab05369 · 7-day withdrawal challenge period) · UI: stargate.finance / hub.horizen.io · cast + Viem examples
+
+## Tutorials — Integrations
+
+- [Connect a Price Feed with Stork Oracle](https://docs.horizen.io/tutorials/integrations/connect-stork-oracle): Full integration walkthrough — fetch signed price payload from Stork REST API, push on-chain to `updateTemporalNumericValuesV1`, read via `getTemporalNumericValueV1` · Stork contract: 0xacC0a0cF13571d30B4b8637996F5D6D774d4fd62
+- [Index Your Contract with Goldsky](https://docs.horizen.io/tutorials/integrations/index-with-goldsky): Index Horizen contract events using Goldsky subgraphs (The Graph-compatible) — subgraph.yaml, schema, mappings, deploy
+- [Add Compliance Gating with PureFi](https://docs.horizen.io/tutorials/integrations/integrate-purefi): Step-by-step PureFi AML verification integration into Solidity contracts — `@purefi/sdk-solidity-v5`, on-chain verifier, off-chain issuer check pattern
+- [Set Up a Multisig on Horizen](https://docs.horizen.io/tutorials/integrations/setup-multisig): Create and manage a Safe-compatible multisig on Horizen using Den · https://safe.horizen.io
+
+## Governance
+
+- [About Horizen DAO](https://docs.horizen.io/governance/overview/about): Overview of Horizen DAO, its decentralized governance framework, guiding values, and constitution
+- [Proposal Categories](https://docs.horizen.io/governance/proposal-categories): Types and categories of governance proposals — what can be proposed and how
+- [Voting Process](https://docs.horizen.io/governance/voting-process/voting-process): How voting works — quorum requirements, ZenIP approval process, timeline
+- [Quick Voting Guide](https://docs.horizen.io/governance/voting-process/quick-voting-guide): Step-by-step guide to casting a vote on a Horizen governance proposal
+- [Foundational Documents](https://docs.horizen.io/governance/reference/foundational-docs): Foundation Bylaws, Memorandum of Association, Articles of Association (PDFs)
+- [Submit a Vote](https://docs.horizen.io/governance/reference/submit-vote): How to submit a formal governance vote
+- [Join the Discussion](https://docs.horizen.io/governance/reference/join-discussion): Community discussion channels for governance proposals

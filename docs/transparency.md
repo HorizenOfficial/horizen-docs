@@ -1,5 +1,6 @@
 ---
 title: Transparency Report
+description: "Transparency report on the formation of the Horizen Foundation, pre-launch governance setup, and the path to launching Horizen DAO."
 ---
 
 ## Introduction

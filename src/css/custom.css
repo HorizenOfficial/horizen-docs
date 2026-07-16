@@ -1,3 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&family=Nunito+Sans:ital,opsz,wght@0,6..12,400;0,6..12,600;0,6..12,700;1,6..12,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+/* Tailwind v4 — skip preflight to avoid conflicts with Docusaurus/Infima */
+@import "tailwindcss/theme" layer(base);
+@import "tailwindcss/utilities" layer(utilities);
+
+/* Match Docusaurus dark mode selector */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 /**
  * Any CSS included here will be global. The classic template
  * bundles Infima by default. Infima is a CSS framework designed to
@@ -6,17 +15,25 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #ac946b;
-  --ifm-color-primary-dark: #a48c61;
-  --ifm-color-primary-darker: #887659;
-  --ifm-color-primary-darkest: #5d4e33;
-  --ifm-color-primary-light: #d5c09b;
-  --ifm-color-primary-lighter: #e5dac6;
-  --ifm-color-primary-lightest: #e1dad0;
+  --ifm-navbar-height: 120px;
+  --ifm-font-family-base: 'Nunito Sans', sans-serif;
+  --ifm-heading-font-family: 'Funnel Display', sans-serif;
+  --ifm-heading-font-weight: 700;
+  --ifm-color-primary: #b07d00;
+  --ifm-color-primary-dark: #9a6d00;
+  --ifm-color-primary-darker: #855e00;
+  --ifm-color-primary-darkest: #5d4200;
+  --ifm-color-primary-light: #d4a000;
+  --ifm-color-primary-lighter: #e6b200;
+  --ifm-color-primary-lightest: #fcd11a;
+  --ifm-h1-font-size: 1.75rem;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
   --deep-blue: #030E24;
   --sunrise-yellow: #FCD11A;
+  /* ── Light-mode amber: bright enough to read on white, still feels yellow ── */
+  --horizen-accent-light: #b07d00;
+  --ifm-pagination-nav-color-hover: var(--horizen-accent-light);
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -29,36 +46,242 @@
   --ifm-color-primary-lighter: #fdd943;
   --ifm-color-primary-lightest: #fde26c;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --ifm-pagination-nav-color-hover: var(--sunrise-yellow);
 }
 
-[data-theme='dark'] .navbar, 
-[data-theme='dark'] .footer {
-  background-color: var(--deep-blue);
-}
-
-[data-theme='dark'] .navbar {
-  border-bottom-color: var(--ifm-toc-border-color);
-}
-
-[data-theme='dark'] .footer {
-  border-top: 1px solid var(--ifm-toc-border-color);
-}
-
-/* need to be more specific to override this variable */
 html[data-theme='dark'] {
   --ifm-background-color: var(--deep-blue);
 }
-.navbar {
-  background-color: #fff4d6;
-  border-bottom: #5d4e33 1px solid;
+
+
+
+.footer {
+  background-color: #030e24;
+  border-top: 1px solid rgba(252, 209, 26, 0.15);
 }
+
+[data-theme='dark'] .footer {
+  background-color: #030e24;
+  border-top: 1px solid rgba(252, 209, 26, 0.15);
+}
+
+.footer__link-item:hover {
+  color: #FCD11A;
+}
+
+/* Always show code block copy button */
+.theme-code-block [class*='buttonGroup'] button {
+  opacity: 0.4 !important;
+}
+
 img.bordered {
   border: #5d4e33 1px solid;
-}
-.footer {
-  background-color: #272729;
 }
 
 .menu__list-item.hidden {
   display: none;
+}
+
+/* ── Sidebar: more vertical spacing between top-level categories ────────── */
+nav.menu .menu__list > .menu__list-item {
+  margin-bottom: 0.4rem;
+}
+
+nav.menu .menu__list > .menu__list-item > .menu__list-item-collapsible {
+  margin-bottom: 0.1rem;
+}
+
+/* ── Sidebar: category label sizing ─────────────────────────────────────── */
+.menu__list-item-collapsible .menu__link,
+.menu__list > .menu__list-item > .menu__link,
+.menu__link {
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+/* ── Sidebar: active/selected link color (page links only, not categories)── */
+.menu__link--active:not(.menu__list-item-collapsible > .menu__link--active),
+.menu__link--active:not(.menu__list-item-collapsible > .menu__link--active):hover,
+[data-theme='dark'] .menu__link--active:not(.menu__list-item-collapsible > .menu__link--active),
+[data-theme='dark'] .menu__link--active:not(.menu__list-item-collapsible > .menu__link--active):hover {
+  background-color: #FFF5CE !important;
+  color: #000000 !important;
+  font-weight: 700;
+  border-radius: 6px;
+}
+
+/* Category headers — active but no background */
+.menu__list-item-collapsible > .menu__link--active,
+.menu__list-item-collapsible > .menu__link--active:hover {
+  background-color: transparent !important;
+  color: #030E24 !important;
+}
+
+[data-theme='dark'] .menu__list-item-collapsible > .menu__link--active,
+[data-theme='dark'] .menu__list-item-collapsible > .menu__link--active:hover {
+  background-color: transparent !important;
+  color: #ffffff !important;
+}
+
+/* ── Search input: theme-aware colors ──────────────────────────────────── */
+:root {
+  --ifm-navbar-search-input-background-color: rgba(0, 0, 0, 0.06);
+  --ifm-navbar-search-input-color: #030E24;
+  --ifm-navbar-search-input-placeholder-color: rgba(3, 14, 36, 0.45);
+}
+
+[data-theme='dark'] {
+  --ifm-navbar-search-input-background-color: rgba(255, 255, 255, 0.09);
+  --ifm-navbar-search-input-color: #ffffff;
+  --ifm-navbar-search-input-placeholder-color: rgba(255, 255, 255, 0.4);
+}
+
+:root,
+[data-theme='dark'] {
+  --docsearch-font-family: 'Nunito Sans', sans-serif;
+  --docsearch-font-size: 0.95rem;
+}
+
+/* ── Algolia DocSearch: font matching ───────────────────────────────────── */
+.DocSearch-Button,
+.DocSearch-Input,
+.DocSearch-Hit-title,
+.DocSearch-Hit-path,
+.DocSearch-Label,
+.DocSearch-Commands,
+.DocSearch-NoResults {
+  font-family: 'Nunito Sans', sans-serif !important;
+  font-size: 0.95rem !important;
+}
+
+.DocSearch-Button-Placeholder {
+  font-family: 'Nunito Sans', sans-serif !important;
+  font-size: 0.95rem !important;
+}
+
+/* Hide default search icon */
+.DocSearch-Search-Icon {
+  display: none !important;
+}
+
+/* Inject custom search icon to the left */
+.DocSearch-Button-Container::before {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z' stroke='%23030E24' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M22 22L20 20' stroke='%23030E24' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+[data-theme='dark'] .DocSearch-Button-Container::before {
+  background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z' stroke='%23ffffff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M22 22L20 20' stroke='%23ffffff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+/* ── DocSearch: full-size button inside mobile nav drawer ───────────────── */
+[role="dialog"] .DocSearch-Button {
+  width: 100% !important;
+  height: 44px !important;
+  border-radius: 8px !important;
+  padding: 0 1rem !important;
+  max-width: none !important;
+}
+
+[role="dialog"] .DocSearch-Button-Placeholder {
+  display: inline !important;
+  font-size: 0.95rem !important;
+}
+
+[role="dialog"] .DocSearch-Button-Keys {
+  display: none !important;
+}
+
+/* ── Layout: push footer to bottom on short pages ───────────────────────── */
+.main-wrapper {
+  min-height: calc(100vh - var(--ifm-navbar-height));
+  display: flex;
+  flex-direction: column;
+}
+
+.main-wrapper > * {
+  flex: 1;
+}
+
+.footer__copyright {
+  font-size: 0.75rem;
+}
+
+/* ── Doc content: links black + bold, no yellow ─────────────────────────── */
+.markdown a,
+.markdown a:hover {
+  color: #030E24 !important;
+  font-weight: 700;
+}
+
+[data-theme='dark'] .markdown a,
+[data-theme='dark'] .markdown a:hover {
+  color: #ffffff !important;
+  font-weight: 700;
+}
+
+/* ── Breadcrumbs: force black/white, no yellow, no background ───────────── */
+.breadcrumbs__link,
+.breadcrumbs__item--active .breadcrumbs__link {
+  color: #030E24 !important;
+  background: none !important;
+  padding: 0 !important;
+}
+
+[data-theme='dark'] .breadcrumbs__link,
+[data-theme='dark'] .breadcrumbs__item--active .breadcrumbs__link {
+  color: #ffffff !important;
+  background: none !important;
+  padding: 0 !important;
+}
+
+/* ── Doc page: Edit this page + pagination buttons ──────────────────────── */
+.theme-edit-this-page,
+.theme-edit-this-page:hover {
+  color: #030E24 !important;
+}
+
+[data-theme='dark'] .theme-edit-this-page,
+[data-theme='dark'] .theme-edit-this-page:hover {
+  color: #ffffff !important;
+}
+
+.pagination-nav__link {
+  border-color: rgba(3, 14, 36, 0.2) !important;
+  color: #030E24 !important;
+}
+
+.pagination-nav__link:hover {
+  border-color: #030E24 !important;
+  color: #030E24 !important;
+}
+
+[data-theme='dark'] .pagination-nav__link {
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  color: #ffffff !important;
+}
+
+[data-theme='dark'] .pagination-nav__link:hover {
+  border-color: #ffffff !important;
+  color: #ffffff !important;
+}
+
+/* ── TOC: active/scrolled-to heading colour ─────────────────────────────── */
+.table-of-contents__link--active,
+.table-of-contents__link--active:hover {
+  color: #030E24 !important;
+  font-weight: 700;
+}
+
+[data-theme='dark'] .table-of-contents__link--active,
+[data-theme='dark'] .table-of-contents__link--active:hover {
+  color: #ffffff !important;
+  font-weight: 700;
 }

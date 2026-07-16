@@ -1,0 +1,131 @@
+.wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.75rem;
+  font-family: var(--ifm-font-family-base);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--ifm-font-color-base);
+  background: #ffffff;
+  border: 1px solid #000000;
+  border-radius: var(--ifm-global-radius);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s, color 0.15s;
+  line-height: 1.4;
+}
+
+[data-theme='dark'] .trigger {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: #000000;
+}
+
+.trigger:hover {
+  background: var(--ifm-color-emphasis-100);
+}
+
+.chevron {
+  display: inline-block;
+  transition: transform 0.15s;
+  font-size: 0.65rem;
+  line-height: 1;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 6px);
+  z-index: 200;
+  min-width: 230px;
+  background: #ffffff;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: var(--ifm-global-radius);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+}
+
+[data-theme='dark'] .menu {
+  background: #0d1b33;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.55rem 1rem;
+  font-family: var(--ifm-font-family-base);
+  font-size: 0.85rem;
+  color: var(--ifm-font-color-base);
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  white-space: nowrap;
+  transition: background 0.12s;
+}
+
+.menuItemText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+}
+
+.menuItemSub {
+  font-size: 0.72rem;
+  opacity: 0.55;
+  font-weight: 400;
+}
+
+.menuItem:hover {
+  background: var(--ifm-color-emphasis-100);
+  text-decoration: none;
+  color: var(--ifm-font-color-base);
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+  margin: 0.15rem 0;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  opacity: 0.75;
+}
+
+.brandIcon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  border-radius: 4px;
+}
+
+.copySuccess {
+  color: var(--ifm-color-primary);
+  font-weight: 600;
+}
+
+.copyError {
+  color: var(--ifm-color-danger, #e74c3c);
+}
+
+@media (max-width: 996px) {
+  .menu {
+    right: auto;
+    left: 0;
+  }
+}

@@ -1,0 +1,15 @@
+.aiToolsBar {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.5rem 0 0;
+  /* col--3 TOC is 25% of the row; offset so button sits at the right edge
+     of the content column rather than floating over the TOC sidebar */
+  padding-right: calc(25% + var(--ifm-spacing-horizontal, 1rem));
+}
+
+@media (max-width: 996px) {
+  .aiToolsBar {
+    /* no TOC on mobile, so no offset needed */
+    padding: 0.5rem 0;
+  }
+}
