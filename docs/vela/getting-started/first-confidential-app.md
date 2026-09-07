@@ -28,12 +28,22 @@ It supports five operations:
 
 ## Step 1: Download the Artifacts
 
-Go to the [`vela-nova` v0.2.0 release page](https://github.com/HorizenOfficial/vela-nova/releases/tag/v0.2.0) and download two files:
+Go to the [`vela-nova` v0.2.0 release page](https://github.com/HorizenOfficial/vela-nova/releases/tag/v0.2.0) and download three files:
 
 - `payment_app.wasm` — the compiled WASM module you'll deploy into the TEE
 - `novaw-linux` — the CLI wallet for interacting with the app
+- `wallet.conf.template` — the wallet configuration template
 
-Place both files in a `wallet/` folder.
+Place all three files in a `wallet/` folder.
+
+Alternatively, if you prefer to clone the repository, `wallet.conf.template` is included in the repo root:
+
+```bash
+git clone https://github.com/HorizenOfficial/vela-nova.git
+cp vela-nova/wallet.conf.template wallet/wallet.conf.template
+```
+
+Then download `payment_app.wasm` and `novaw-linux` from the release page and place them in the same `wallet/` folder.
 
 Make `novaw-linux` executable:
 
@@ -298,10 +308,12 @@ The secp256k1 key in `wallet.conf` is not an Anvil pre-funded account. Switch to
 
 The payment app supports any ERC-20 token that was allowlisted when the app was deployed. ETH is always available. Adding ERC-20 support is a three-step setup.
 
+> **Note:** The local Anvil environment does not include any pre-deployed ERC-20 tokens. To test ERC-20 support locally, deploy a mock token contract first and use its address below. The steps and token address shown here are illustrative for a real network deployment.
+
 **1. Register the token in `wallet.conf`:**
 
 ```ini
-token.USDC.address=0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48
+token.USDC.address=<your-token-contract-address>
 token.USDC.decimals=6
 ```
 

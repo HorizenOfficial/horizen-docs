@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
@@ -315,37 +315,104 @@ function StartBuilding() {
   );
 }
 
+declare global {
+  interface Window {
+    turnstile?: {
+      render: (el: HTMLElement, opts: Record<string, unknown>) => string;
+      reset: (id?: string) => void;
+      remove: (id: string) => void;
+    };
+  }
+}
+
+const TURNSTILE_SRC = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+
+function loadTurnstile(): Promise<void> {
+  return new Promise((resolve, reject) => {
+    if (window.turnstile) return resolve();
+    const existing = document.querySelector<HTMLScriptElement>(`script[src="${TURNSTILE_SRC}"]`);
+    if (existing) {
+      existing.addEventListener('load', () => resolve(), { once: true });
+      return;
+    }
+    const s = document.createElement('script');
+    s.src = TURNSTILE_SRC;
+    s.async = true;
+    s.onload = () => resolve();
+    s.onerror = () => reject(new Error('Turnstile failed to load'));
+    document.head.appendChild(s);
+  });
+}
+
 /* ─── Newsletter ────────────────────────────────────────────────────────── */
 function Newsletter() {
+  const { siteConfig } = useDocusaurusContext();
+  const siteKey = siteConfig.customFields?.turnstileSiteKey as string;
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [token, setToken] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState('');
 
-  async function handleSubmit(e: React.FormEvent) {
+  const widgetRef = useRef<HTMLDivElement>(null);
+  const widgetId = useRef<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    loadTurnstile()
+      .then(() => {
+        if (cancelled || !widgetRef.current || !window.turnstile) return;
+        widgetId.current = window.turnstile.render(widgetRef.current, {
+          sitekey: siteKey,
+          appearance: 'interaction-only',
+          theme: 'light',
+          callback: (t: string) => setToken(t),
+          'expired-callback': () => setToken(''),
+          'error-callback': () => setToken(''),
+        });
+      })
+      .catch(() => {
+        setErrorMsg('Could not load verification. Please disable content blockers and reload.');
+        setStatus('error');
+      });
+    return () => {
+      cancelled = true;
+      if (widgetId.current && window.turnstile) window.turnstile.remove(widgetId.current);
+    };
+  }, [siteKey]);
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setStatus('loading');
     setErrorMsg('');
+    const website = (new FormData(e.currentTarget).get('website') as string | null) ?? '';
     try {
       const res = await fetch('/api/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, name }),
+        body: JSON.stringify({ email, name, turnstileToken: token, website }),
       });
       if (res.ok) {
         setStatus('success');
         setName('');
         setEmail('');
       } else {
-        const data = await res.json() as { error?: string };
+        const data = (await res.json().catch(() => ({}))) as { error?: string };
         setErrorMsg(data.error || 'Something went wrong. Please try again.');
         setStatus('error');
       }
     } catch {
       setErrorMsg('Something went wrong. Please try again.');
       setStatus('error');
+    } finally {
+      if (widgetId.current && window.turnstile) window.turnstile.reset(widgetId.current);
+      setToken('');
     }
   }
+
+  const inputClass =
+    'bg-transparent border-0 border-b border-[#030E24] text-[#030E24] placeholder:text-[#030E24] placeholder:font-medium text-base outline-none w-60 py-2 rounded-none shadow-none focus:border-b-2 max-[860px]:w-full';
 
   return (
     <section className="w-full min-h-52 bg-[rgba(254,203,23,1)] flex items-center px-25 py-12.5 max-[1100px]:px-10 max-[860px]:px-6 max-[860px]:py-10">
@@ -359,31 +426,28 @@ function Newsletter() {
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="flex items-center gap-10 flex-1 justify-end max-[860px]:w-full max-[860px]:flex-col max-[860px]:items-stretch max-[860px]:gap-5">
+            <input type="text" placeholder="Name" value={name} onChange={e => setName(e.target.value)} className={inputClass} aria-label="Name" />
+            <input type="email" placeholder="Email Address" value={email} onChange={e => setEmail(e.target.value)} required className={inputClass} aria-label="Email address" />
+            {/* Honeypot: off-screen rather than display:none, since some bots skip hidden inputs. */}
             <input
               type="text"
-              placeholder="Name"
-              value={name}
-              onChange={e => setName(e.target.value)}
-              className="bg-transparent border-0 border-b border-[#030E24] text-[#030E24] placeholder:text-[#030E24] placeholder:font-medium text-base outline-none w-60 py-2 rounded-none shadow-none focus:border-b-2 max-[860px]:w-full"
-              aria-label="Name"
-            />
-            <input
-              type="email"
-              placeholder="Email Address"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-              required
-              className="bg-transparent border-0 border-b border-[#030E24] text-[#030E24] placeholder:text-[#030E24] placeholder:font-medium text-base outline-none w-60 py-2 rounded-none shadow-none focus:border-b-2 max-[860px]:w-full"
-              aria-label="Email address"
+              name="website"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              style={{ position: 'absolute', left: '-9999px', width: 1, height: 1, opacity: 0 }}
             />
             <div className="flex flex-col items-end gap-1 max-[860px]:items-stretch">
               {status === 'error' && (
-                <p className="text-red-700 text-xs m-0 text-right max-[860px]:text-left">{errorMsg}</p>
+                <p role="alert" className="text-red-700 text-xs m-0 text-right max-[860px]:text-left">{errorMsg}</p>
               )}
+              {/* Turnstile mounts here. Zero size unless a challenge is shown. */}
+              <div ref={widgetRef} />
               <button
                 type="submit"
-                disabled={status === 'loading'}
-                className="bg-white text-[#030E24] font-bold text-base px-10 py-4 rounded-full whitespace-nowrap min-w-40 cursor-pointer hover:bg-gray-50 border-none hover:shadow-md transition-all max-[860px]:w-full disabled:opacity-60"
+                disabled={status === 'loading' || !token}
+                title={!token ? 'Verifying…' : undefined}
+                className="bg-white text-[#030E24] font-bold text-base px-10 py-4 rounded-full whitespace-nowrap min-w-40 cursor-pointer hover:bg-gray-50 border-none hover:shadow-md transition-all max-[860px]:w-full disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 {status === 'loading' ? 'Subscribing…' : 'Subscribe'}
               </button>
