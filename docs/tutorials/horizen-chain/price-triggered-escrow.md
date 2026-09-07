@@ -79,7 +79,7 @@ Key facts about the Stork data model:
 
 - `quantizedValue` is `int192` scaled to 18 decimals. Example: $3,500 is `3500e18`.
 - `timestampNs` is a nanosecond Unix timestamp (`uint64`). It's a 19-digit integer that **exceeds float64 precision**. See [Step 5](#step-5-server-side-price-proxy) for why this matters in JavaScript.
-- The ETH/USD asset ID on all networks: `0x59102b37de83bdda9f38ac8254e596f0d9ac61d2035c07936675e87342817160`
+- The ETH/USD asset ID on all networks: `0x59102b37de83bdda9f38ac8254e596f0d9ac61d2035c07936675e87342817160` — derived as keccak256("ETHUSD"); verify with `cast keccak "ETHUSD"`
 
 
 
@@ -700,7 +700,7 @@ cast call $STORK "getTemporalNumericValueV1(bytes32)(uint64,int192)" $ETH_USD_ID
   --rpc-url $RPC_URL
 
 # Read a specific escrow
-cast call $VAULT "escrows(uint256)((address,address,uint256,int256,uint8,bool))" 0 \
+cast call $VAULT "escrows(uint256)(address,address,uint256,int256,uint8,bool)" 0 \
   --rpc-url $RPC_URL
 
 # Cancel an escrow (depositor only)

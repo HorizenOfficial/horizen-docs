@@ -18,6 +18,11 @@ const config: Config = {
   tagline: "Build Private. Build Compliant. Build on Horizen.",
   favicon: "logos/png/Horizen2.0-logo_icon-on-yellow.png",
 
+  customFields: {
+    // Fallback is Cloudflare's always-pass test key; set TURNSTILE_SITE_KEY in Pages env for production.
+    turnstileSiteKey: process.env.TURNSTILE_SITE_KEY ?? '1x00000000000000000000AA',
+  },
+
   url: "https://docs.horizen.io",
   baseUrl: "/",
 
@@ -30,7 +35,21 @@ const config: Config = {
 
   plugins: [
     path.resolve(__dirname, 'plugins/tailwind-plugin.js'),
-    path.resolve(__dirname, 'plugins/llms-per-page/index.ts'),
+    [
+      '@docusaurus/plugin-client-redirects',
+      {
+        redirects: [
+          {
+            from: '/vela/getting-started/hello-world',
+            to: '/vela/getting-started/first-confidential-app',
+          },
+          {
+            from: '/vela/limitations/limitations',
+            to: '/vela/roadmap',
+          },
+        ],
+      },
+    ],
     [
       '@easyops-cn/docusaurus-search-local',
       {
@@ -45,11 +64,14 @@ const config: Config = {
       {
         generateLLMsTxt: true,
         generateLLMsFullTxt: true,
-        docsDir: 'docs',
+        docsDir: [{ path: 'docs', routeBasePath: '/', label: 'Docs' }],
         title: 'Horizen Documentation',
         description: 'Developer documentation for Horizen — an EVM-identical L3 on Base (Ethereum L2) using the OP Stack. Horizen adds compliant, verifiable privacy via VELA, a confidential execution coprocessor powered by Trusted Execution Environments (TEEs). Deploy standard Solidity contracts with Foundry or Hardhat (same tooling as Base/Ethereum), or build privacy-preserving apps with VELA. Mainnet chain ID: 26514, RPC https://horizen.calderachain.xyz/http. Testnet chain ID: 2651420, RPC https://horizen-testnet.rpc.caldera.xyz/http. ZEN is the native governance token (Base ERC-20: 0xf43eB8De897Fbc7F2502483B2Bef7Bb9EA179229). Tutorials cover: ERC-20 and NFT deployment, price-triggered escrow with Stork oracle, bridging assets via Stargate LayerZero OFT (ZEN OFT Adapter on Base 0x57da2D504bf8b83Ef304759d9f2648522D7a9280, Horizen EID 30399) and native OP Stack bridge (L1StandardBridge on Base 0xf4a6cc4171fda694439f856d912777aa6ab05369), Goldsky subgraph indexing, PureFi compliance gating, and Safe multisig setup. Governance: Horizen DAO with ZenIP proposal and voting process.',
       },
     ],
+    // llms-per-page must come AFTER docusaurus-plugin-llms so its postBuild
+    // hook runs after llms.txt is generated (plugins run postBuild in order).
+    path.resolve(__dirname, 'plugins/llms-per-page/index.ts'),
   ],
 
   presets: [

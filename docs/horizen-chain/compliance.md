@@ -1,6 +1,6 @@
 ---
 title: Compliance
-description: "Compliance patterns on Horizen: contract-level rules, confidential enforcement via VELA, and third-party AML/KYC screening with PureFi."
+description: "Compliance patterns on Horizen: contract-level rules, confidential enforcement via Vela, and third-party AML/KYC screening with PureFi."
 sidebar_position: 7
 ---
 
@@ -23,11 +23,11 @@ This pattern is appropriate when your compliance logic is fully deterministic, y
 
 ## Confidential Enforcement
 
-Some compliance requirements involve private data: verifying a user meets a financial threshold without disclosing the amount, enforcing policy on encrypted inputs, or producing auditable proof that a rule executed correctly without exposing the underlying state. For these cases, the compliance logic can run inside a TEE using VELA.
+Some compliance requirements involve private data: verifying a user meets a financial threshold without disclosing the amount, enforcing policy on encrypted inputs, or producing auditable proof that a rule executed correctly without exposing the underlying state. For these cases, the compliance logic can run inside a TEE using Vela.
 
-The compliance logic is your code. VELA provides a hardware-isolated execution environment and a cryptographic attestation proving the rules ran correctly on the specified input. No operator, cloud provider, or external party can access the data during execution. Authorized verifiers like auditors and regulators can confirm compliance through the attestation without seeing the underlying state.
+The compliance logic is your code. Vela provides a hardware-isolated execution environment where data is encrypted in memory and computations are cryptographically attested. No operator, cloud provider, or external party can access the data during execution. Authorized auditors and regulators receive encrypted compliance reports from the TEE, which they can decrypt and verify without exposing any other user's data.
 
-→ [What is VELA?](/vela/introduction)
+→ [What is Vela?](/vela/introduction)
 
 ## Third-Party AML/KYC Screening
 

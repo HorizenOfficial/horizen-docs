@@ -42,16 +42,20 @@
 
 ## Vela (Confidential Execution — TEE coprocessor by Horizen Labs)
 
-- [What is Vela?](https://docs.horizen.io/vela/introduction): TEE-based confidential execution solution by Horizen Labs — hardware enclaves, cryptographic attestation, compliance without data exposure · https://vela.horizenlabs.io
+- [What is Vela?](https://docs.horizen.io/vela/introduction): TEE-based confidential execution solution by Horizen Labs — AWS Nitro Enclaves, cryptographic attestation, encrypted compliance reports for authorized auditors · ERC-20 and deanonymization fully shipped in v0.2.0 · https://horizenlabs.io/vela/
 - [Prerequisites](https://docs.horizen.io/vela/getting-started/prerequisites): Required tools and setup before starting Vela development
-- [Local Environment Setup](https://docs.horizen.io/vela/getting-started/local-environment-setup): Docker-based local dev environment (Vela not yet on testnet/mainnet)
-- [Your First Confidential App](https://docs.horizen.io/vela/getting-started/hello-world): Deploy a private transfer app, deposit ETH into encrypted TEE account, verify private balance
-- [Current Limitations](https://docs.horizen.io/vela/limitations/limitations): Local/Docker only (no testnet/mainnet yet) · Emulated TEE (no hardware attestation in dev; contact team for AWS Nitro Enclave access) · Single WASM app per environment · Roadmap: multi-app support, self-deployment on testnet, ERC-20 support, deanonymization controls
+- [Local Environment Setup](https://docs.horizen.io/vela/getting-started/local-environment-setup): Docker-based local dev environment with software-emulated TEE · Base Sepolia testnet available to early builders
+- [Your First Confidential App](https://docs.horizen.io/vela/getting-started/first-confidential-app): Deploy a private transfer app, deposit ETH into encrypted TEE account, verify private balance
+- [Roadmap](https://docs.horizen.io/vela/roadmap/roadmap): Available today: local Docker dev + Base Sepolia testnet · ERC-20 token support and deanonymization fully shipped · Coming next: Base mainnet, multi-app support, self-service testnet deployment
+- [Smart Contracts Reference](https://docs.horizen.io/vela/reference/smart-contracts): Request types (PROCESS/DEANONYMIZATION/ASSOCIATEKEY/DEPLOYAPP/TRUSTPROCESS), TokenAllowlist, meta-transactions via submitRequestFor, adminReset testnet caveat
+- [TypeScript Client](https://docs.horizen.io/vela/reference/typescript-client): @horizen/vela-common-ts installation and usage · v0.2.0 package and class rename from horizen-cce-common-ts / HorizenCCEClient
+- [Trigger Contracts](https://docs.horizen.io/vela/reference/trigger-contracts): Advanced trigger contract pattern, stateUpdate callback sequence, TRUSTPROCESS flow, chaining guard patterns
+- [WASM Application Development](https://docs.horizen.io/vela/reference/wasm-development): Required WASM exports, TinyGo build command, v0.2.0 breaking change (generate_deanonymization_report removed)
 
 ## Privacy & Compliance
 
-- [Privacy Tools](https://docs.horizen.io/horizen-chain/privacy-tools): Overview of privacy primitives on Horizen — VELA (TEE confidential execution) and zkVerify (on-chain ZK proof verification)
-- [Compliance](https://docs.horizen.io/horizen-chain/compliance): Compliance patterns on Horizen — contract-level rules (Solidity), confidential enforcement via VELA/TEE, and AML/KYC gating via PureFi
+- [Privacy Tools](https://docs.horizen.io/horizen-chain/privacy-tools): Overview of privacy primitives on Horizen — Vela (TEE confidential execution) and zkVerify (on-chain ZK proof verification)
+- [Compliance](https://docs.horizen.io/horizen-chain/compliance): Compliance patterns on Horizen — contract-level rules (Solidity), confidential enforcement via Vela/TEE, and AML/KYC gating via PureFi
 
 ## Integrations
 
@@ -74,12 +78,23 @@
 - [Add Compliance Gating with PureFi](https://docs.horizen.io/tutorials/integrations/integrate-purefi): Step-by-step PureFi AML verification integration into Solidity contracts — `@purefi/sdk-solidity-v5`, on-chain verifier, off-chain issuer check pattern
 - [Set Up a Multisig on Horizen](https://docs.horizen.io/tutorials/integrations/setup-multisig): Create and manage a Safe-compatible multisig on Horizen using Den · https://safe.horizen.io
 
+## ZEN Token Migration
+
+> **Migration completed July 23, 2025.** ZEN balances from both the old Horizen mainchain (ZEND) and the EON EVM chain have been migrated to a ZEN ERC-20 contract on Base. **There is no deadline to claim.**
+
+- [Migration Overview](https://docs.horizen.io/migration/overview): What was migrated and how — EON balances auto-migrated to the same address; ZEND mainchain balances require a manual claim because UTXO addresses don't map automatically to Ethereum addresses
+- [Claiming ZEND Mainchain ZEN](https://docs.horizen.io/migration/claiming-zen): Manual claim process — need ETH on Base (min 0.000004 ETH per claim), sign a message with your old Horizen wallet key, call `claimP2PKH` / `claimP2SH` / `claimDirect` on the ZENDBackupVault contract · Official UI: https://www.horizen.io/zenclaim
+- [Step-by-step Claim Instructions](https://docs.horizen.io/migration/mainnet-migration-instructions/mainnet-claim): Full walkthrough — get ETH on Base (Coinbase, Binance, or Superbridge), create signature with old wallet, submit claim · Sphere Wallet, Ledger, and CLI paths covered
+- [Smart Contracts](https://docs.horizen.io/migration/smart-contracts): ZEN ERC-20 on Base: `0xf43eB8De897Fbc7F2502483B2Bef7Bb9EA179229` · ZENDBackupVault (manual claim): `0x1Ee188bDf19eBF04B73Ab6FFcec2a864cd4774F2` · EONBackupVault (auto-mint): `0x1Cc689233837A0b96e1f176d49FC08462f70C47F` · Audited by Cantina and Halborn
+- [Migration Tools](https://docs.horizen.io/migration/migration-tools): CLI tool and signing utilities for users who need to sign without a GUI wallet
+- [Troubleshooting & FAQ](https://docs.horizen.io/migration/troubleshooting): Common claim issues — wrong Sphere version, signature format errors, insufficient ETH for gas
+
 ## Governance
 
 - [About Horizen DAO](https://docs.horizen.io/governance/overview/about): Overview of Horizen DAO, its decentralized governance framework, guiding values, and constitution
-- [Proposal Categories](https://docs.horizen.io/governance/proposal-categories): Types and categories of governance proposals — what can be proposed and how
-- [Voting Process](https://docs.horizen.io/governance/voting-process/voting-process): How voting works — quorum requirements, ZenIP approval process, timeline
-- [Quick Voting Guide](https://docs.horizen.io/governance/voting-process/quick-voting-guide): Step-by-step guide to casting a vote on a Horizen governance proposal
-- [Foundational Documents](https://docs.horizen.io/governance/reference/foundational-docs): Foundation Bylaws, Memorandum of Association, Articles of Association (PDFs)
-- [Submit a Vote](https://docs.horizen.io/governance/reference/submit-vote): How to submit a formal governance vote
-- [Join the Discussion](https://docs.horizen.io/governance/reference/join-discussion): Community discussion channels for governance proposals
+- [Proposal Categories](https://docs.horizen.io/governance/proposal_categories): Types and categories of governance proposals — what can be proposed and how
+- [Voting Process](https://docs.horizen.io/governance/voting_process/voting_process): How voting works — quorum requirements, ZenIP approval process, timeline
+- [Quick Voting Guide](https://docs.horizen.io/governance/voting_process/quick_voting_guide): Step-by-step guide to casting a vote on a Horizen governance proposal
+- [Foundational Documents](https://docs.horizen.io/governance/reference/foundational_docs): Foundation Bylaws, Memorandum of Association, Articles of Association (PDFs)
+- [Submit a Vote](https://docs.horizen.io/governance/reference/submit_vote): How to submit a formal governance vote
+- [Join the Discussion](https://docs.horizen.io/governance/reference/join_discussion): Community discussion channels for governance proposals

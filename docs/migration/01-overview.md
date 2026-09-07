@@ -1,6 +1,6 @@
 ---
 title: Migration overview
-description: "Historical reference: Horizen's ZEN token migration from legacy mainchain and EON EVM chain to a Base ERC-20 contract, completed July 23, 2025. Not relevant to current EVM development on Horizen."
+description: "ZEN token migration from the legacy Horizen mainchain (ZEND) and EON EVM chain to a Base ERC-20 contract, completed July 23, 2025. ZEND mainchain holders must manually claim ZEN on Base — no deadline. EON holders were migrated automatically to the same address. Official claim page: https://www.horizen.io/zenclaim"
 ---
 
 # Migration overview

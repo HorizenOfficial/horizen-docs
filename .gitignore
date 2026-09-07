@@ -1,5 +1,6 @@
 # Env files
 .env
+.dev.vars
 .env.local
 .env.development.local
 .env.test.local
@@ -43,3 +44,10 @@ package-lock.json
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Deployment platforms
+.vercel
+.wrangler
+
+.vercel
+.env*.local

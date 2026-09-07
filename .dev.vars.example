@@ -1,0 +1,4 @@
+BEEHIIV_API_KEY=your_beehiiv_api_key_here
+PUBLICATION_ID=your_publication_id_here
+# Always-pass Cloudflare test secret — replace with real value from the Pages dashboard for production.
+TURNSTILE_SECRET_KEY=1x0000000000000000000000000000000AA

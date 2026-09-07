@@ -4,7 +4,7 @@ description: "Confidentiality primitives available on Horizen: Vela for TEE-base
 sidebar_position: 6
 ---
 
-Horizen gives you two complementary confidentiality primitives that operate at different layers, in addition to supporting any other EVM-compatible privacy implementation integrated by developers at the app level. Vela keeps inputs and computation private during execution using a TEE-based approach. zkVerify uses zero-knowledge proofs to prove that computation ran correctly and posts attestations onchain for dApp interoperability. These tools can be used independently or together — what you adopt depends on what your application needs to keep private and how it needs to demonstrate correctness.
+Horizen gives you two complementary confidentiality primitives that operate at different layers, in addition to supporting any other EVM-compatible privacy implementation integrated by developers at the app level. Vela keeps inputs and computation private during execution using a TEE-based approach. zkVerify uses zero-knowledge proofs to prove that computation ran correctly and posts attestations onchain for dApp interoperability. These tools can be used independently or together. What you adopt depends on what your application needs to keep private and how it needs to demonstrate correctness.
 
 
 ## Vela - Confidential Execution

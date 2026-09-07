@@ -43,6 +43,18 @@ Full REST API reference: [docs.stork.network/api-reference/rest-api](https://doc
 
 Available asset IDs (e.g. `BTCUSD`, `ETHUSD`) are listed in the [Stork Asset ID Registry](https://docs.stork.network/resources/asset-id-registry).
 
+### Deriving Feed IDs
+
+Encoded feed IDs are the keccak256 hash of the asset ID string. You can derive
+any feed ID locally rather than looking it up:
+
+```bash
+cast keccak "ETHUSD"
+# 0x59102b37de83bdda9f38ac8254e596f0d9ac61d2035c07936675e87342817160
+```
+
+The same value is returned as `encoded_asset_id` in the REST API response.
+
 
 
 ### Step 2: Push Data On-Chain
@@ -113,7 +125,7 @@ interface IStork {
 contract PriceConsumer {
     IStork public immutable stork;
 
-    // ETHUSD feed ID (verify from Stork Asset Registry)
+    // ETHUSD feed ID — keccak256("ETHUSD"), verify with: cast keccak "ETHUSD"
     bytes32 public constant ETH_USD_ID =
         0x59102b37de83bdda9f38ac8254e596f0d9ac61d2035c07936675e87342817160;
 
@@ -130,7 +142,7 @@ contract PriceConsumer {
 }
 ```
 
-For view functions where you want to implement custom staleness logic, use `getTemporalNumericValueUnsafeV1` instead — it returns the stored value without reverting on staleness, allowing you to implement your own freshness checks.
+If your contract needs a **tighter** freshness window than the chain default (e.g. reject prices older than 60 seconds), call `getTemporalNumericValueV1` as normal and add your own `require` check on `timestampNs`. If you need a **looser** or fully custom freshness policy, use `getTemporalNumericValueUnsafeV1` instead — it returns the stored value without reverting on staleness.
 
 
 

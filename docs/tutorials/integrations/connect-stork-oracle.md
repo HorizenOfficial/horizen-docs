@@ -46,7 +46,7 @@ Stork identifies price feeds using an **asset ID** - a human-readable string lik
 
 ```bash
 curl -u "<YOUR_API_KEY>:" \
-  "https://rest.jp.stork-oracles.com/v1/prices/latest?assets=BTCUSD,ETHUSD"
+  "https://rest.jp.stork-oracle.network/v1/prices/latest?assets=BTCUSD,ETHUSD"
 ```
 
 The response contains the latest signed price with its encoded asset ID:
@@ -62,13 +62,13 @@ The response contains the latest signed price with its encoded asset ID:
       "price": "67500000000000000000000",
       "stork_signed_price": {
         "public_key": "0x...",
-        "encoded_asset_id": "0x4254435553440000000000000000000000000000000000000000000000000000",
+        "encoded_asset_id": "0x7404e3d104ea7841c3d9e6fd20adfe99b4ad586bc08d8f3bd3afef894cf184de",
         "price": "67500000000000000000000",
         "timestamped_signature": {
           "signature": {
             "r": "0x...",
             "s": "0x...",
-            "v": 28
+            "v": "28"
           },
           "timestamp": 1718000000000000000,
           "msg_hash": "0x..."
@@ -109,8 +109,8 @@ The `TemporalNumericValue` struct returned by the getter:
 
 ```solidity
 struct TemporalNumericValue {
-    uint256 timestampNs;    // Nanosecond timestamp of the price
-    int128  quantizedValue; // Price scaled to 18 decimal places
+    uint64 timestampNs;    // Nanosecond timestamp of the price
+    int192 quantizedValue; // Price scaled to 18 decimal places
 }
 ```
 
@@ -134,15 +134,15 @@ const ASSET       = "BTCUSD";
 
 // ── Minimal ABI ─────────────────────────────────────────────────────────────
 const STORK_ABI = [
-  "function updateTemporalNumericValuesV1((bytes32 id, (uint256 timestampNs, int128 quantizedValue) temporalNumericValue, bytes32 publisherMerkleRoot, bytes32 valueComputeAlgHash, bytes signature)[] calldata updateData) external payable",
-  "function getTemporalNumericValueV1(bytes32 id) external view returns (uint256 timestampNs, int128 quantizedValue)",
-  "function getUpdateFeeV1((bytes32 id, (uint256 timestampNs, int128 quantizedValue) temporalNumericValue, bytes32 publisherMerkleRoot, bytes32 valueComputeAlgHash, bytes signature)[] calldata updateData) external view returns (uint256 feeAmount)",
+  "function updateTemporalNumericValuesV1(((uint64 timestampNs, int192 quantizedValue) temporalNumericValue, bytes32 id, bytes32 publisherMerkleRoot, bytes32 valueComputeAlgHash, bytes32 r, bytes32 s, uint8 v)[] calldata updateData) external payable",
+  "function getTemporalNumericValueV1(bytes32 id) external view returns ((uint64 timestampNs, int192 quantizedValue) value)",
+  "function getUpdateFeeV1(((uint64 timestampNs, int192 quantizedValue) temporalNumericValue, bytes32 id, bytes32 publisherMerkleRoot, bytes32 valueComputeAlgHash, bytes32 r, bytes32 s, uint8 v)[] calldata updateData) external view returns (uint256 feeAmount)",
 ];
 
 // ── Fetch from Stork API ─────────────────────────────────────────────────────
 async function fetchStorkPrice(asset: string) {
   const res = await fetch(
-    `https://rest.jp.stork-oracles.com/v1/prices/latest?assets=${asset}`,
+    `https://rest.jp.stork-oracle.network/v1/prices/latest?assets=${asset}`,
     {
       headers: {
         Authorization: "Basic " + Buffer.from(`${STORK_API_KEY}:`).toString("base64"),
@@ -150,25 +150,35 @@ async function fetchStorkPrice(asset: string) {
     }
   );
   if (!res.ok) throw new Error(`Stork API error: ${res.status}`);
-  const json = await res.json();
+
+  // Do not use res.json(). timestampNs is a 19-digit integer; JSON.parse
+  // converts it to float64 and silently rounds it. The Stork signature is
+  // computed over the exact integer, so a rounded value causes the oracle
+  // to revert with InvalidSignature.
+  const rawText = await res.text();
+  const safeText = rawText.replace(/:(\s*)(-?\d{16,})([,}\]])/g, `:$1"$2"$3`);
+  const json = JSON.parse(safeText);
+
   return json.data[asset].stork_signed_price;
 }
 
 // ── Build update payload ─────────────────────────────────────────────────────
 function buildUpdateData(signedPrice: any) {
   const { r, s, v } = signedPrice.timestamped_signature.signature;
-  // Pack the ECDSA signature into 65 bytes: r (32) + s (32) + v (1)
-  const signature = ethers.concat([r, s, ethers.toBeArray(v)]);
 
   return {
-    id: signedPrice.encoded_asset_id,
     temporalNumericValue: {
       timestampNs: BigInt(signedPrice.timestamped_signature.timestamp),
       quantizedValue: BigInt(signedPrice.price),
     },
+    id: signedPrice.encoded_asset_id,
     publisherMerkleRoot: signedPrice.publisher_merkle_root,
-    valueComputeAlgHash: signedPrice.calculation_alg.checksum,
-    signature,
+    valueComputeAlgHash: signedPrice.calculation_alg.checksum.startsWith("0x")
+      ? signedPrice.calculation_alg.checksum
+      : `0x${signedPrice.calculation_alg.checksum}`,
+    r,
+    s,
+    v: Number(v),
   };
 }
 
@@ -222,8 +232,8 @@ pragma solidity ^0.8.20;
 /// @dev Minimal Stork interface - only what we need
 interface IStork {
     struct TemporalNumericValue {
-        uint256 timestampNs;
-        int128  quantizedValue;
+        uint64 timestampNs;
+        int192 quantizedValue;
     }
 
     function getTemporalNumericValueV1(bytes32 id)
@@ -237,17 +247,17 @@ contract PriceGatedVault {
 
     // bytes32 asset IDs - use the encoded_asset_id from the Stork API
     bytes32 public constant BTC_USD =
-        0x4254435553440000000000000000000000000000000000000000000000000000;
+        0x7404e3d104ea7841c3d9e6fd20adfe99b4ad586bc08d8f3bd3afef894cf184de;
 
     // Price staleness tolerance: reject prices older than 60 seconds
     uint256 public constant MAX_PRICE_AGE_NS = 60 * 1e9;
 
     // Minimum BTC price (in USD, 18 decimals) to allow deposits
-    int128 public constant MIN_PRICE = 50_000 * int128(1e18);
+    int192 public constant MIN_PRICE = 50_000 * int192(1e18);
 
     mapping(address => uint256) public deposits;
 
-    event Deposited(address indexed user, uint256 amount, int128 btcPrice);
+    event Deposited(address indexed user, uint256 amount, int192 btcPrice);
 
     constructor(address _stork) {
         stork = IStork(_stork);
@@ -273,7 +283,7 @@ contract PriceGatedVault {
         emit Deposited(msg.sender, msg.value, price.quantizedValue);
     }
 
-    function getPrice() external view returns (int128 price, uint256 timestampNs) {
+    function getPrice() external view returns (int192 price, uint64 timestampNs) {
         IStork.TemporalNumericValue memory val =
             stork.getTemporalNumericValueV1(BTC_USD);
         return (val.quantizedValue, val.timestampNs);
@@ -293,7 +303,7 @@ forge create src/PriceGatedVault.sol:PriceGatedVault \
 ### Verify the price read
 
 ```bash
-cast call <YOUR_VAULT_ADDRESS> "getPrice()(int128,uint256)" \
+cast call <YOUR_VAULT_ADDRESS> "getPrice()(int192,uint64)" \
   --rpc-url https://horizen-testnet.rpc.caldera.xyz/http
 ```
 
@@ -352,17 +362,27 @@ function depositWithPriceUpdate(
 
 ## Encoding Asset IDs
 
-If you need to compute the `bytes32` asset ID for a feed programmatically:
+Stork encodes asset IDs as the keccak256 hash of the asset ID string.
+
+With Foundry:
+
+```bash
+cast keccak "ETHUSD"
+# 0x59102b37de83bdda9f38ac8254e596f0d9ac61d2035c07936675e87342817160
+```
+
+With ethers:
 
 ```typescript
 import { ethers } from "ethers";
 
-// Stork encodes asset IDs as right-padded ASCII bytes32
 function encodeAssetId(asset: string): string {
-  return ethers.encodeBytes32String(asset);
+  return ethers.keccak256(ethers.toUtf8Bytes(asset));
 }
 
-// e.g. "BTCUSD" → "0x4254435553440000000000000000000000000000000000000000000000000000"
-console.log(encodeAssetId("BTCUSD"));
+console.log(encodeAssetId("ETHUSD"));
 ```
+
+You can also read the `encoded_asset_id` directly from the Stork REST API
+response rather than deriving it. Both are equivalent.
 
