@@ -18,6 +18,11 @@ const config: Config = {
   tagline: "Build Private. Build Compliant. Build on Horizen.",
   favicon: "logos/png/Horizen2.0-logo_icon-on-yellow.png",
 
+  customFields: {
+    // Fallback is Cloudflare's always-pass test key; set TURNSTILE_SITE_KEY in Pages env for production.
+    turnstileSiteKey: process.env.TURNSTILE_SITE_KEY ?? '1x00000000000000000000AA',
+  },
+
   url: "https://docs.horizen.io",
   baseUrl: "/",
 
@@ -30,6 +35,21 @@ const config: Config = {
 
   plugins: [
     path.resolve(__dirname, 'plugins/tailwind-plugin.js'),
+    [
+      '@docusaurus/plugin-client-redirects',
+      {
+        redirects: [
+          {
+            from: '/vela/getting-started/hello-world',
+            to: '/vela/getting-started/first-confidential-app',
+          },
+          {
+            from: '/vela/limitations/limitations',
+            to: '/vela/roadmap',
+          },
+        ],
+      },
+    ],
     [
       '@easyops-cn/docusaurus-search-local',
       {

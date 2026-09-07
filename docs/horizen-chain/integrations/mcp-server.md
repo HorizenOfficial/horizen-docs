@@ -4,10 +4,6 @@ description: "Connect AI coding assistants and agents to Horizen via the Model C
 sidebar_position: 5
 ---
 
-<!-- <div style={{display: 'flex', justifyContent: 'center', margin: '24px 0'}}>
-  <img src="/tutorials/mcp-banner.png" alt="Horizen MCP Server" style={{maxWidth: '100%', width: '720px', borderRadius: '8px'}} />
-</div> -->
-
 Connect your AI coding assistant to Horizen in one step. The Horizen MCP server gives Claude, Cursor, Windsurf, and other AI editors direct access to verified chain data, such as RPC URLs, contract addresses, bridge info, oracle feed IDs so your agent stops hallucinating and starts building.
 
 No API key. No signup. Just `npx`.
@@ -37,7 +33,9 @@ Add the following to your editor's MCP config file. The JSON block is the same f
 
 | Editor | Config file path |
 |---|---|
-| Claude Code / Claude Desktop | `~/.claude/claude_desktop_config.json` |
+| Claude Desktop (macOS) | `~/Library/Application Support/Claude/claude_desktop_config.json` |
+| Claude Desktop (Windows) | `%APPDATA%\Claude\claude_desktop_config.json` |
+| Claude Code | `claude mcp add horizen -- npx -y horizen-mcp` (or add to project `.mcp.json`) |
 | Cursor | `~/.cursor/mcp.json` |
 | Windsurf | `~/.codeium/windsurf/mcp_config.json` |
 | Continue | `~/.continue/config.json` |
@@ -45,7 +43,7 @@ Add the following to your editor's MCP config file. The JSON block is the same f
 
 After saving the config, restart your editor. You should see a **horizen** entry in the MCP panel or tool list.
 
-> **Verify it's working:** Ask your AI assistant "What is Horizen's mainnet chain ID?" It should return `7332` with a source citation.
+> **Verify it's working:** Ask your AI assistant "What is Horizen's mainnet chain ID?" It should return `26514` with a source citation.
 
 ## What You Can Ask
 
@@ -56,7 +54,7 @@ Once connected, your AI assistant can answer questions like:
 - *"What Stork feed ID should I use for ETH/USD on Horizen?"*
 - *"What contracts are deployed on Horizen testnet?"*
 - *"How do I integrate Goldsky with Horizen?"*
-- *"Search the Horizen docs for validator setup."*
+- *"Search the Horizen docs for bridging ZEN."*
 
 Every response includes a source attribution and verification date — the agent will never fabricate an address or URL.
 
@@ -78,4 +76,3 @@ Every response includes a source attribution and verification date — the agent
 |---|---|
 | npm package | [npmjs.com/package/horizen-mcp](https://www.npmjs.com/package/horizen-mcp) |
 | Model Context Protocol | [modelcontextprotocol.io](https://modelcontextprotocol.io/) |
-/
