@@ -48,6 +48,3 @@ yarn-error.log*
 # Deployment platforms
 .vercel
 .wrangler
-
-.vercel
-.env*.local

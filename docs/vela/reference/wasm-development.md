@@ -1,7 +1,7 @@
 ---
 title: WASM Application Development
 description: "Building Vela WASM applications with TinyGo: required exports, the v0.2.0 breaking change to process_request, and build commands."
-sidebar_position: 2
+sidebar_position: 4
 ---
 
 # WASM Application Development

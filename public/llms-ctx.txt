@@ -46,7 +46,7 @@
 - [Prerequisites](https://docs.horizen.io/vela/getting-started/prerequisites): Required tools and setup before starting Vela development
 - [Local Environment Setup](https://docs.horizen.io/vela/getting-started/local-environment-setup): Docker-based local dev environment with software-emulated TEE · Base Sepolia testnet available to early builders
 - [Your First Confidential App](https://docs.horizen.io/vela/getting-started/first-confidential-app): Deploy a private transfer app, deposit ETH into encrypted TEE account, verify private balance
-- [Roadmap](https://docs.horizen.io/vela/roadmap/roadmap): Available today: local Docker dev + Base Sepolia testnet · ERC-20 token support and deanonymization fully shipped · Coming next: Base mainnet, multi-app support, self-service testnet deployment
+- [Roadmap](https://docs.horizen.io/vela/roadmap): Available today: local Docker dev + Base Sepolia testnet · ERC-20 token support and deanonymization fully shipped · Coming next: Base mainnet, multi-app support, self-service testnet deployment
 - [Smart Contracts Reference](https://docs.horizen.io/vela/reference/smart-contracts): Request types (PROCESS/DEANONYMIZATION/ASSOCIATEKEY/DEPLOYAPP/TRUSTPROCESS), TokenAllowlist, meta-transactions via submitRequestFor, adminReset testnet caveat
 - [TypeScript Client](https://docs.horizen.io/vela/reference/typescript-client): @horizen/vela-common-ts installation and usage · v0.2.0 package and class rename from horizen-cce-common-ts / HorizenCCEClient
 - [Trigger Contracts](https://docs.horizen.io/vela/reference/trigger-contracts): Advanced trigger contract pattern, stateUpdate callback sequence, TRUSTPROCESS flow, chaining guard patterns

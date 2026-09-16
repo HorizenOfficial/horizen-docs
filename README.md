@@ -15,18 +15,26 @@ npm run start
 
 There are two sets of variables depending on where they are consumed.
 
-**Build-time** (Docusaurus, read via `process.env` at `npm run build`): create a `.env` file at the repo root:
+**Build-time** (Docusaurus, read via `process.env` at `npm run build`): Docusaurus does not load `.env` files natively, so set these as shell environment variables before building:
 
-```
+```sh
 # Algolia search — optional; search falls back to local index without these
-ALGOLIA_APP_ID=
-ALGOLIA_API_KEY=
-ALGOLIA_INDEX_NAME=
+export ALGOLIA_APP_ID=your_app_id
+export ALGOLIA_API_KEY=your_api_key
+export ALGOLIA_INDEX_NAME=your_index_name
 
 # Turnstile — build-time only (embedded in the page bundle)
 # For local dev the value below is Cloudflare's always-pass test site key; no dashboard needed.
-TURNSTILE_SITE_KEY=1x00000000000000000000AA
+export TURNSTILE_SITE_KEY=1x00000000000000000000AA
 ```
+
+Or inline for a one-off build:
+
+```sh
+TURNSTILE_SITE_KEY=your_key npm run build
+```
+
+In CI/CD (e.g. Cloudflare Pages), set these in the project's **Settings → Environment Variables** under the **Build** environment.
 
 **Runtime** (Cloudflare Pages Functions, never bundled into the client): stored in `.dev.vars` locally and in the Pages project's **Settings → Environment Variables** for deployed environments.
 

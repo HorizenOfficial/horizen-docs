@@ -349,7 +349,6 @@ function Newsletter() {
   const { siteConfig } = useDocusaurusContext();
   const siteKey = siteConfig.customFields?.turnstileSiteKey as string;
 
-  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [token, setToken] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
@@ -391,11 +390,10 @@ function Newsletter() {
       const res = await fetch('/api/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, name, turnstileToken: token, website }),
+        body: JSON.stringify({ email, turnstileToken: token, website }),
       });
       if (res.ok) {
         setStatus('success');
-        setName('');
         setEmail('');
       } else {
         const data = (await res.json().catch(() => ({}))) as { error?: string };
@@ -426,7 +424,6 @@ function Newsletter() {
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="flex items-center gap-10 flex-1 justify-end max-[860px]:w-full max-[860px]:flex-col max-[860px]:items-stretch max-[860px]:gap-5">
-            <input type="text" placeholder="Name" value={name} onChange={e => setName(e.target.value)} className={inputClass} aria-label="Name" />
             <input type="email" placeholder="Email Address" value={email} onChange={e => setEmail(e.target.value)} required className={inputClass} aria-label="Email address" />
             {/* Honeypot: off-screen rather than display:none, since some bots skip hidden inputs. */}
             <input

@@ -3,15 +3,13 @@
 interface Env {
   BEEHIIV_API_KEY: string;
   PUBLICATION_ID: string;
-  TURNSTILE_SECRET_KEY?: string;
+  TURNSTILE_SECRET_KEY: string;
 }
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-// Cloudflare public test secret — always passes; replace with real secret in Pages env vars.
-const TURNSTILE_TEST_SECRET = '1x0000000000000000000000000000000AA';
 
 export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
-  let body: { email?: unknown; name?: unknown; turnstileToken?: unknown; website?: unknown };
+  let body: { email?: unknown; turnstileToken?: unknown; website?: unknown };
   try {
     body = await request.json();
   } catch {
@@ -28,8 +26,11 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     return Response.json({ error: 'A valid email address is required.' }, { status: 400 });
   }
 
+  if (!env.TURNSTILE_SECRET_KEY) {
+    return Response.json({ error: 'Server misconfiguration.' }, { status: 500 });
+  }
   const token = typeof body.turnstileToken === 'string' ? body.turnstileToken : '';
-  const secret = env.TURNSTILE_SECRET_KEY ?? TURNSTILE_TEST_SECRET;
+  const secret = env.TURNSTILE_SECRET_KEY;
   const verify = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -50,7 +51,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
       },
       body: JSON.stringify({
         email,
-        reactivate_existing: false,
+        reactivate_existing: true,
         send_welcome_email: true,
       }),
     }

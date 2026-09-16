@@ -1,7 +1,7 @@
 ---
 title: TypeScript Client
 description: "Installation and usage for the @horizen/vela-common-ts TypeScript client. Includes the v0.2.0 package and class rename."
-sidebar_position: 2
+sidebar_position: 3
 ---
 
 # TypeScript Client
@@ -21,7 +21,7 @@ import { VelaClient } from "@horizen/vela-common-ts";
 
 const client = new VelaClient(
   signer,
-  false,
+  false, // useSoftwareTEE: false for a real enclave, true for local software-emulated dev
   teeAuthenticatorAddress,
   processorEndpointAddress
 );

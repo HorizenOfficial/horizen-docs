@@ -40,7 +40,7 @@ Alternatively, if you prefer to clone the repository, `wallet.conf.template` is 
 
 ```bash
 git clone https://github.com/HorizenOfficial/vela-nova.git
-cp vela-nova/wallet.conf.template wallet/wallet.conf.template
+cp vela-nova/wallet/wallet.conf.template wallet/wallet.conf.template
 ```
 
 Then download `payment_app.wasm` and `novaw-linux` from the release page and place them in the same `wallet/` folder.

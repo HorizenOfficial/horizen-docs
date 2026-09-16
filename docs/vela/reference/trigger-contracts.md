@@ -1,7 +1,7 @@
 ---
 title: Trigger Contracts
 description: "How trigger contracts and the TRUSTPROCESS flow work in Vela v0.2.0. Covers deploying with a trigger, the stateUpdate callback sequence, and chaining guard patterns."
-sidebar_position: 1
+sidebar_position: 2
 ---
 
 # Trigger Contracts
