@@ -12,7 +12,7 @@ Vela applications are WebAssembly modules compiled from Go using TinyGo. Your mo
 
 | Export | When called |
 |---|---|
-| `deploy` | Once at application deployment — receives constructor parameters and returns the initial encrypted state |
+| `deploy` | Once at application deployment — receives constructor parameters and returns the initial encrypted state. Every module must export it; v0.2.0 calls it at deploy time, and a module without it fails to deploy. |
 | `load_module` | Whenever the Executor needs the module and it is not in its in-memory cache (after a restart, or after the module was evicted from the LRU cache). It receives only `appId`, not the application state, and its returned state is not used. Keep it side-effect free and never use it to initialise state; `deploy` does that. |
 | `deposit` | When a request includes a token or ETH deposit — called before `process_request` to credit the user's account |
 | `process_request` | For every `PROCESS` (requestType=1) and `DEANONYMIZATION` (requestType=2) request |
@@ -44,12 +44,12 @@ The Executor enforces these invariants on the result:
 - A `DEANONYMIZATION` result with an empty `Report` field is rejected.
 - A non-`DEANONYMIZATION` result with a non-empty `Report` field is also rejected.
 
-The v0.2.0 Executor never calls `generate_deanonymization_report`, so reports from a module that still relies on it will not be produced. Move report generation into `process_request` (`requestType == 2`). Every module must export `deploy`, which v0.2.0 calls at deploy time; a module without it fails to deploy. Remove the old export and move the report generation logic into `process_request`:
+The v0.2.0 Executor never calls `generate_deanonymization_report`, so reports from a module that still relies on it will not be produced. Remove that export and move the report generation logic into `process_request` (`requestType == 2`):
 
 ```go
 func processRequest(requestType int32, state []byte, ...) types.ProcessResult {
     if requestType == 2 {
-        report := generateReport(state) // only data already saved in state
+        report := generateReport(state)
         return types.ProcessResult{
             State:  state,  // return the current state unchanged alongside the report
             Report: report,
@@ -62,4 +62,4 @@ func processRequest(requestType int32, state []byte, ...) types.ProcessResult {
 
 Always return the application's current `State` alongside the `Report`; a report can only include data the app has already saved in state.
 
-The example payment app (`vela-nova`) keeps only its last 50 transactions in private state (`MaxTransactions = 50`), so its `tx_history` report may be incomplete on busy apps. This is a choice in that app, not a Vela limit: your app decides what history to keep, and a report can only include data the app has saved in state.
+The example payment app (`vela-nova`) keeps only its last 50 transactions in private state (`MaxTransactions = 50`), so its `tx_history` report may be incomplete on busy apps. This is a choice in that app, not a Vela limit: your app decides what history to keep.

@@ -16,7 +16,7 @@ All user interactions with a deployed Vela application go through `ProcessorEndp
 |---|---|---|---|
 | `DEPLOYAPP` | `0` | `submitDeployRequest` or `submitDeployRequestWithTrigger` | Caller must hold `DEPLOYER_ROLE` on `ProcessorEndpoint` |
 | `PROCESS` | `1` | `submitRequest` or `submitRequestFor` | Any address |
-| `DEANONYMIZATION` | `2` | `submitRequest` | Addresses registered in `AuthorityRegistry` for the target application |
+| `DEANONYMIZATION` | `2` | `submitRequest` | Addresses allowed by the application's authority checker (its custom contract, or the `DefaultAuthority` fallback) via `AuthorityRegistry` |
 | `ASSOCIATEKEY` | `3` | `submitRequest` or `submitRequestFor` | Any address |
 | `TRUSTPROCESS` | `4` | Enqueued automatically by a trigger contract — cannot be submitted directly by users | Trigger contract only |
 

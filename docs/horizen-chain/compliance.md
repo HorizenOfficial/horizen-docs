@@ -4,7 +4,7 @@ description: "Compliance patterns on Horizen: contract-level rules, confidential
 sidebar_position: 7
 ---
 
-On Horizen, compliance logic is code instead of a platform guardrail. Since Horizen is EVM-identical, you can implement compliance at whatever layer matches your requirement: encode rules directly in Solidity, enforce policies over private data using confidential computation, or integrate a purpose-built AML/KYC protocol. 
+On Horizen, compliance logic is code instead of a platform guardrail. Since Horizen is EVM-compatible, you can implement compliance at whatever layer matches your requirement: encode rules directly in Solidity, enforce policies over private data using confidential computation, or integrate a purpose-built AML/KYC protocol. 
 
 ## Contract-Level Rules
 

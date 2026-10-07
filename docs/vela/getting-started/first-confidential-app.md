@@ -15,7 +15,7 @@ This guide walks you through deploying the Vela example application - a private 
 
 The example application (`vela-nova`) is a private account-based ledger running entirely inside the TEE. Balances, transfers, and transaction history are all encrypted. External observers see only attested state roots on-chain, not the underlying data.
 
-The app supports four operations — `deposit`, `privatetransfer`, `withdraw`, and `deanonymize`. `withdraw` makes the app emit a withdrawal; `ProcessorEndpoint` credits it to your pending-claims balance. `claimpendingpayments` is a wallet command that calls `ProcessorEndpoint.claim()` to pull those funds to your address; it does not go through the WASM app.
+The app's WASM operations are `deposit`, `privatetransfer`, `withdraw`, and `deanonymize`. `withdraw` makes the app emit a withdrawal; `ProcessorEndpoint` credits it to your pending-claims balance, which you then pull to your own address with the `claimpendingpayments` wallet command (see the table below).
 
 | Operation | What it does |
 |---|---|
