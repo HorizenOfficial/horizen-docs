@@ -8,15 +8,15 @@ sidebar_position: 1
 
 Vela is a TEE-based confidential execution solution by Horizen Labs. It lets developers run application logic inside Trusted Execution Environments (TEEs), where data is isolated from the host and computations run on a genuine, cryptographically attested enclave.
 
-No operator, cloud provider, or third party running the infrastructure can read the data being processed inside the enclave. At the same time, authorized auditors can request encrypted compliance reports from the TEE — generated from data the application has stored in its confidential state — without exposing any other user's data.
+Data is processed inside an AWS Nitro Enclave, isolated from the host and the operator. In the current release, the enclave's keys are protected by a master key held in AWS KMS and released only to an enclave with matching attestation. At the same time, authorized auditors can request encrypted compliance reports from the TEE — generated from data the application has stored in its confidential state — without exposing any other user's data.
 
 ## Key Properties
 
-**Confidential execution** — Application logic runs inside a TEE. Enclave memory is isolated from the host machine and the cloud provider, and application state is encrypted at rest (AES-256), so it is inaccessible to the host, the operator, or any external observer.
+**Confidential execution** — Application logic runs inside a TEE. Enclave memory is isolated from the host machine and the cloud provider, and application state is encrypted at rest (AES-256), so it is inaccessible to the host and the operator. In the current release, enclave keys are released by AWS KMS only to an enclave with matching attestation; a KMS administrator who changes the key policy could obtain the master key. A multi-TEE key-sharing model that removes this dependency is planned.
 
 **Attested identity, signed results** — The enclave's identity is established by hardware attestation, which proves that a specific, measured application is running inside a genuine enclave. Every result the enclave returns is then signed by that attested enclave and verified on-chain. Attestation proves *which* code ran on genuine hardware — it does not prove the application's logic is correct; that remains the developer's responsibility.
 
-**Compliance without exposure** — Authorized auditors can request a private compliance report from the TEE. The enclave generates the report from its confidential state, encrypts it specifically for the auditor's registered public key, and makes it available through the Authority Service. Only the authorized auditor can decrypt the report, and no other user's data is exposed in the process. Access is controlled per-application via the `AuthorityRegistry` contract, which governs which addresses may request reports. Note that a report can only contain data the application chose to persist in its confidential state — producing compliance reports is a feature the application developer designs, not one the platform provides automatically.
+**Compliance without exposure** — Authorized auditors can request a private compliance report from the TEE. The enclave generates the report from its confidential state, encrypts it specifically for the auditor's registered public key, and makes it available through the Authority Service. Only the authorized auditor can decrypt the report, and no other user's data is exposed in the process. Access is controlled per-application on-chain (see [Regulatory Compliance and Authorization](#regulatory-compliance-and-authorization) below). Note that a report can only contain data the application chose to persist in its confidential state — producing compliance reports is a feature the application developer designs, not one the platform provides automatically.
 
 **Chain-agnostic** — Vela is not limited to Horizen Chain. It is designed as a coprocessor that can serve applications across multiple EVM-compatible networks.
 
@@ -30,7 +30,7 @@ In local development, the Nitro Enclave is replaced by a software-emulated conta
 
 ## Regulatory Compliance and Authorization
 
-Authorization to request deanonymization reports is managed on-chain by the `AuthorityRegistry` contract. Each application has its own set of permitted auditor addresses. Only addresses registered in the registry for a given application can submit `DEANONYMIZATION` requests — attempting to do so from an unregistered address is rejected. The set of authorized auditors is therefore transparent and auditable on-chain, while the report content itself remains encrypted end-to-end.
+Authorization to request deanonymization reports is managed on-chain by the `AuthorityRegistry` contract. `AuthorityRegistry` routes the check for each application: if the application has a custom authority contract, that contract decides; otherwise the check falls back to the `DefaultAuthority` allowlist, which Horizen admins maintain per application. `ProcessorEndpoint` rejects a `DEANONYMIZATION` request (`AuthorityNotAllowed`) when the check returns false. The set of authorized auditors is therefore transparent and auditable on-chain, while the report content itself remains encrypted end-to-end.
 
 Vela verifies on-chain *who* is authorized to request a report. *What* the report contains is determined by the application: the enclave can only include data the application has saved in its confidential state, so the disclosure feature — and the scope of what it can reveal — is designed by the application developer.
 
@@ -41,7 +41,7 @@ Applications on Vela are WebAssembly (WASM) modules compiled from Go code using 
 | Export | When called |
 |---|---|
 | `deploy` | Once, when the application is first deployed — receives constructor parameters and returns initial state |
-| `load_module` | On Executor restart — reloads the application module into the Executor's cache |
+| `load_module` | Whenever the Executor needs the module and it is not in its in-memory cache (after a restart or LRU eviction). Receives only `appId`; its return value is not used. |
 | `deposit` | When a request includes a token or ETH deposit — credits the user's in-app account |
 | `process_request` | For every standard (`PROCESS`) or audit (`DEANONYMIZATION`) request |
 | `trusted_request` | For requests triggered automatically by an external trigger contract (advanced, optional) |
@@ -51,7 +51,7 @@ Your application never handles encryption directly. The Executor decrypts incomi
 Fees are set by the application. There is currently no automatic metering — the developer assigns the fuel cost of each operation, and it should be proportional to the complexity of the work that operation performs.
 
 :::note
-The `deposit` and `process_request` exports accept an `appId` parameter for interface compatibility, but the value is discarded at runtime — application identity is carried in state rather than per-call. Do not rely on `appId` in your application logic.
+The Executor passes the application's real `appId` to `load_module`, `deploy`, `deposit`, `process_request`, and `trusted_request`. The reference apps ignore it in `deposit` and `process_request` and keep their identity in state instead; your app may do the same.
 :::
 
 ## How It Fits with Horizen

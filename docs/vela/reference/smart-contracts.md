@@ -16,7 +16,7 @@ All user interactions with a deployed Vela application go through `ProcessorEndp
 |---|---|---|---|
 | `DEPLOYAPP` | `0` | `submitDeployRequest` or `submitDeployRequestWithTrigger` | Caller must hold `DEPLOYER_ROLE` on `ProcessorEndpoint` |
 | `PROCESS` | `1` | `submitRequest` or `submitRequestFor` | Any address |
-| `DEANONYMIZATION` | `2` | `submitRequest` | Addresses registered in `AuthorityRegistry` for the target application |
+| `DEANONYMIZATION` | `2` | `submitRequest` | Addresses allowed by the application's authority checker (its custom contract, or the `DefaultAuthority` fallback) via `AuthorityRegistry` |
 | `ASSOCIATEKEY` | `3` | `submitRequest` or `submitRequestFor` | Any address |
 | `TRUSTPROCESS` | `4` | Enqueued automatically by a trigger contract — cannot be submitted directly by users | Trigger contract only |
 
@@ -30,9 +30,9 @@ Calling `submitRequest` with type `DEPLOYAPP` (`0`) or `TRUSTPROCESS` (`4`) will
 
 **`ASSOCIATEKEY` (3):** Registers the sender's P-521 public key in the Executor's key store. This key is used to ECDH-encrypt all subsequent response payloads sent to this address. Handled entirely by the Executor — the WASM application is not called.
 
-**`DEPLOYAPP` (0):** Deploys a new WASM application. The Executor validates the module, calls `load_module` to initialize state caching, then calls `deploy` with the constructor parameters from the request payload and stores the resulting encrypted initial state.
+**`DEPLOYAPP` (0):** Deploys a new WASM application. The Executor checks the WASM's SHA-256 against the on-chain deploy descriptor, compiles and instantiates the module, and calls `deploy(appId, params)`. The state `deploy` returns becomes the app's initial encrypted state. `load_module` is not called at deploy time.
 
-**`TRUSTPROCESS` (4):** A follow-up request enqueued automatically by a trigger contract after a normal request completes. Processed before normal requests in the queue (trigger queue has higher priority). Routed to the WASM `trusted_request` export. No sender address, no user signature, no application fee, no minimum-fee check. The payload is plaintext since it comes from the on-chain trigger contract, not from a user.
+**`TRUSTPROCESS` (4):** A follow-up request enqueued automatically by a trigger contract after a normal request completes successfully. Processed before normal requests in the queue (trigger queue has higher priority). Routed to the WASM `trusted_request` export. The request's sender is the trigger contract's address. There is no user signature, no application fee and no minimum-fee check, and the WASM `trusted_request` export receives no sender argument. The payload is plaintext since it comes from the on-chain trigger contract, not from a user.
 
 ---
 
@@ -43,8 +43,10 @@ Calling `submitRequest` with type `DEPLOYAPP` (`0`) or `TRUSTPROCESS` (`4`) will
 To check whether a given token is accepted before submitting a deposit:
 
 ```solidity
-processorEndpoint.tokenAllowlist().isAllowed(tokenAddress)
+processorEndpoint.tokenAllowlist().isAllowedToken(tokenAddress)
 ```
+
+`getAllowedTokens()` returns the full list; `addAllowedToken` / `removeAllowedToken` require the `ADMIN` role on `TokenAllowlist`.
 
 Adding tokens to the allowlist requires the appropriate admin role on the `TokenAllowlist` contract itself, not on `ProcessorEndpoint`. The two contracts have independent access control.
 
@@ -57,7 +59,7 @@ Adding tokens to the allowlist requires the appropriate admin role on the `Token
 **How it works:**
 
 1. The end user signs an EIP-712 authorization message covering: their address (`sender`), the protocol version, application ID, request type, payload hash, token address, asset amount, a per-user nonce, and a deadline timestamp.
-2. The facilitator calls `submitRequestFor` on `ProcessorEndpoint` with the signed authorization and the actual encrypted payload, paying gas via `msg.value`.
+2. The facilitator calls `submitRequestFor` and pays the transaction gas; `msg.value` is the request's `maxFeeValue` (at least `minFeePerRequest`). Any fee refund goes back to the facilitator. ETH deposits cannot be sent through this path; only ERC-20 deposits (with a permit) can.
 3. The contract validates the EIP-712 signature, checks that the deadline has not passed, and increments the per-user nonce stored in `facilitatorNonces[sender]`.
 4. The resulting `PendingRequest` records both `sender` (the end user) and `facilitator` (the caller). Both addresses appear in the emitted `RequestSubmitted` event.
 

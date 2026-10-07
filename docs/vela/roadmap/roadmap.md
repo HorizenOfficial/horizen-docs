@@ -1,6 +1,6 @@
 ---
 title: What's Available & What's Coming
-description: "Vela is moving fast. Local development and Base Sepolia testnet are available today. ERC-20 tokens and compliance reports are fully shipped. Base mainnet and multi-app support are coming next."
+description: "Vela is moving fast. Local development, Base Sepolia testnet, and Horizen testnet are available today. ERC-20 tokens, compliance reports, and multi-app support are fully shipped. Mainnet is coming next."
 sidebar_position: 1
 ---
 
@@ -15,30 +15,27 @@ Vela is moving fast. Here's an honest look at where things stand today and what 
 | Environment | Details |
 |---|---|
 | **Local (Docker)** | Full Vela stack with software-emulated TEE. Zero cloud dependencies, just Docker. Ideal for development and iteration. |
-| **Base Sepolia Testnet** | Live network testing for early builders. [Reach out on Discord](https://discord.gg/horizen) to get access. |
+| **Base Sepolia and Horizen Testnet** | Live. Real AWS Nitro Enclave on a public testnet. Deployment is currently permissioned and done by the Vela team. [Reach out on Discord](https://discord.gg/horizen) to get access. |
 
 ### Shipped Features
 
 | Feature | Since | What it enables |
 |---|---|---|
-| **ERC-20 Token Support** | v0.2.0 | Deposit and withdraw any allowlisted ERC-20 token through the platform, including gasless flows via EIP-2612 permit. |
-| **Audit and Compliance Reports** | v0.2.0 | Authorized auditors can request encrypted reports from the TEE. Access is managed on-chain via the `AuthorityRegistry` contract. |
+| **ERC-20 Token Support** | v0.1.0 | Deposit and withdraw any allowlisted ERC-20 token through the platform, including gasless flows via EIP-2612 permit. |
+| **Audit and Compliance Reports** | v0.1.x | Authorized auditors can request encrypted reports from the TEE. Access is managed on-chain via the `AuthorityRegistry` contract. In v0.2.0 reports are produced by `process_request` with `requestType=2`. |
+| **Multi-App Support** | v0.1.0 | One Vela environment hosts multiple WASM applications, each with isolated state and locked funds (10 by default, admin-configurable). |
 
 
 
 ## What's Coming Next
 
-### Base Mainnet
+### Mainnet
 
-Base mainnet is the next major milestone. If you're building on Vela now, locally or on testnet, you'll be ready to deploy the moment it launches.
+Mainnet is the next major milestone. If you're building on Vela now, locally or on testnet, you'll be ready to deploy the moment it launches.
 
-### Multi-App Support
+### Self-Service Deployment
 
-Today, a single Vela environment hosts one WebAssembly application at a time. Multi-app support is actively in development, opening the door to more complex, composable architectures.
-
-### Self-Service Testnet Deployment
-
-Soon, you'll be able to deploy your own Vela application to a shared testnet without coordinating with the team. Fully self-serve.
+Testnet deployment is permissioned today. Fully self-serve deployment may become available for teams in the future.
 
 
 
