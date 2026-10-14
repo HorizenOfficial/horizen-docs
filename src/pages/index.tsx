@@ -64,7 +64,7 @@ function Hero() {
               onchain app developers.
             </div>
             <div className="text-base leading-[1.7] text-[rgba(3,14,36,0.7)] m-0 max-w-130 [html[data-theme='dark']_&]:text-white/75">
-              Horizen is an EVM-native L3 on Base designed for private onchain finance and compliance-forward blockchain app development.
+              Horizen is an EVM-compatible L3 on Base designed for private onchain finance and compliance-forward blockchain app development.
             </div>
             <div className="flex gap-4 flex-wrap mt-7">
               <Link

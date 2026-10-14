@@ -4,14 +4,20 @@ on:
   pull_request:
     branches:
       - main
+  # Also build after merge so two independently-green PRs can't combine into a broken main.
+  push:
+    branches:
+      - main
+  workflow_dispatch:
 
 # Least privilege: the job only needs to read the repo.
 permissions:
   contents: read
 
-# Cancel superseded runs when new commits are pushed to the same PR.
+# Cancel superseded runs on the same PR or branch. Falls back to the git ref
+# for push / workflow_dispatch events, where there is no pull_request number.
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 jobs:

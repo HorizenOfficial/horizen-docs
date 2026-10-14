@@ -22,7 +22,7 @@ Vela is moving fast. Here's an honest look at where things stand today and what 
 | Feature | Since | What it enables |
 |---|---|---|
 | **ERC-20 Token Support** | v0.1.0 | Deposit and withdraw any allowlisted ERC-20 token through the platform, including gasless flows via EIP-2612 permit. |
-| **Audit and Compliance Reports** | v0.1.x | Authorized auditors can request encrypted reports from the TEE. Access is managed on-chain via the `AuthorityRegistry` contract. In v0.2.0 reports are produced by `process_request` with `requestType=2`. |
+| **Audit and Compliance Reports** | v0.2.0 (`process_request`) | Authorized auditors can request encrypted reports from the TEE. Access is managed on-chain via the `AuthorityRegistry` contract. Reports are produced by `process_request` with `requestType=2`. |
 | **Multi-App Support** | v0.1.0 | One Vela environment hosts multiple WASM applications, each with isolated state and locked funds (10 by default, admin-configurable). |
 
 

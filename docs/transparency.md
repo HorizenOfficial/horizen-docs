@@ -135,7 +135,7 @@ A list of estimated annual DAO operational costs incurred by The Horizen Foundat
 
 To that end, the Horizen DAO’s portion of the block subsidy shall be allocated as follows:
 
-- 25% to be retained in the Horizen DAO treasury for use by the community in accordance with the ZenIP and EONIP proposal processes.
+- 25% to be retained in the Horizen DAO treasury for use by the community in accordance with the ZenIP proposal process.
 
 - 75% to be allocated to an administrative budget for The Horizen Foundation to satisfy the DAO’s operational costs.
 
@@ -151,7 +151,7 @@ The Governance Structure was established in line with the Constitution of the Ho
 
 - The Horizen DAO is made up of the $ZEN tokenholders, who play a pivotal role in its system of decentralized governance with the overarching goal of fostering a trustless, transparent, and verifiable Horizen ecosystem. Given that Horizen aims to serve as a public resource, it is only fitting that those benefiting from this public good should be the ones steering its governance.
 
-- $ZEN token holders have the ability to propose and vote on ZenIPs and EONIPs with respect to the blockchains and ecosystems governed by the Horizen DAO.
+- $ZEN token holders have the ability to propose and vote on ZenIPs with respect to the blockchains and ecosystems governed by the Horizen DAO.
 
 - Sections 3 and 4 of the Constitution, and The Horizen Foundation Governing Documents set forth the details relating to the governance by the token holders, as well as their specific authorities and voting powers.
 
@@ -159,7 +159,7 @@ The Governance Structure was established in line with the Constitution of the Ho
 
 **Overview:**
 
-The **"Special Council"** is a DAO committee, initially made up of 7 Special Council members, to provide oversight of The Horizen Foundation on behalf of the Horizen DAO as further detailed in Section 6 of the Constitution. The Special Council’s oversight responsibilities include convening emergency operational meetings when necessary to deliberate and mitigate security risks affecting the Horizen DAO related to any protocols utilizing the $ZEN token, tokenholders, or The Horizen Foundation. Additional responsibilities will include community and ecosystem protection functions by overseeing the review of ZenIPs and EONIPs before they are put forth for a vote by the Horizen DAO.
+The **"Special Council"** is a DAO committee, initially made up of 7 Special Council members, to provide oversight of The Horizen Foundation on behalf of the Horizen DAO as further detailed in Section 6 of the Constitution. The Special Council’s oversight responsibilities include convening emergency operational meetings when necessary to deliberate and mitigate security risks affecting the Horizen DAO related to any protocols utilizing the $ZEN token, tokenholders, or The Horizen Foundation. Additional responsibilities will include community and ecosystem protection functions by overseeing the review of ZenIPs before they are put forth for a vote by the Horizen DAO.
 
 The initial Special Council members, split by cohort, are as follows:
 
@@ -193,15 +193,15 @@ The DAO holds the authority to designate and choose individuals for the Special 
 
 #### 3. Horizen DAO Voting Procedure
 
-Section 5 of the Constitution describes the details of the ZenIP and EONIP processes and voting procedures, as well as the different categories of ZenIPs and EONIPs.
+Section 5 of the Constitution describes the details of the ZenIP process and voting procedures, as well as the different categories of ZenIPs.
 
 There are a few governance channels and tools available, each serving its own purpose.
 
 - [Discord](https://horizen.io/invite/discord): is a social media and messaging application that serves as the main communications platform for Horizen. Anyone is free to join the official Horizen server and engage in discussion with other community members across any of the channels. This is where community members can first propose and socialize ideas before beginning the formal proposal process.
 
-- [Discourse](http://forum.horizen.io): is an open forum for governance related discussions. It is where tokenholders can create ZenIPs and EONIPs, view current and past proposals, and comment on proposals. Members of the Horizen community must register for an account before contributing and engaging with posts.
+- [Discourse](http://forum.horizen.io): is an open forum for governance related discussions. It is where tokenholders can create ZenIPs, view current and past proposals, and comment on proposals. Members of the Horizen community must register for an account before contributing and engaging with posts.
 
-- [Snapshot](https://snapshot.org/#/horizenfoundation.eth): is an off-chain voting interface that allows the community to vote on ZenIPs and EONIPs based on the amount of $ZEN they hold, and delegate voting power to a different delegate.
+- [Snapshot](https://snapshot.org/#/horizenfoundation.eth): is an off-chain voting interface that allows the community to vote on ZenIPs based on the amount of $ZEN they hold, and delegate voting power to a different delegate.
 
 Because Snapshot is not compatible with Horizen’s mainchain, it is integrated with EON, which is Ethereum-compatible. This means that $ZEN tokenholders will need to “link” their mainchain $ZEN address with an EON address in order to capture their full voting power for proposals in Snapshot. More information on this process can be found [here](https://eon.horizen.io/governance/dao).
 

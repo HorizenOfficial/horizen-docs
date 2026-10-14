@@ -41,7 +41,7 @@ Applications on Vela are WebAssembly (WASM) modules compiled from Go code using 
 | Export | When called |
 |---|---|
 | `deploy` | Once, when the application is first deployed — receives constructor parameters and returns initial state |
-| `load_module` | Whenever the Executor needs the module and it is not in its in-memory cache (after a restart or LRU eviction). Receives only `appId`; its return value is not used. |
+| `load_module` | Whenever the Executor needs the module and it is not in its in-memory cache (after a restart or LRU eviction). Receives only `appId` and must return a `LoadModuleResult` with an empty `Error` — a non-empty `Error` aborts the load. Any returned state is ignored. |
 | `deposit` | When a request includes a token or ETH deposit — credits the user's in-app account |
 | `process_request` | For every standard (`PROCESS`) or audit (`DEANONYMIZATION`) request |
 | `trusted_request` | For requests triggered automatically by an external trigger contract (advanced, optional) |

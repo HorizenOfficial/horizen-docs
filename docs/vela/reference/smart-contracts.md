@@ -46,9 +46,9 @@ To check whether a given token is accepted before submitting a deposit:
 processorEndpoint.tokenAllowlist().isAllowedToken(tokenAddress)
 ```
 
-`getAllowedTokens()` returns the full list; `addAllowedToken` / `removeAllowedToken` require the `ADMIN` role on `TokenAllowlist`.
+`getAllowedTokens()` returns the full list.
 
-Adding tokens to the allowlist requires the appropriate admin role on the `TokenAllowlist` contract itself, not on `ProcessorEndpoint`. The two contracts have independent access control.
+Adding or removing tokens from the allowlist — `addAllowedToken` / `removeAllowedToken` — requires the `ADMIN` role on the `TokenAllowlist` contract itself, not on `ProcessorEndpoint`. The two contracts have independent access control.
 
 ---
 

@@ -13,7 +13,7 @@ Vela applications are WebAssembly modules compiled from Go using TinyGo. Your mo
 | Export | When called |
 |---|---|
 | `deploy` | Once at application deployment — receives constructor parameters and returns the initial encrypted state. Every module must export it; v0.2.0 calls it at deploy time, and a module without it fails to deploy. |
-| `load_module` | Whenever the Executor needs the module and it is not in its in-memory cache (after a restart, or after the module was evicted from the LRU cache). It receives only `appId`, not the application state, and its returned state is not used. Keep it side-effect free and never use it to initialise state; `deploy` does that. |
+| `load_module` | Whenever the Executor needs the module and it is not in its in-memory cache (after a restart, or after the module was evicted from the LRU cache). It receives only `appId`, not the application state. It must return a `LoadModuleResult` whose `Error` field is empty — the Executor reads the result and aborts the load (`failed to load module: <Error>`) if `Error` is non-empty — but any returned state is not used. Keep it side-effect free and never use it to initialise state; `deploy` does that. |
 | `deposit` | When a request includes a token or ETH deposit — called before `process_request` to credit the user's account |
 | `process_request` | For every `PROCESS` (requestType=1) and `DEANONYMIZATION` (requestType=2) request |
 | `trusted_request` | For `TRUSTPROCESS` (requestType=4) requests enqueued by a trigger contract — optional, only needed for trigger-contract patterns |
