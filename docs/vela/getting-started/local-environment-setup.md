@@ -6,7 +6,7 @@ sidebar_position: 2
 
 The Vela local environment runs a complete stack on your machine via Docker Compose. It includes a local EVM chain, automatic smart contract deployment, a subgraph indexer, the TEE Executor, the Manager, and the Authority Service. Everything you need to develop and test a WASM application without touching a testnet.
 
-The TEE is emulated in this environment using a software container. No real AWS Nitro Enclave is used. Only one WASM application deployment is supported per environment (`appId 1`).
+The TEE is emulated in this environment using a software container. No real AWS Nitro Enclave is used. You can deploy several WASM applications to the same environment; each keeps its own isolated state and locked funds. Each deploy derives its own `applicationId` from the on-chain request ID, and the wallet writes it to `wallet.conf` automatically. `ProcessorEndpoint` allows 10 applications by default (`maxNumOfApplications`); an admin can raise this.
 
 ## Prerequisites
 

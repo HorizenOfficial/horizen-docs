@@ -47,13 +47,13 @@ This Constitution describes the decision-making framework for governance for Hor
 
 Currently, $ZEN is the governance token for Horizen. This Constitution lays out a dual-track process for implementing improvement proposals. Technical proposals follow a “rough consensus” model, where implementation happens when a majority of network participants, on the applicable chain, choose to run the new software version. This is the same model currently used by certain other blockchain networks, most notably Bitcoin and Ethereum. Non-Technical proposals, meanwhile, are enacted via a directive to the Foundation by means of a Tokenholder Vote. Further details regarding the process and voting thresholds are outlined below.
 
-All DAO-approved proposals are reviewed by the Special Council for adherence to the mission of the Horizen DAO, this Constitution, the Foundation Governing Documents, and applicable law, before a ZenIP or EONIP is formally adopted. The responsibilities of the Special Council are described below and in the Foundation Governing Documents.
+All DAO-approved proposals are reviewed by the Special Council for adherence to the mission of the Horizen DAO, this Constitution, the Foundation Governing Documents, and applicable law, before a ZenIP is formally adopted. The responsibilities of the Special Council are described below and in the Foundation Governing Documents.
 
 Following a DAO-approved proposal, the Foundation is responsible for implementing the actions described in each such proposal.
 
 ## 4. DAO Voting
 
-As detailed in this Constitution and further in the Foundation Governing Documents, Tokenholders have the authority to propose and vote on ZenIPs, subject to, and in accordance with, either the ZenIP Process or EONIP Process (as applicable):
+As detailed in this Constitution and further in the Foundation Governing Documents, Tokenholders have the authority to propose and vote on ZenIPs, subject to, and in accordance with, the ZenIP Process:
 
 - Appointing or removing members of the Special Council, and other DAO working groups, as those come into being, from time to time.
 - Creating new DAO Committees from time to time.
@@ -198,7 +198,7 @@ The initial Special Council Members are:
 
 **c. Responsibilities**
 
-Special Council members serve as a DAO committee and are tasked with serving as a steward for the Horizen DAO and providing oversight of the Foundation on behalf of the Horizen DAO. This includes calling emergency operational meetings as needed to discuss and address security threats to the Horizen DAO, any protocol utilizing the Token, the Tokenholders, or the Foundation, along with ensuring that they review any ZenIPs or EONIPs prior to voting by the Horizen DAO.
+Special Council members serve as a DAO committee and are tasked with serving as a steward for the Horizen DAO and providing oversight of the Foundation on behalf of the Horizen DAO. This includes calling emergency operational meetings as needed to discuss and address security threats to the Horizen DAO, any protocol utilizing the Token, the Tokenholders, or the Foundation, along with ensuring that they review any ZenIPs prior to voting by the Horizen DAO.
 
 **d. Qualifications**
 

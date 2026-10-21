@@ -13,4 +13,6 @@ How much voting power do I have?
 
 Your voting power is a sum of the following criteria:
 
-- $ZEN in your wallet.
+- $ZEN in your self-custodial wallet on Base.
+- $ZEN in your self-custodial wallet on Horizen.
+- $ZEN you have staked in the ZEN staking program.

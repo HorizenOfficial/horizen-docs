@@ -15,14 +15,14 @@ This guide walks you through deploying the Vela example application - a private 
 
 The example application (`vela-nova`) is a private account-based ledger running entirely inside the TEE. Balances, transfers, and transaction history are all encrypted. External observers see only attested state roots on-chain, not the underlying data.
 
-It supports five operations:
+The app's WASM operations are `deposit`, `privatetransfer`, `withdraw`, and `deanonymize`. `withdraw` makes the app emit a withdrawal; `ProcessorEndpoint` credits it to your pending-claims balance, which you then pull to your own address with the `claimpendingpayments` wallet command (see the table below).
 
 | Operation | What it does |
 |---|---|
 | `deposit` | Move ETH or ERC-20 tokens from your public address into your encrypted TEE account |
 | `privatetransfer` | Transfer funds between private accounts inside the TEE |
-| `withdraw` | Move funds from your TEE account into the bridge contract for claiming |
-| `claimpendingpayments` | Claim bridged funds and deliver them to your public address. This is required to complete a withdrawal — `withdraw` alone does not return funds to your wallet. |
+| `withdraw` | Move funds from your TEE account; `ProcessorEndpoint` credits the amount to your pending-claims balance |
+| `claimpendingpayments` | Wallet command — calls `ProcessorEndpoint.claim()` to pull pending funds to your public address. This is required to complete a withdrawal — `withdraw` alone does not return funds to your wallet. |
 | `deanonymize` | Authorized auditors only. Submits a request that calls `process_request(requestType=2)` in the WASM app, which returns an encrypted compliance report. The report is encrypted to the auditor's registered P-521 key and retrieved via the Authority Service API. |
 
 
@@ -36,7 +36,7 @@ Go to the [`vela-nova` v0.2.0 release page](https://github.com/HorizenOfficial/v
 
 Place all three files in a `wallet/` folder.
 
-Alternatively, if you prefer to clone the repository, `wallet.conf.template` is included in the repo root:
+Alternatively, if you prefer to clone the repository, `wallet.conf.template` is in the repo's `wallet/` folder:
 
 ```bash
 git clone https://github.com/HorizenOfficial/vela-nova.git
@@ -381,9 +381,9 @@ docker run --rm --platform linux/amd64 -v $(pwd):/wallet -w /wallet \
 | `deposit -a "1 ETH"` | Deposit ETH or ERC-20 tokens into your private TEE account |
 | `getprivatebalance` | Query your encrypted TEE balance |
 | `privatetransfer` | Transfer funds between private accounts inside the TEE |
-| `withdraw` | Move funds from your TEE account into the bridge for claiming |
-| `getpendingpayments` | Show funds awaiting claim in the bridge contract |
-| `claimpendingpayments` | Claim pending bridged funds and deliver to your public address |
+| `withdraw` | Move funds from your TEE account; `ProcessorEndpoint` credits the amount to your pending-claims balance |
+| `getpendingpayments` | Show funds awaiting claim at `ProcessorEndpoint` |
+| `claimpendingpayments` | Call `ProcessorEndpoint.claim()` to pull pending funds to your public address |
 | `requestreport` | Submit a compliance report request (authorized auditors only) |
 | `downloadreport` | Download an encrypted compliance report |
 | `decryptreport` | Decrypt a downloaded compliance report |

@@ -21,11 +21,15 @@ import { VelaClient } from "@horizen/vela-common-ts";
 
 const client = new VelaClient(
   signer,
-  false, // useSoftwareTEE: false for a real enclave, true for local software-emulated dev
+  false, // useAlternativeSign: true to sign with eth_sign RPC instead of signMessage() (for wallets without EIP-191 personal_sign)
   teeAuthenticatorAddress,
   processorEndpointAddress
 );
 ```
+
+:::note
+The same client works against the local stack and a real enclave; there is no TEE-mode flag.
+:::
 
 ## v0.2.0 Migration Note
 
