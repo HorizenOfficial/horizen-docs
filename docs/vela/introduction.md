@@ -56,6 +56,6 @@ The Executor passes the application's real `appId` to `load_module`, `deploy`, `
 
 ## Current Status
 
-Vela is at v0.2.0 and open for builders to experiment with. Run it locally via Docker with a software-emulated TEE (no AWS account required), or build against live network conditions — Vela is live (gated / early access) on Base mainnet and Base Sepolia. For details on getting started, see the [Getting Started](/vela/getting-started/prerequisites) section.
+Vela is at v0.2.0 and open for builders to experiment with. Run it locally via Docker with a software-emulated TEE (no AWS account required), or build against live network conditions — Vela is live (gated / early access) on Base Sepolia. For details on getting started, see the [Getting Started](/vela/getting-started/prerequisites) section.
 
 → [Vela website](https://vela.horizenlabs.io/)
