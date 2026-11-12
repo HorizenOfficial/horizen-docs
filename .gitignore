@@ -46,5 +46,13 @@ yarn-debug.log*
 yarn-error.log*
 
 # Deployment platforms
-.vercel
 .wrangler
+.vercel
+
+# Extra hardening — never commit local secrets, env overrides, or caches
+.env.*
+!.env.example
+.dev.vars.*
+!.dev.vars.example
+*.tsbuildinfo
+.turbo

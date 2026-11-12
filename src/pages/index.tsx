@@ -7,28 +7,28 @@ import styles from './index.module.css';
 /* ─── Start Building ────────────────────────────────────────────────────── */
 const buildingCards = [
   {
-    tag: 'EVM',
-    title: 'Deploy Your First Contract',
-    description: 'Standard EVM deployment on Horizen. Done in minutes with the tools you already know.',
-    link: '/horizen-chain/deploy-contracts/using-foundry',
-  },
-  {
     tag: 'Vela',
     title: 'Your First Confidential App',
     description: 'Deploy a private transfer app inside a hardware-attested TEE. Vela runs your WASM logic in an AWS Nitro Enclave while balances, transfers, and history stay encrypted on-chain.',
     link: '/vela/getting-started/first-confidential-app',
   },
   {
-    tag: 'BRIDGE',
-    title: 'Bridge Assets to Horizen',
-    description: 'Move ETH via the native OP Stack bridge, or bridge supported assets via Stargate.',
-    link: '/horizen-chain/bridging/how-bridging-works',
+    tag: 'Setup',
+    title: 'Set Up Your Local Environment',
+    description: 'Run the full Vela stack locally with Docker and a software-emulated TEE — no AWS account required. Build and iterate before deploying to Base.',
+    link: '/vela/getting-started/local-environment-setup',
+  },
+  {
+    tag: 'Reference',
+    title: 'Integrate with the TypeScript Client',
+    description: 'Use @horizen/vela-common-ts to call Vela from the browser or your frontend — encrypted requests, attested results, no manual ABI calls.',
+    link: '/vela/reference/typescript-client',
   },
 ];
 
 /* ─── Hero ──────────────────────────────────────────────────────────────── */
 function Hero() {
-  const features = ['Privacy tooling', 'Compliance plug-ins', 'Base liquidity'];
+  const features = ['Confidential execution', 'On-chain attestation', 'Compliance without exposure'];
 
   return (
     <section
@@ -59,16 +59,16 @@ function Hero() {
         <div className="flex items-center justify-between gap-32 max-[900px]:flex-col max-[900px]:items-start max-[900px]:gap-10">
           <div className="flex-1 min-w-0 max-w-4xl">
             <div className="text-[clamp(2.4rem,5.5vw,4rem)] font-extrabold leading-[1.1] mb-6 text-[#030E24] tracking-tight [html[data-theme='dark']_&]:text-white" style={{ fontFamily: "'Funnel Display', sans-serif" }}>
-              Horizen is home <br />
-              for privacy-first <br />
-              onchain app developers.
+              Run logic in private. <br />
+              Settle publicly <br />
+              onchain.
             </div>
             <div className="text-base leading-[1.7] text-[rgba(3,14,36,0.7)] m-0 max-w-130 [html[data-theme='dark']_&]:text-white/75">
-              Horizen is an EVM-compatible L3 on Base designed for private onchain finance and compliance-forward blockchain app development.
+              Vela runs your code inside a sealed hardware enclave where no operator, host, or cloud provider can see the data. Every run posts a cryptographic attestation your smart contracts and agents can verify, gate, and settle on.
             </div>
             <div className="flex gap-4 flex-wrap mt-7">
               <Link
-                to={buildingCards[0].link}
+                to="/vela/getting-started/prerequisites"
               >
                 <button
                   className="inline-flex border-none items-center justify-center h-12 px-8 rounded-[60px] text-[0.95rem] font-bold bg-[#FECB17] text-[#030E24]! no-underline! transition-colors duration-150 hover:bg-[#f5c800]"
@@ -77,7 +77,7 @@ function Hero() {
                 </button>
               </Link>
               <Link
-                to={buildingCards[1].link}
+                to="/vela/introduction"
               >
                 <button
                   className="inline-flex items-center border-none justify-center h-12 px-8 rounded-[60px] text-[0.95rem] font-bold bg-[#FECB17] text-[#030E24]! no-underline! transition-colors duration-150 hover:bg-[#f5c800]"
@@ -96,11 +96,11 @@ function Hero() {
         <div className="grid grid-cols-3 items-start gap-6 w-full max-[900px]:grid-cols-1 max-[900px]:gap-7">
           <div className="min-w-0 max-[900px]:text-center">
             <div className="text-[clamp(2rem,4vw,3rem)] font-extrabold text-[#030E24] m-0 leading-[1.15] tracking-tight [html[data-theme='dark']_&]:text-white" style={{ fontFamily: "'Funnel Display', sans-serif" }}>
-              What is Horizen?
+              What is Vela?
             </div>
           </div>
           <div className="max-[900px]:flex max-[900px]:flex-col max-[900px]:items-center max-[900px]:text-center">
-            <p className="text-base font-semibold text-[#030E24] mb-3 [html[data-theme='dark']_&]:text-white">It adds what Base doesn't have</p>
+            <p className="text-base font-semibold text-[#030E24] mb-3 [html[data-theme='dark']_&]:text-white">A confidential blockchain coprocessor</p>
             <div className="flex flex-wrap flex-1  gap-4 max-[900px]:justify-center">
               {features.map((f) => (
                 <div
@@ -118,8 +118,8 @@ function Hero() {
           </div>
           <div className="min-w-0 max-[900px]:text-center">
             <p className="text-base leading-[1.8] text-[rgba(3,14,36,0.75)] m-0 [html[data-theme='dark']_&]:text-white/65">
-              Horizen adds what other EVM chains lack – a tight focus and supportive tooling for private onchain finance and regulatory-compliant blockchain application development, while retaining what other privacy blockchain projects left behind – familiar EVM architecture, composability, and developer ergonomics.
-              <strong> No new language, no obscure tech stack.</strong>
+              Vela is a TEE-based confidential execution coprocessor by Horizen Labs. Your code, packaged as WASM, runs off-chain inside a Trusted Execution Environment where data stays encrypted in memory and unreadable to the host, the cloud provider, and the operator — while smart contracts remain the entrypoint and exitpoint.
+              <strong> Chain-agnostic. No new language, no obscure tech stack.</strong>
             </p>
           </div>
         </div>
@@ -129,12 +129,12 @@ function Hero() {
 }
 
 
-/* ─── L3 Banner ─────────────────────────────────────────────────────────── */
+/* ─── Tagline Banner ────────────────────────────────────────────────────── */
 function L3Banner() {
   return (
     <div className="flex items-center justify-center py-8 px-8" style={{ background: 'linear-gradient(93.2deg, #030E24 2.62%, #1038BB 54.56%)' }}>
       <span className="font-bold text-[45px] leading-[120%] text-white text-center" style={{ fontFamily: "'Funnel Display', sans-serif" }}>
-        Horizen is an EVM-compatible L3 built on{' '}
+        Run logic in private. Settle publicly on{' '}
         <span className="font-bold text-white">
           <span className="inline-block mr-[0.15em] text-[0.75em] align-middle opacity-90">
             <span className="inline-block w-[0.60em] h-[0.60em] bg-white"></span>
@@ -148,10 +148,10 @@ function L3Banner() {
 /* ─── Choose Your Path ──────────────────────────────────────────────────── */
 const personas = [
   {
-    title: 'EVM Developer',
-    description: 'Already building on Base or Ethereum? Deploy on Horizen in minutes with the same tools you use today.',
-    link: '/horizen-chain/deploy-contracts/using-foundry',
-    cta: 'Deploy a Contract',
+    title: 'Private DeFi',
+    description: 'Keep balances, orders, and strategies out of view while settling against public liquidity. Confidentiality as defense against front-running, MEV, and copy-trading.',
+    link: '/vela/getting-started/first-confidential-app',
+    cta: 'Build a Confidential App',
     icon: (
       <svg width="58" height="58" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect width="70" height="70" rx="14" fill="#1038BB" />
@@ -164,10 +164,10 @@ const personas = [
     ),
   },
   {
-    title: 'Privacy-First Builder',
-    description: 'Building confidential DeFi, payments, or identity apps from scratch.',
-    link: '/horizen-chain/privacy-tools',
-    cta: 'Explore Privacy Tools',
+    title: 'Autonomous Agents',
+    description: 'Pay-per-use private execution as a structural feature for programmatic, machine-to-machine activity — where attested results are the only thing other agents need to trust.',
+    link: '/vela/introduction',
+    cta: 'How It Works',
     icon: (
       <svg width="48" height="48" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect width="70" height="70" rx="14" fill="#1038BB" />
@@ -178,10 +178,10 @@ const personas = [
     ),
   },
   {
-    title: 'Compliance Engineer',
-    description: 'Gate contract actions behind AML verification for regulated markets. No new toolchain needed.',
-    link: '/horizen-chain/compliance',
-    cta: 'Explore Compliance Patterns',
+    title: 'Institutional & Bespoke',
+    description: 'Authorized auditors and regulators can verify that specific rules were followed through cryptographic proof — without ever accessing the underlying data or application state.',
+    link: '/vela/reference/trigger-contracts',
+    cta: 'Explore the Reference',
     icon: (
       <svg width="48" height="48" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect width="70" height="70" rx="14" fill="#1038BB" />
@@ -239,9 +239,9 @@ function PersonaCards() {
 
 /* ─── Quick Setup ───────────────────────────────────────────────────────── */
 const quickSetupItems = [
-  { label: 'Add Horizen to Your Wallet', link: '/horizen-chain/network/mainnet' },
-  { label: 'Get Testnet ETH from the Faucet', link: '/horizen-chain/network/testnet' },
-  { label: 'View the Block Explorer', link: '/horizen-chain/network/block-explorer' },
+  { label: 'Check the Prerequisites', link: '/vela/getting-started/prerequisites' },
+  { label: 'Set Up Your Local Environment', link: '/vela/getting-started/local-environment-setup' },
+  { label: 'Build Your First Confidential App', link: '/vela/getting-started/first-confidential-app' },
 ];
 
 function QuickSetup() {
@@ -469,7 +469,7 @@ export default function Home() {
         <PersonaCards />
         <QuickSetup />
         <StartBuilding />
-        <Newsletter />
+        {/* <Newsletter /> */}
       </main>
     </Layout>
   );

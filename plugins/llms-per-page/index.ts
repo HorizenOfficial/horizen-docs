@@ -40,8 +40,8 @@ export default function llmsPerPagePlugin(_ctx: LoadContext): Plugin<void> {
 
       console.log(`[llms-per-page] Emitted ${count} per-page .md files.`);
       // URL pattern: /path/to/page.md mirrors HTML route /path/to/page
-      // e.g. build/horizen-chain/overview/what-is-horizen.md
-      //   → https://docs.horizen.io/horizen-chain/overview/what-is-horizen.md
+      // e.g. build/vela/introduction.md
+      //   → https://docs.horizen.io/vela/introduction.md
     },
   };
 }
