@@ -18,7 +18,7 @@ Data is processed inside an AWS Nitro Enclave, isolated from the host and the op
 
 **Compliance without exposure** — Authorized auditors can request a private compliance report from the TEE. The enclave generates the report from its confidential state, encrypts it specifically for the auditor's registered public key, and makes it available through the Authority Service. Only the authorized auditor can decrypt the report, and no other user's data is exposed in the process. Access is controlled per-application on-chain (see [Regulatory Compliance and Authorization](#regulatory-compliance-and-authorization) below). Note that a report can only contain data the application chose to persist in its confidential state — producing compliance reports is a feature the application developer designs, not one the platform provides automatically.
 
-**Chain-agnostic** — Vela is not limited to Horizen Chain. It is designed as a coprocessor that can serve applications across multiple EVM-compatible networks.
+**Chain-agnostic** — Vela is not tied to any single chain. It is designed as a coprocessor that can serve applications across multiple EVM-compatible networks.
 
 ## Trusted Execution Environment
 
@@ -54,12 +54,8 @@ Fees are set by the application. There is currently no automatic metering — th
 The Executor passes the application's real `appId` to `load_module`, `deploy`, `deposit`, `process_request`, and `trusted_request`. The reference apps ignore it in `deposit` and `process_request` and keep their identity in state instead; your app may do the same.
 :::
 
-## How It Fits with Horizen
-
-Horizen Chain is an EVM chain built on the OP Stack, settling to Base. Vela extends it by providing the confidential computation layer the base chain does not offer. Together, they enable applications that are both publicly verifiable and privately executed.
-
 ## Current Status
 
-Vela is at v0.2.0 and open for builders to experiment with. Run it locally via Docker with a software-emulated TEE (no AWS account required), or build against live network conditions — Vela is deployed on Base Sepolia testnet and Horizen testnet, with mainnet next on the roadmap. For details on getting started, see the [Getting Started](/vela/getting-started/prerequisites) section.
+Vela is at v0.2.0 and open for builders to experiment with. Run it locally via Docker with a software-emulated TEE (no AWS account required), or build against live network conditions — Vela is live (gated / early access) on Base Sepolia. For details on getting started, see the [Getting Started](/vela/getting-started/prerequisites) section.
 
 → [Vela website](https://vela.horizenlabs.io/)

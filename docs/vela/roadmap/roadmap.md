@@ -1,6 +1,6 @@
 ---
 title: What's Available & What's Coming
-description: "Vela is moving fast. Local development, Base Sepolia testnet, and Horizen testnet are available today. ERC-20 tokens, compliance reports, and multi-app support are fully shipped. Mainnet is coming next."
+description: "Vela is moving fast. Local development and Base Sepolia (gated / early access) are available today. ERC-20 tokens, compliance reports, and multi-app support are fully shipped. Self-service deployment is coming next."
 sidebar_position: 1
 ---
 
@@ -15,7 +15,7 @@ Vela is moving fast. Here's an honest look at where things stand today and what 
 | Environment | Details |
 |---|---|
 | **Local (Docker)** | Full Vela stack with software-emulated TEE. Zero cloud dependencies, just Docker. Ideal for development and iteration. |
-| **Base Sepolia and Horizen Testnet** | Live. Real AWS Nitro Enclave on a public testnet. Deployment is currently permissioned and done by the Vela team. [Reach out on Discord](https://discord.gg/horizen) to get access. |
+| **Base Sepolia** | Live (gated / early access). Real AWS Nitro Enclave. Deployment is currently permissioned and done by the Vela team. [Reach out on Discord](https://discord.gg/horizen) to get access. |
 
 ### Shipped Features
 
@@ -29,13 +29,9 @@ Vela is moving fast. Here's an honest look at where things stand today and what 
 
 ## What's Coming Next
 
-### Mainnet
-
-Mainnet is the next major milestone. If you're building on Vela now, locally or on testnet, you'll be ready to deploy the moment it launches.
-
 ### Self-Service Deployment
 
-Testnet deployment is permissioned today. Fully self-serve deployment may become available for teams in the future.
+Deployment to Base Sepolia is permissioned (gated) today, done by the Vela team. Fully self-serve, public deployment is the next major milestone — if you're building on Vela now, locally or on a gated network, you'll be ready to deploy the moment it opens up.
 
 
 

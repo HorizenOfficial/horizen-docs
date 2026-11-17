@@ -5,7 +5,7 @@ description: "Links to key governance documents including bylaws and memorandum.
 
 # Foundational Documents
 
-[**Transparency Report**](/transparency)
+[**Transparency Report**](/governance/reference/transparency-report)
 
 **Foundation Bylaws** <a target="_blank" href={require('/public/references/Bylaws.pdf').default}>Download PDF</a>
 

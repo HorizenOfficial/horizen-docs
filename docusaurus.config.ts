@@ -47,6 +47,23 @@ const config: Config = {
             from: '/vela/limitations/limitations',
             to: '/vela/roadmap',
           },
+          // v2: Horizen Chain wind-down — point retired routes at Vela / Governance.
+          {
+            from: ['/horizen-chain', '/horizen-chain/overview/what-is-horizen'],
+            to: '/vela/introduction',
+          },
+          {
+            from: ['/tutorials', '/tutorials/horizen-chain/deploy-erc20'],
+            to: '/vela/getting-started/first-confidential-app',
+          },
+          {
+            from: '/horizen_hub',
+            to: '/vela/introduction',
+          },
+          {
+            from: '/transparency',
+            to: '/governance/reference/transparency-report',
+          },
         ],
       },
     ],
@@ -66,7 +83,7 @@ const config: Config = {
         generateLLMsFullTxt: true,
         docsDir: [{ path: 'docs', routeBasePath: '/', label: 'Docs' }],
         title: 'Horizen Documentation',
-        description: 'Developer documentation for Horizen — an EVM-compatible L3 built on the OP Stack, settling to Base. Horizen adds compliant, verifiable privacy via VELA, a confidential execution coprocessor powered by Trusted Execution Environments (TEEs). Deploy standard Solidity contracts with Foundry or Hardhat (same tooling as Base/Ethereum), or build privacy-preserving apps with VELA. Mainnet chain ID: 26514, RPC https://horizen.calderachain.xyz/http. Testnet chain ID: 2651420, RPC https://horizen-testnet.rpc.caldera.xyz/http. ZEN is the native governance token (Base ERC-20: 0xf43eB8De897Fbc7F2502483B2Bef7Bb9EA179229). Tutorials cover: ERC-20 and NFT deployment, price-triggered escrow with Stork oracle, bridging assets via Stargate LayerZero OFT (ZEN OFT Adapter on Base 0x57da2D504bf8b83Ef304759d9f2648522D7a9280, Horizen EID 30399) and native OP Stack bridge (L1StandardBridge on Base 0xf4a6cc4171fda694439f856d912777aa6ab05369), Goldsky subgraph indexing, PureFi compliance gating, and Safe multisig setup. Governance: Horizen DAO with ZenIP proposal and voting process.',
+        description: 'Developer documentation for Vela — a confidential blockchain coprocessor by Horizen Labs. Vela runs your application logic as WebAssembly (WASM, compiled from Go with TinyGo) inside a Trusted Execution Environment (AWS Nitro Enclave), where data is isolated from the host, the cloud provider, and the operator, and application state is encrypted at rest (AES-256). Smart contracts are both the entrypoint (submit an encrypted request, lock funds) and the exitpoint (a cryptographically attested result settles funds and can fire on-chain events). Every result is signed by the attested enclave and verified on-chain, so contracts and autonomous agents can verify, gate, and settle on the outcome without trusting any operator in between. Authorized auditors can request encrypted compliance reports from the TEE without exposing other users’ data; authorization is managed on-chain via the AuthorityRegistry contract. Vela is chain-agnostic and live (gated / early access) on Base mainnet and Base Sepolia; develop locally via Docker with a software-emulated TEE (no AWS account required). Governance: Horizen DAO with ZenIP proposal and voting process. Migration: ZEN migration guide.',
       },
     ],
     path.resolve(__dirname, 'plugins/llms-per-page/index.ts'),
@@ -109,10 +126,14 @@ const config: Config = {
     metadata: [
       {
         name: 'description',
-        content: 'Deploy smart contracts, bridge assets, and build privacy-preserving apps on Horizen — an EVM-compatible L3 built on the OP Stack, settling to Base.',
+        content: 'Build confidential apps with Vela — a blockchain coprocessor that runs your code inside a hardware-attested TEE and settles results on-chain. Live on Base.',
+      },
+      {
+        name: 'keywords',
+        content: 'Vela, Horizen, Horizen Labs, confidential execution, blockchain coprocessor, Trusted Execution Environment, TEE, AWS Nitro Enclave, attestation, confidential smart contracts, on-chain privacy, compliance, WASM, TinyGo, Base, ZEN token, ZEN migration, Horizen DAO, ZenIP governance',
       },
       { property: 'og:type', content: 'website' },
-      { property: 'og:description', content: 'Deploy smart contracts, bridge assets, and build privacy-preserving apps on Horizen — an EVM-compatible L3 built on the OP Stack, settling to Base.' },
+      { property: 'og:description', content: 'Build confidential apps with Vela — a blockchain coprocessor that runs your code inside a hardware-attested TEE and settles results on-chain. Live on Base.' },
       { name: 'twitter:card', content: 'summary_large_image' },
       { name: 'twitter:site', content: '@HorizenOfficial' },
     ],
@@ -131,21 +152,9 @@ const config: Config = {
         },
         {
           type: "docSidebar",
-          sidebarId: "horizenChainSidebar",
-          position: "left",
-          label: "Horizen Chain",
-        },
-        {
-          type: "docSidebar",
           sidebarId: "velaSidebar",
           position: "left",
           label: "VELA",
-        },
-        {
-          type: "docSidebar",
-          sidebarId: "tutorialsSidebar",
-          position: "left",
-          label: "Tutorials",
         },
         {
           type: "docSidebar",

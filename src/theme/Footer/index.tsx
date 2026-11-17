@@ -2,22 +2,19 @@ import React from "react";
 import Link from "@docusaurus/Link";
 
 const HORIZEN_LINKS = [
-  { label: "Protocol Whitepaper", href: "https://downloads.horizen.io/file/web-assets/Horizen+Whitepaper+v1.0.0.pdf" },
   { label: "MiCAR Whitepaper", href: "https://horizen.micarwhitepapers.eu/" },
   { label: "Governance", href: "/governance/overview/about" },
   { label: "ZEN Migration Hub", href: "https://www.horizen.io/horizen-upgrade" },
 ];
 
 const DOCS_LINKS = [
-  { label: "Horizen Chain", to: "/horizen-chain/overview/what-is-horizen" },
   { label: "Vela", to: "/vela/introduction" },
-  { label: "Tutorials", to: "/tutorials/horizen-chain/deploy-erc20" },
   { label: "Migration", to: "/migration/overview" },
+  { label: "Governance", to: "/governance/overview/about" },
 ];
 
 const ECOSYSTEM_LINKS = [
   { label: "Apps & Partners", href: "https://horizen.io/ecosystem" },
-  { label: "Builder Ecosystem Fund", href: "https://horizen.io/builder-fund/" },
 ];
 
 const SOCIAL_LINKS = [

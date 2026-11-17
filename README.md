@@ -1,6 +1,6 @@
 # Horizen Documentation
 
-Source for [docs.horizen.io](https://docs.horizen.io) — developer documentation for Horizen, an EVM-identical L3 on Base using the OP Stack.
+Source for [docs.horizen.io](https://docs.horizen.io) — developer documentation for Vela, a confidential blockchain coprocessor by Horizen Labs that runs your code inside a hardware-attested TEE and settles results on-chain (live on Base).
 
 ## Local Development
 
